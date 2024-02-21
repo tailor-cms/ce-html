@@ -3,6 +3,8 @@
   "private": true,
   "type": "module",
   "version": "0.0.1",
+  "description": "Tailor CMS default HTML editor",
+  "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -30,6 +32,9 @@
     "vite": "^4.4.5",
     "vue-tsc": "^1.8.5"
   },
-  "description": "Tailor CMS default HTML editor",
-  "author": "Damir Perisic <info@gostudion.com> (https://github.com/tailor-cms)"
+  "dependencies": {
+    "@tiptap/pm": "^2.2.3",
+    "@tiptap/starter-kit": "^2.2.3",
+    "@tiptap/vue-3": "^2.2.3"
+  }
 }
