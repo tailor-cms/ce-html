@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "version": "0.0.1",
-  "description": "Tailor CMS default HTML editor",
+  "description": "Tailor CMS default HTML editor authoring component",
   "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
   "exports": {
     ".": {
@@ -36,5 +36,8 @@
     "@tiptap/pm": "^2.2.3",
     "@tiptap/starter-kit": "^2.2.3",
     "@tiptap/vue-3": "^2.2.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "@tailor-cms/ce-html-default-server",
-  "description": "Tailor CMS default HTML editor",
-  "author": "Damir Perisic <info@gostudion.com> (https://github.com/tailor-cms)",
+  "description": "Tailor CMS default HTML editor server component",
+  "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
   "type": "module",
   "version": "0.0.1",
   "exports": {
@@ -44,5 +44,8 @@
     "minify": false,
     "clean": false,
     "dts": true
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
