@@ -1,5 +1,5 @@
 {
-  "name": "tce-server",
+  "name": "@tailor-cms/ce-html-default-server",
   "description": "Tailor CMS default HTML editor",
   "author": "Damir Perisic <info@gostudion.com> (https://github.com/tailor-cms)",
   "type": "module",

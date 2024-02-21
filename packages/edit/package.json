@@ -1,5 +1,5 @@
 {
-  "name": "tce-edit",
+  "name": "@tailor-cms/ce-html-default-edit",
   "private": true,
   "type": "module",
   "version": "0.0.1",

@@ -1,5 +1,5 @@
 {
-  "name": "@tailor-cms/html_default",
+  "name": "@tailor-cms/ce-html-default",
   "description": "Tailor CMS default HTML editor",
   "version": "0.0.1",
   "author": "Damir Perisic <info@gostudion.com> (https://github.com/tailor-cms)",
