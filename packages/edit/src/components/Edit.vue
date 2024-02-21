@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineEmits, defineProps } from 'vue';
+import { defineEmits, defineProps, watch } from 'vue';
 import { EditorContent, useEditor } from '@tiptap/vue-3';
 import { Element } from 'tce-manifest';
 import StarterKit from '@tiptap/starter-kit';
@@ -50,6 +50,13 @@ const editor = useEditor({
   content: props.element.data.content,
   extensions: [StarterKit],
 });
+
+watch(
+  () => props.isFocused,
+  (val) => {
+    if (!val && editor.value) emit('save', { content: editor.value.getHTML() });
+  },
+);
 </script>
 
 <style lang="scss" scoped>

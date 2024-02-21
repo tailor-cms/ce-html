@@ -1,6 +1,7 @@
 <template>
   <div class="ce-html-default-root">
-    {{ data.content }}
+    <!-- eslint-disable-next-line -->
+    <span v-html="data.content" />
   </div>
 </template>
 
