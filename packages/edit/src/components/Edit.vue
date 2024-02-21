@@ -49,7 +49,7 @@ const emit = defineEmits(['save']);
 const editor = useEditor({
   content: props.element.data.content,
   extensions: [StarterKit],
-});
+}) as any;
 
 watch(
   () => props.isFocused,
