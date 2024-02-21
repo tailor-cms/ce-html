@@ -1,6 +1,5 @@
 {
   "name": "@tailor-cms/ce-html-default-edit",
-  "private": true,
   "type": "module",
   "version": "0.0.1",
   "description": "Tailor CMS default HTML editor authoring component",

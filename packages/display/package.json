@@ -2,7 +2,6 @@
   "name": "@tailor-cms/ce-html-default-display",
   "description": "Tailor CMS default HTML editor end-user component",
   "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
-  "private": true,
   "type": "module",
   "version": "0.0.1",
   "exports": {
