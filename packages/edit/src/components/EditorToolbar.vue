@@ -1,6 +1,6 @@
 <template>
   <VBtnGroup density="compact" variant="text">
-    <template v-for="(group, index) in actions" :key="index">
+    <Fragment v-for="(group, index) in actions" :key="index">
       <VTooltip v-for="btn in group" :key="btn.label" location="bottom">
         <template #activator="{ props }">
           <VBtn
@@ -17,11 +17,13 @@
         {{ btn.label }}
       </VTooltip>
       <VDivider class="mx-1" vertical />
-    </template>
+    </Fragment>
   </VBtnGroup>
 </template>
 
 <script setup lang="ts">
+import { Fragment } from 'vue';
+
 defineProps<{ editor: any }>();
 
 interface Action {
