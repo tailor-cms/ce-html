@@ -32,6 +32,18 @@ interface Action {
 const actions: Action[][] = [
   [
     {
+      label: 'Undo',
+      action: 'undo',
+      icon: 'undo',
+    },
+    {
+      label: 'Redo',
+      action: 'redo',
+      icon: 'redo',
+    },
+  ],
+  [
+    {
       label: 'Bold',
       isActive: 'bold',
       action: 'toggleBold',
