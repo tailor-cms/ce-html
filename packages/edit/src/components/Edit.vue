@@ -18,7 +18,7 @@ const elementBus: any = inject('$elementBus');
 
 const editor = useEditor({
   content: props.element.data.content,
-  extensions,
+  extensions
 }) as any;
 
 watch(
@@ -31,12 +31,20 @@ watch(
 </script>
 
 <style lang="scss" scoped>
-:deep(.tiptap) {
+:deep(.ProseMirror) {
   min-height: 5rem;
   padding: 1rem;
   border: 1px solid #888;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
+
+  & p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    height: 0;
+    opacity: 0.5;
+    float: left;
+    pointer-events: none;
+  }
 
   > * + * {
     margin-top: 0.75em;
