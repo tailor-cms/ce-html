@@ -133,6 +133,13 @@ const actions: Action[][] = [
       icon: 'code-tags',
     },
   ],
+  [
+    {
+      label: 'Clear formatting',
+      action: ['unsetAllMarks'],
+      icon: 'format-clear',
+    },
+  ],
 ];
 </script>
 
