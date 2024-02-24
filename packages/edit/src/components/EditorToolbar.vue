@@ -1,39 +1,89 @@
 <template>
   <VBtnGroup class="w-100 bg-white">
-    <VBtn
-      v-for="btn in actions"
-      :key="btn.name"
-      :active="editor.isActive(btn.name)"
-      :disabled="!editor.can().chain().focus()[btn.action]().run()"
-      :icon="`mdi-${btn.icon}`"
-      @click="editor.chain().focus()[btn.action]().run()"
-    />
+    <template v-for="(group, index) in actions" :key="index">
+      <VTooltip v-for="btn in group" :key="btn.label" location="bottom">
+        <template #activator="{ props }">
+          <VBtn
+            :active="'isActive' in btn && editor.isActive(btn.isActive)"
+            :aria-label="btn.label"
+            :disabled="!editor.can().chain().focus()[btn.action]().run()"
+            :icon="`mdi-${btn.icon}`"
+            v-bind="props"
+            @click="editor.chain().focus()[btn.action]().run()"
+          />
+        </template>
+        {{ btn.label }}
+      </VTooltip>
+      <VDivider vertical />
+    </template>
   </VBtnGroup>
 </template>
 
 <script setup lang="ts">
 defineProps<{ editor: any }>();
 
-const actions = [
-  {
-    name: 'bold',
-    action: 'toggleBold',
-    icon: 'format-bold',
-  },
-  {
-    name: 'italic',
-    action: 'toggleItalic',
-    icon: 'format-italic',
-  },
-  {
-    name: 'strike',
-    action: 'toggleStrike',
-    icon: 'format-strikethrough-variant',
-  },
-  {
-    name: 'code',
-    action: 'toggleCode',
-    icon: 'code-tags',
-  },
+interface Action {
+  label: string;
+  isActive?: string;
+  action: string;
+  icon: string;
+}
+
+const actions: Action[][] = [
+  [
+    {
+      label: 'Bold',
+      isActive: 'bold',
+      action: 'toggleBold',
+      icon: 'format-bold',
+    },
+    {
+      label: 'Italic',
+      isActive: 'italic',
+      action: 'toggleItalic',
+      icon: 'format-italic',
+    },
+    {
+      label: 'Strikethrough',
+      isActive: 'strike',
+      action: 'toggleStrike',
+      icon: 'format-strikethrough-variant',
+    },
+  ],
+  [
+    {
+      label: 'Horizontal line',
+      action: 'setHorizontalRule',
+      icon: 'minus',
+    },
+  ],
+  [
+    {
+      label: 'Numbered list',
+      isActive: 'orderedList',
+      action: 'toggleOrderedList',
+      icon: 'format-list-numbered',
+    },
+    {
+      label: 'Numbered list',
+      isActive: 'bulletList',
+      action: 'toggleBulletList',
+      icon: 'format-list-bulleted',
+    },
+  ],
+  [
+    {
+      label: 'Quote',
+      isActive: 'blockquote',
+      action: 'toggleBlockquote',
+      icon: 'format-quote-close',
+    },
+    {
+      label: 'Code',
+      isActive: 'code',
+      action: 'toggleCode',
+      icon: 'code-tags',
+    },
+  ],
 ];
 </script>
