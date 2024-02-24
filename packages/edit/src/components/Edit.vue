@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { defineEmits, defineProps, inject, watch } from 'vue';
 import { EditorContent, useEditor } from '@tiptap/vue-3';
-import { Element } from 'tce-manifest';
+import { Element } from '@tailor-cms/ce-html-default-manifest';
 import StarterKit from '@tiptap/starter-kit';
 
 const props = defineProps<{ element: Element; isFocused: boolean }>();

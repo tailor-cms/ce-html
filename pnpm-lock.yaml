@@ -39,15 +39,15 @@ importers:
         specifier: ^3.3.4
         version: 3.3.4
     devDependencies:
+      '@tailor-cms/ce-html-default-manifest':
+        specifier: workspace:*
+        version: link:../manifest
       '@tailor-cms/eslint-config':
         specifier: 0.0.2
         version: 0.0.2(@typescript-eslint/eslint-plugin@7.0.2)(@typescript-eslint/parser@7.0.2)(eslint-config-prettier@9.1.0)(eslint-config-semistandard@17.0.0)(eslint-config-standard@17.1.0)(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.6.2)(eslint-plugin-prettier@5.1.3)(eslint-plugin-promise@6.1.1)(eslint-plugin-vue@9.21.1)(eslint-plugin-vuejs-accessibility@2.2.1)(eslint@8.56.0)
       '@vitejs/plugin-vue':
         specifier: ^4.2.3
         version: 4.6.2(vite@4.5.2)(vue@3.3.4)
-      tce-manifest:
-        specifier: workspace:*
-        version: link:../manifest
       typescript:
         specifier: ^5.1.6
         version: 5.3.3
@@ -73,15 +73,15 @@ importers:
         specifier: ^3.3.4
         version: 3.3.4
     devDependencies:
+      '@tailor-cms/ce-html-default-manifest':
+        specifier: workspace:*
+        version: link:../manifest
       '@tailor-cms/eslint-config':
         specifier: 0.0.2
         version: 0.0.2(@typescript-eslint/eslint-plugin@7.0.2)(@typescript-eslint/parser@7.0.2)(eslint-config-prettier@9.1.0)(eslint-config-semistandard@17.0.0)(eslint-config-standard@17.1.0)(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.6.2)(eslint-plugin-prettier@5.1.3)(eslint-plugin-promise@6.1.1)(eslint-plugin-vue@9.21.1)(eslint-plugin-vuejs-accessibility@2.2.1)(eslint@8.56.0)
       '@vitejs/plugin-vue':
         specifier: ^4.2.3
         version: 4.6.2(vite@4.5.2)(vue@3.3.4)
-      tce-manifest:
-        specifier: workspace:*
-        version: link:../manifest
       typescript:
         specifier: ^5.1.6
         version: 5.3.3
@@ -106,15 +106,15 @@ importers:
 
   packages/server:
     devDependencies:
+      '@tailor-cms/ce-html-default-manifest':
+        specifier: workspace:*
+        version: link:../manifest
       '@tailor-cms/cek-common':
         specifier: ^0.0.3
         version: 0.0.3
       '@tailor-cms/eslint-config':
         specifier: 0.0.2
         version: 0.0.2(@typescript-eslint/eslint-plugin@7.0.2)(@typescript-eslint/parser@7.0.2)(eslint-config-prettier@9.1.0)(eslint-config-semistandard@17.0.0)(eslint-config-standard@17.1.0)(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.6.2)(eslint-plugin-prettier@5.1.3)(eslint-plugin-promise@6.1.1)(eslint-plugin-vue@9.21.1)(eslint-plugin-vuejs-accessibility@2.2.1)(eslint@8.56.0)
-      tce-manifest:
-        specifier: workspace:*
-        version: link:../manifest
       tsup:
         specifier: ^7.2.0
         version: 7.3.0(typescript@5.3.3)
