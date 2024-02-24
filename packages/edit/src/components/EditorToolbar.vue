@@ -6,12 +6,14 @@
           <VBtn
             :active="'isActive' in btn && editor.isActive(btn.isActive)"
             :aria-label="btn.label"
-            :disabled="!editor.can().chain().focus()[btn.action]().run()"
+            :disabled="
+              !editor.can().chain().focus()[btn.action[0]](btn.action[1]).run()
+            "
             :icon="`mdi-${btn.icon}`"
             v-bind="props"
             rounded="lg"
             size="36"
-            @click="editor.chain().focus()[btn.action]().run()"
+            @click="editor.chain().focus()[btn.action[0]](btn.action[1]).run()"
           />
         </template>
         {{ btn.label }}
@@ -27,7 +29,7 @@ defineProps<{ editor: any }>();
 interface Action {
   label: string;
   isActive?: string;
-  action: string;
+  action: string[];
   icon: string;
 }
 
@@ -35,12 +37,12 @@ const actions: Action[][] = [
   [
     {
       label: 'Undo',
-      action: 'undo',
+      action: ['undo'],
       icon: 'undo',
     },
     {
       label: 'Redo',
-      action: 'redo',
+      action: ['redo'],
       icon: 'redo',
     },
   ],
@@ -48,26 +50,44 @@ const actions: Action[][] = [
     {
       label: 'Bold',
       isActive: 'bold',
-      action: 'toggleBold',
+      action: ['toggleBold'],
       icon: 'format-bold',
     },
     {
       label: 'Italic',
       isActive: 'italic',
-      action: 'toggleItalic',
+      action: ['toggleItalic'],
       icon: 'format-italic',
+    },
+    {
+      label: 'Underline',
+      isActive: 'underline',
+      action: ['toggleUnderline'],
+      icon: 'format-underline',
     },
     {
       label: 'Strikethrough',
       isActive: 'strike',
-      action: 'toggleStrike',
+      action: ['toggleStrike'],
       icon: 'format-strikethrough',
+    },
+    {
+      label: 'Superscript',
+      isActive: 'superscript',
+      action: ['toggleSuperscript'],
+      icon: 'format-superscript',
+    },
+    {
+      label: 'Strikethrough',
+      isActive: 'subscript',
+      action: ['toggleSubscript'],
+      icon: 'format-subscript',
     },
   ],
   [
     {
       label: 'Horizontal line',
-      action: 'setHorizontalRule',
+      action: ['setHorizontalRule'],
       icon: 'minus',
     },
   ],
@@ -75,27 +95,39 @@ const actions: Action[][] = [
     {
       label: 'Numbered list',
       isActive: 'orderedList',
-      action: 'toggleOrderedList',
+      action: ['toggleOrderedList'],
       icon: 'format-list-numbered',
     },
     {
       label: 'Numbered list',
       isActive: 'bulletList',
-      action: 'toggleBulletList',
+      action: ['toggleBulletList'],
       icon: 'format-list-bulleted',
+    },
+    {
+      label: 'Decrease indent',
+      isActive: 'bulletList',
+      action: ['liftListItem', 'listItem'],
+      icon: 'format-indent-decrease',
+    },
+    {
+      label: 'Increase indent',
+      isActive: 'bulletList',
+      action: ['sinkListItem', 'listItem'],
+      icon: 'format-indent-increase',
     },
   ],
   [
     {
       label: 'Quote',
       isActive: 'blockquote',
-      action: 'toggleBlockquote',
+      action: ['toggleBlockquote'],
       icon: 'format-quote-close',
     },
     {
       label: 'Code',
       isActive: 'code',
-      action: 'toggleCode',
+      action: ['toggleCode'],
       icon: 'code-tags',
     },
   ],
