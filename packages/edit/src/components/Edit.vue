@@ -8,7 +8,8 @@
 import { defineEmits, defineProps, inject, watch } from 'vue';
 import { EditorContent, useEditor } from '@tiptap/vue-3';
 import { Element } from '@tailor-cms/ce-html-default-manifest';
-import StarterKit from '@tiptap/starter-kit';
+
+import extensions from './extensions';
 
 const props = defineProps<{ element: Element; isFocused: boolean }>();
 const emit = defineEmits(['save']);
@@ -17,7 +18,7 @@ const elementBus: any = inject('$elementBus');
 
 const editor = useEditor({
   content: props.element.data.content,
-  extensions: [StarterKit],
+  extensions,
 }) as any;
 
 watch(
