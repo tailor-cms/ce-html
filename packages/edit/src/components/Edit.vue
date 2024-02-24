@@ -1,50 +1,19 @@
 <template>
   <div class="tce-container">
-    <div v-if="editor">
-      <VBtn
-        v-for="btn in actions"
-        :key="btn.name"
-        :class="{ 'is-active': editor.isActive(btn.name) }"
-        :disabled="!editor.can().chain().focus()[btn.action]().run()"
-        class="mr-2 mb-2"
-        size="small"
-        variant="outlined"
-        @click="editor.chain().focus()[btn.action]().run()"
-      >
-        {{ btn.name }}
-      </VBtn>
-      <EditorContent :editor="editor" class="tiptap" />
-    </div>
+    <EditorContent v-if="editor" :editor="editor" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { defineEmits, defineProps, watch } from 'vue';
+import { defineEmits, defineProps, inject, watch } from 'vue';
 import { EditorContent, useEditor } from '@tiptap/vue-3';
 import { Element } from 'tce-manifest';
 import StarterKit from '@tiptap/starter-kit';
 
-const actions = [
-  {
-    name: 'bold',
-    action: 'toggleBold',
-  },
-  {
-    name: 'italic',
-    action: 'toggleItalic',
-  },
-  {
-    name: 'strike',
-    action: 'toggleStrike',
-  },
-  {
-    name: 'code',
-    action: 'toggleCode',
-  },
-];
-
 const props = defineProps<{ element: Element; isFocused: boolean }>();
 const emit = defineEmits(['save']);
+
+const elementBus: any = inject('$elementBus');
 
 const editor = useEditor({
   content: props.element.data.content,
@@ -55,14 +24,15 @@ watch(
   () => props.isFocused,
   (val) => {
     if (!val && editor.value) emit('save', { content: editor.value.getHTML() });
+    elementBus.emit('initialize', editor.value);
   },
 );
 </script>
 
 <style lang="scss" scoped>
-.tiptap {
+:deep(.tiptap) {
   min-height: 5rem;
-  padding: 0.5rem;
+  padding: 1rem;
   border: 1px solid #888;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
