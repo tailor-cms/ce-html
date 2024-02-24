@@ -1,5 +1,5 @@
 <template>
-  <VBtnGroup class="w-100 bg-white">
+  <VBtnGroup density="compact" variant="text">
     <template v-for="(group, index) in actions" :key="index">
       <VTooltip v-for="btn in group" :key="btn.label" location="bottom">
         <template #activator="{ props }">
@@ -9,12 +9,14 @@
             :disabled="!editor.can().chain().focus()[btn.action]().run()"
             :icon="`mdi-${btn.icon}`"
             v-bind="props"
+            rounded="lg"
+            size="36"
             @click="editor.chain().focus()[btn.action]().run()"
           />
         </template>
         {{ btn.label }}
       </VTooltip>
-      <VDivider vertical />
+      <VDivider class="mx-1" vertical />
     </template>
   </VBtnGroup>
 </template>
@@ -59,7 +61,7 @@ const actions: Action[][] = [
       label: 'Strikethrough',
       isActive: 'strike',
       action: 'toggleStrike',
-      icon: 'format-strikethrough-variant',
+      icon: 'format-strikethrough',
     },
   ],
   [
@@ -99,3 +101,13 @@ const actions: Action[][] = [
   ],
 ];
 </script>
+
+<style lang="scss" scoped>
+.v-btn + .v-btn {
+  margin-left: 0.125rem;
+}
+
+.v-btn.v-btn--active {
+  color: rgba(var(--v-theme-primary));
+}
+</style>
