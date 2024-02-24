@@ -71,18 +71,6 @@ const actions: Action[][] = [
       action: ['toggleStrike'],
       icon: 'format-strikethrough',
     },
-    {
-      label: 'Superscript',
-      isActive: 'superscript',
-      action: ['toggleSuperscript'],
-      icon: 'format-superscript',
-    },
-    {
-      label: 'Strikethrough',
-      isActive: 'subscript',
-      action: ['toggleSubscript'],
-      icon: 'format-subscript',
-    },
   ],
   [
     {
@@ -115,6 +103,20 @@ const actions: Action[][] = [
       isActive: 'bulletList',
       action: ['sinkListItem', 'listItem'],
       icon: 'format-indent-increase',
+    },
+  ],
+  [
+    {
+      label: 'Superscript',
+      isActive: 'superscript',
+      action: ['toggleSuperscript'],
+      icon: 'format-superscript',
+    },
+    {
+      label: 'Strikethrough',
+      isActive: 'subscript',
+      action: ['toggleSubscript'],
+      icon: 'format-subscript',
     },
   ],
   [

@@ -33,10 +33,10 @@ watch(
 <style lang="scss" scoped>
 :deep(.ProseMirror) {
   min-height: 5rem;
-  padding: 1rem;
-  border: 1px solid #888;
+  padding: 0.5rem;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
+  outline: none;
 
   & p.is-editor-empty:first-child::before {
     content: attr(data-placeholder);
