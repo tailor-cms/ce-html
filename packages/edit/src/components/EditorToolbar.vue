@@ -34,6 +34,7 @@ import { Component as VueComponent } from 'vue';
 
 import ColorPicker from './ColorPicker.vue';
 import TextAlign from './TextAlign.vue';
+import TextHighlight from './TextHighlight.vue';
 
 defineProps<{ editor: any }>();
 
@@ -92,6 +93,7 @@ const toolbarItems: (Action | Component | { type: string })[] = [
   },
   { type: 'divider' },
   { component: ColorPicker },
+  { component: TextHighlight },
   { type: 'divider' },
   {
     label: 'Numbered list',

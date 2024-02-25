@@ -4,17 +4,17 @@
       <VTooltip location="bottom">
         <template #activator="{ props: tooltip }">
           <VBtn
-            aria-label="Text color"
+            aria-label="Highlight"
             rounded="lg"
             size="36"
             icon
             v-bind="mergeProps(menu, tooltip)"
           >
-            <VIcon size="24">mdi-format-color-text</VIcon>
+            <VIcon size="24">mdi-format-color-highlight</VIcon>
             <VIcon :color="currentColor">mdi-color-helper</VIcon>
           </VBtn>
         </template>
-        Text color
+        Highlight
       </VTooltip>
     </template>
     <VSheet color="white">
@@ -32,7 +32,7 @@
           prepend-icon="mdi-water-off"
           variant="plain"
           block
-          @click="props.editor.chain().focus().unsetColor().run()"
+          @click="props.editor.chain().focus().unsetHighlight().run()"
         >
           Reset
         </VBtn>
@@ -48,10 +48,10 @@ const props = defineProps<{ editor: any }>();
 
 const currentColor = computed({
   get() {
-    return props.editor.getAttributes('textStyle').color;
+    return props.editor.getAttributes('highlight').color;
   },
   set(color) {
-    return props.editor.chain().focus().setColor(color).run();
+    return props.editor.chain().focus().setHighlight({ color }).run();
   },
 });
 </script>
@@ -64,7 +64,6 @@ const currentColor = computed({
 .color-icon {
   position: relative;
 }
-
 :deep(.v-color-picker) {
   .v-color-picker-swatches > div {
     padding-bottom: 0;
