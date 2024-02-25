@@ -63,6 +63,9 @@ importers:
       '@tiptap/extension-color':
         specifier: ^2.2.3
         version: 2.2.4(@tiptap/core@2.2.3)(@tiptap/extension-text-style@2.2.4)
+      '@tiptap/extension-highlight':
+        specifier: ^2.2.3
+        version: 2.2.4(@tiptap/core@2.2.3)
       '@tiptap/extension-placeholder':
         specifier: ^2.2.3
         version: 2.2.4(@tiptap/core@2.2.3)(@tiptap/pm@2.2.3)
@@ -1318,6 +1321,14 @@ packages:
 
   /@tiptap/extension-heading@2.2.3(@tiptap/core@2.2.3):
     resolution: {integrity: sha512-7atctuvtwPqIAdnBPOhAMsJZd41UPnWN3CktzgzfsfEoplq/86QR1hGIE4JXVB2wAZDmbnKP9Fe8PCNr7Q8JCQ==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.2.3(@tiptap/pm@2.2.3)
+    dev: false
+
+  /@tiptap/extension-highlight@2.2.4(@tiptap/core@2.2.3):
+    resolution: {integrity: sha512-GGl6ehKQ0Q0gGgUQhkWg2XYPfhVU5c0JD3NHzV4OrBP6JAtFeMYeSLdfYzFcmoYnGafvSZaJ3NukUvnDHZGzRg==}
     peerDependencies:
       '@tiptap/core': ^2.0.0
     dependencies:
