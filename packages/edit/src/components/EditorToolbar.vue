@@ -109,13 +109,11 @@ const toolbarItems: (Action | Component | { type: string })[] = [
   },
   {
     label: 'Decrease indent',
-    isActive: 'bulletList',
     action: ['liftListItem', 'listItem'],
     icon: 'format-indent-decrease',
   },
   {
     label: 'Increase indent',
-    isActive: 'bulletList',
     action: ['sinkListItem', 'listItem'],
     icon: 'format-indent-increase',
   },
