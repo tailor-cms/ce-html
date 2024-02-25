@@ -1,27 +1,28 @@
 <template>
   <VBtnGroup density="compact" variant="text">
-    <template v-for="(btn, index) in toolbarItems">
-      <VTooltip v-if="'action' in btn" :key="btn.label" location="bottom">
+    <template v-for="(it, index) in toolbarItems">
+      <VTooltip v-if="'action' in it" :key="it.label" location="bottom">
         <template #activator="{ props }">
           <VBtn
-            :active="'isActive' in btn && editor.isActive(btn.isActive)"
-            :aria-label="btn.label"
+            :active="'isActive' in it && editor.isActive(it.isActive)"
+            :aria-label="it.label"
             :disabled="
-              !editor.can().chain().focus()[btn.action[0]](btn.action[1]).run()
+              !editor.can().chain().focus()[it.action[0]](it.action[1]).run()
             "
-            :icon="`mdi-${btn.icon}`"
+            :icon="`mdi-${it.icon}`"
             v-bind="props"
             rounded="lg"
             size="36"
-            @click="editor.chain().focus()[btn.action[0]](btn.action[1]).run()"
+            @click="editor.chain().focus()[it.action[0]](it.action[1]).run()"
           />
         </template>
-        {{ btn.label }}
+        {{ it.label }}
       </VTooltip>
       <component
-        :is="btn.component"
-        v-else-if="'component' in btn"
-        :key="btn.component"
+        :is="it.component"
+        v-else-if="'component' in it"
+        :key="it.component"
+        :editor="editor"
       />
       <VDivider v-else :key="index" class="mx-1" vertical />
     </template>
@@ -29,6 +30,10 @@
 </template>
 
 <script setup lang="ts">
+import { Component as VueComponent } from 'vue';
+
+import TextAlign from './TextAlign.vue';
+
 defineProps<{ editor: any }>();
 
 interface Action {
@@ -39,7 +44,7 @@ interface Action {
 }
 
 interface Component {
-  component: string;
+  component: VueComponent;
 }
 
 const toolbarItems: (Action | Component | { type: string })[] = [
@@ -140,6 +145,9 @@ const toolbarItems: (Action | Component | { type: string })[] = [
     label: 'Clear formatting',
     action: ['unsetAllMarks'],
     icon: 'format-clear',
+  },
+  {
+    component: TextAlign,
   },
 ];
 </script>
