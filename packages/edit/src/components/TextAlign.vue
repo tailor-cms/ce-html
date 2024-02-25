@@ -34,17 +34,13 @@
         </VListItemTitle>
       </VListItem>
     </VList>
-    {{ test }}bbhhb
   </VMenu>
 </template>
 
 <script setup lang="ts">
 import { mergeProps } from 'vue';
 
-defineProps<{
-  editor: any;
-  test: any;
-}>();
+defineProps<{ editor: any }>();
 
 const alignments = ['left', 'center', 'right', 'justify'];
 </script>
