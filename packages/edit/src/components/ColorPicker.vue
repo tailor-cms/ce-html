@@ -7,6 +7,7 @@
             aria-label="Text color"
             class="pa-0"
             min-width="54"
+            rounded="lg"
             v-bind="mergeProps(menu, tooltip)"
           >
             <VIcon size="24">mdi-format-color-text</VIcon>

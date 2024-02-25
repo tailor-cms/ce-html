@@ -7,6 +7,7 @@
             aria-label="Text align"
             class="pa-0"
             min-width="54"
+            rounded="lg"
             v-bind="mergeProps(menu, tooltip)"
           >
             <VIcon size="24">mdi-format-align-justify</VIcon>
