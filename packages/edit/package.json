@@ -33,10 +33,12 @@
   },
   "dependencies": {
     "@tiptap/pm": "^2.2.3",
+    "@tiptap/extension-color": "^2.2.3",
     "@tiptap/extension-placeholder": "^2.2.3",
     "@tiptap/extension-subscript":"^2.2.3",
     "@tiptap/extension-superscript": "^2.2.3",
     "@tiptap/extension-text-align": "^2.2.3",
+    "@tiptap/extension-text-style": "^2.2.3",
     "@tiptap/extension-underline": "^2.2.3",
     "@tiptap/starter-kit": "^2.2.3",
     "@tiptap/vue-3": "^2.2.3"

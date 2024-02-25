@@ -32,6 +32,7 @@
 <script setup lang="ts">
 import { Component as VueComponent } from 'vue';
 
+import ColorPicker from './ColorPicker.vue';
 import TextAlign from './TextAlign.vue';
 
 defineProps<{ editor: any }>();
@@ -90,6 +91,8 @@ const toolbarItems: (Action | Component | { type: string })[] = [
     icon: 'minus',
   },
   { type: 'divider' },
+  { component: ColorPicker },
+  { type: 'divider' },
   {
     label: 'Numbered list',
     isActive: 'orderedList',
@@ -114,6 +117,8 @@ const toolbarItems: (Action | Component | { type: string })[] = [
     action: ['sinkListItem', 'listItem'],
     icon: 'format-indent-increase',
   },
+  { type: 'divider' },
+  { component: TextAlign },
   { type: 'divider' },
   {
     label: 'Superscript',
@@ -145,9 +150,6 @@ const toolbarItems: (Action | Component | { type: string })[] = [
     label: 'Clear formatting',
     action: ['unsetAllMarks'],
     icon: 'format-clear',
-  },
-  {
-    component: TextAlign,
   },
 ];
 </script>

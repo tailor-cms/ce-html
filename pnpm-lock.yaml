@@ -60,6 +60,9 @@ importers:
 
   packages/edit:
     dependencies:
+      '@tiptap/extension-color':
+        specifier: ^2.2.3
+        version: 2.2.4(@tiptap/core@2.2.3)(@tiptap/extension-text-style@2.2.4)
       '@tiptap/extension-placeholder':
         specifier: ^2.2.3
         version: 2.2.4(@tiptap/core@2.2.3)(@tiptap/pm@2.2.3)
@@ -70,6 +73,9 @@ importers:
         specifier: ^2.2.3
         version: 2.2.4(@tiptap/core@2.2.3)
       '@tiptap/extension-text-align':
+        specifier: ^2.2.3
+        version: 2.2.4(@tiptap/core@2.2.3)
+      '@tiptap/extension-text-style':
         specifier: ^2.2.3
         version: 2.2.4(@tiptap/core@2.2.3)
       '@tiptap/extension-underline':
@@ -1253,6 +1259,16 @@ packages:
       '@tiptap/core': 2.2.3(@tiptap/pm@2.2.3)
     dev: false
 
+  /@tiptap/extension-color@2.2.4(@tiptap/core@2.2.3)(@tiptap/extension-text-style@2.2.4):
+    resolution: {integrity: sha512-R3caThbG25gQz5b1+3PoJnVmuMF0lnqxPJ86l2ZWRAuqRSSEOJDYMGY5rlnPkAVW23Ej2FOuDFVxV/18pFHo3w==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/extension-text-style': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.2.3(@tiptap/pm@2.2.3)
+      '@tiptap/extension-text-style': 2.2.4(@tiptap/core@2.2.3)
+    dev: false
+
   /@tiptap/extension-document@2.2.3(@tiptap/core@2.2.3):
     resolution: {integrity: sha512-60Egd9yKb5SzpQlstQAP2A/2a/Qr+A+TblMRKZugrT+NENUhAj6Tx1HxWlblqGu2MsS1iXvQLZ6BQO1jHkL2IQ==}
     peerDependencies:
@@ -1396,6 +1412,14 @@ packages:
 
   /@tiptap/extension-text-align@2.2.4(@tiptap/core@2.2.3):
     resolution: {integrity: sha512-iojhpsv3n/r4g/4wMFl1d85RloWrAV3TRUJluurPQZJdrJ7ynJ2fiPqmigAXyaYAJ3+a1ryu9JPlktT9RdYO/A==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.2.3(@tiptap/pm@2.2.3)
+    dev: false
+
+  /@tiptap/extension-text-style@2.2.4(@tiptap/core@2.2.3):
+    resolution: {integrity: sha512-8Mcxy+HUHPUgK7bOv34m8zhbhzPm6f1/hgbgwz9m+Oel7MNPElsMXtxxygbwtr7Hbj6S4NBoBl/Ir4BkziYRbQ==}
     peerDependencies:
       '@tiptap/core': ^2.0.0
     dependencies:
