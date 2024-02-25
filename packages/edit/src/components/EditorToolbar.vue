@@ -1,7 +1,8 @@
 <template>
   <VBtnGroup density="compact" variant="text">
-    <template v-for="(it, index) in toolbarItems">
-      <VTooltip v-if="'action' in it" :key="it.label" location="bottom">
+    <!-- @vue-ignore -->
+    <template v-for="(it, index) in toolbarItems" :key="index">
+      <VTooltip v-if="'action' in it" location="bottom">
         <template #activator="{ props }">
           <VBtn
             :active="'isActive' in it && editor.isActive(it.isActive)"
@@ -21,10 +22,9 @@
       <component
         :is="it.component"
         v-else-if="'component' in it"
-        :key="it.component"
         :editor="editor"
       />
-      <VDivider v-else :key="index" class="mx-1" vertical />
+      <VDivider v-else class="mx-1" vertical />
     </template>
   </VBtnGroup>
 </template>
