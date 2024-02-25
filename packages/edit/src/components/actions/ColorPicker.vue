@@ -4,17 +4,19 @@
       <VTooltip location="bottom">
         <template #activator="{ props: tooltip }">
           <VBtn
-            aria-label="Text color"
+            :active="!!value"
+            :aria-label="label"
+            :disabled="disabled"
             rounded="lg"
             size="36"
             icon
             v-bind="mergeProps(menu, tooltip)"
           >
-            <VIcon size="24">mdi-format-color-text</VIcon>
+            <VIcon size="24">{{ icon }}</VIcon>
             <VIcon :color="currentColor">mdi-color-helper</VIcon>
           </VBtn>
         </template>
-        Text color
+        {{ label }}
       </VTooltip>
     </template>
     <VSheet color="white">
@@ -32,7 +34,7 @@
           prepend-icon="mdi-water-off"
           variant="plain"
           block
-          @click="props.editor.chain().focus().unsetColor().run()"
+          @click="$emit('unset')"
         >
           Reset
         </VBtn>
@@ -44,14 +46,20 @@
 <script setup lang="ts">
 import { computed, mergeProps } from 'vue';
 
-const props = defineProps<{ editor: any }>();
+const props = defineProps<{
+  disabled: boolean;
+  value: string;
+  label: string;
+  icon: string;
+}>();
+const emit = defineEmits(['set', 'unset']);
 
 const currentColor = computed({
   get() {
-    return props.editor.getAttributes('textStyle').color;
+    return props.value;
   },
   set(color) {
-    return props.editor.chain().focus().setColor(color).run();
+    return emit('set', color);
   },
 });
 </script>
@@ -59,6 +67,10 @@ const currentColor = computed({
 <style lang="scss" scoped>
 .mdi-color-helper {
   position: absolute !important;
+}
+
+.v-btn.v-btn--active {
+  color: rgba(var(--v-theme-primary));
 }
 
 .color-icon {

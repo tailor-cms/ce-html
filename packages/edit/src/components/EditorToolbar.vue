@@ -32,9 +32,9 @@
 <script setup lang="ts">
 import { Component as VueComponent } from 'vue';
 
-import ColorPicker from './ColorPicker.vue';
-import TextAlign from './TextAlign.vue';
-import TextHighlight from './TextHighlight.vue';
+import TextAlign from './actions/TextAlign.vue';
+import TextColor from './actions/TextColor.vue';
+import TextHighlight from './actions/TextHighlight.vue';
 
 defineProps<{ editor: any }>();
 
@@ -92,7 +92,7 @@ const toolbarItems: (Action | Component | { type: string })[] = [
     icon: 'minus',
   },
   { type: 'divider' },
-  { component: ColorPicker },
+  { component: TextColor },
   { component: TextHighlight },
   { type: 'divider' },
   {
@@ -155,7 +155,7 @@ const toolbarItems: (Action | Component | { type: string })[] = [
 </script>
 
 <style lang="scss" scoped>
-.v-btn + .v-btn {
+:deep(.v-btn + .v-btn) {
   margin-left: 0.125rem;
 }
 
