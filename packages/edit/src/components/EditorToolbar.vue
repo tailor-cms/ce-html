@@ -32,6 +32,7 @@
 <script setup lang="ts">
 import { Component as VueComponent } from 'vue';
 
+import AddLink from './actions/AddLink.vue';
 import FontSize from './actions/FontSize.vue';
 import TextAlign from './actions/TextAlign.vue';
 import TextColor from './actions/TextColor.vue';
@@ -94,6 +95,7 @@ const toolbarItems: (Action | Component | { type: string })[] = [
     action: ['setHorizontalRule'],
     icon: 'minus',
   },
+  { component: AddLink },
   { type: 'divider' },
   { component: TextColor },
   { component: TextHighlight },

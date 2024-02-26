@@ -66,6 +66,9 @@ importers:
       '@tiptap/extension-highlight':
         specifier: ^2.2.3
         version: 2.2.4(@tiptap/core@2.2.3)
+      '@tiptap/extension-link':
+        specifier: ^2.2.3
+        version: 2.2.4(@tiptap/core@2.2.3)(@tiptap/pm@2.2.3)
       '@tiptap/extension-placeholder':
         specifier: ^2.2.3
         version: 2.2.4(@tiptap/core@2.2.3)(@tiptap/pm@2.2.3)
@@ -93,6 +96,9 @@ importers:
       '@tiptap/vue-3':
         specifier: ^2.2.3
         version: 2.2.3(@tiptap/core@2.2.3)(@tiptap/pm@2.2.3)(vue@3.3.4)
+      validator:
+        specifier: ^13.11.0
+        version: 13.11.0
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -1361,6 +1367,17 @@ packages:
       '@tiptap/core': ^2.0.0
     dependencies:
       '@tiptap/core': 2.2.3(@tiptap/pm@2.2.3)
+    dev: false
+
+  /@tiptap/extension-link@2.2.4(@tiptap/core@2.2.3)(@tiptap/pm@2.2.3):
+    resolution: {integrity: sha512-Qsx0cFZm4dxbkToXs5TcXbSoUdicv8db1gV1DYIZdETqjBm4wFjlzCUP7hPHFlvNfeSy1BzAMRt+RpeuiwvxWQ==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.2.3(@tiptap/pm@2.2.3)
+      '@tiptap/pm': 2.2.3
+      linkifyjs: 4.1.3
     dev: false
 
   /@tiptap/extension-list-item@2.2.3(@tiptap/core@2.2.3):
@@ -4333,6 +4350,10 @@ packages:
       uc.micro: 2.0.0
     dev: false
 
+  /linkifyjs@4.1.3:
+    resolution: {integrity: sha512-auMesunaJ8yfkHvK4gfg1K0SaKX/6Wn9g2Aac/NwX+l5VdmFZzo/hdPGxEOETj+ryRa4/fiOPjeeKURSAJx1sg==}
+    dev: false
+
   /load-tsconfig@0.2.5:
     resolution: {integrity: sha512-IXO6OCs9yg8tMKzfPZ1YmheJbZCiEsnBdcB03l0OcfK9prKnJb96siuHCr5Fl37/yo9DnKU+TLpxzTUspw9shg==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
@@ -6456,7 +6477,6 @@ packages:
   /validator@13.11.0:
     resolution: {integrity: sha512-Ii+sehpSfZy+At5nPdnyMhx78fEoPDkR2XW/zimHEL3MyGJQOCQ7WeP20jPYRz7ZCpcKLB21NxuXHF3bxjStBQ==}
     engines: {node: '>= 0.10'}
-    dev: true
 
   /vanilla-jsoneditor@0.17.10:
     resolution: {integrity: sha512-2ScoLNqq3kRSJ1+sG8rzbh4YtetrgEXbRX0OYxOk1Lqlg6tSkELGPsTA4KADFwk1s84oPj2ozMmFY6SwbZRJhg==}
