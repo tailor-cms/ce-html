@@ -32,6 +32,7 @@
 <script setup lang="ts">
 import { Component as VueComponent } from 'vue';
 
+import FontSize from './actions/FontSize.vue';
 import TextAlign from './actions/TextAlign.vue';
 import TextColor from './actions/TextColor.vue';
 import TextHighlight from './actions/TextHighlight.vue';
@@ -60,6 +61,8 @@ const toolbarItems: (Action | Component | { type: string })[] = [
     action: ['redo'],
     icon: 'redo',
   },
+  { type: 'divider' },
+  { component: FontSize },
   { type: 'divider' },
   {
     label: 'Bold',
@@ -159,7 +162,7 @@ const toolbarItems: (Action | Component | { type: string })[] = [
   margin-left: 0.125rem;
 }
 
-.v-btn.v-btn--active {
+:deep(.v-btn.v-btn--active) {
   color: rgba(var(--v-theme-primary));
 }
 </style>
