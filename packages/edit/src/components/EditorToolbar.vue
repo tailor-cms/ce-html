@@ -36,6 +36,7 @@ import AddLink from './actions/AddLink.vue';
 import FontSize from './actions/FontSize.vue';
 import TextAlign from './actions/TextAlign.vue';
 import TextColor from './actions/TextColor.vue';
+import TextHeading from './actions/TextHeading.vue';
 import TextHighlight from './actions/TextHighlight.vue';
 
 defineProps<{ editor: any }>();
@@ -63,6 +64,7 @@ const toolbarItems: (Action | Component | { type: string })[] = [
     icon: 'redo',
   },
   { type: 'divider' },
+  { component: TextHeading },
   { component: FontSize },
   { type: 'divider' },
   {
