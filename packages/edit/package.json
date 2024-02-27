@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@tiptap/extension-color": "^2.2.3",
+    "@tiptap/extension-font-family": "^2.2.3",
     "@tiptap/extension-highlight": "^2.2.3",
     "@tiptap/extension-link": "^2.2.3",
     "@tiptap/extension-placeholder": "^2.2.3",

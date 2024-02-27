@@ -33,6 +33,7 @@
 import { Component as VueComponent } from 'vue';
 
 import AddLink from './actions/AddLink.vue';
+import FontFamily from './actions/FontFamily.vue';
 import FontSize from './actions/FontSize.vue';
 import TextAlign from './actions/TextAlign.vue';
 import TextColor from './actions/TextColor.vue';
@@ -65,6 +66,7 @@ const toolbarItems: (Action | Component | { type: string })[] = [
   },
   { type: 'divider' },
   { component: TextHeading },
+  { component: FontFamily },
   { component: FontSize },
   { type: 'divider' },
   {

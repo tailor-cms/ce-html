@@ -63,6 +63,9 @@ importers:
       '@tiptap/extension-color':
         specifier: ^2.2.3
         version: 2.2.4(@tiptap/core@2.2.3)(@tiptap/extension-text-style@2.2.4)
+      '@tiptap/extension-font-family':
+        specifier: ^2.2.3
+        version: 2.2.4(@tiptap/core@2.2.3)(@tiptap/extension-text-style@2.2.4)
       '@tiptap/extension-highlight':
         specifier: ^2.2.3
         version: 2.2.4(@tiptap/core@2.2.3)
@@ -1305,6 +1308,16 @@ packages:
       '@tiptap/core': 2.2.3(@tiptap/pm@2.2.3)
       '@tiptap/pm': 2.2.3
       tippy.js: 6.3.7
+    dev: false
+
+  /@tiptap/extension-font-family@2.2.4(@tiptap/core@2.2.3)(@tiptap/extension-text-style@2.2.4):
+    resolution: {integrity: sha512-w+Na6p42qN4IAY6ffJQXV9LH0/4OyMEqrWigkSzN2aOb9mrZpWI2KMODVepn3gVZy0ESmhdK546WJoXmKhsE4A==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/extension-text-style': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.2.3(@tiptap/pm@2.2.3)
+      '@tiptap/extension-text-style': 2.2.4(@tiptap/core@2.2.3)
     dev: false
 
   /@tiptap/extension-gapcursor@2.2.3(@tiptap/core@2.2.3)(@tiptap/pm@2.2.3):

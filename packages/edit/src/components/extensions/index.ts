@@ -1,4 +1,5 @@
 import Color from '@tiptap/extension-color';
+import FontFamily from '@tiptap/extension-font-family';
 import Highlight from '@tiptap/extension-highlight';
 import Placeholder from '@tiptap/extension-placeholder';
 import StarterKit from '@tiptap/starter-kit';
@@ -13,6 +14,7 @@ import Link from './link.ts';
 
 export default [
   Color,
+  FontFamily,
   FontSize,
   Highlight.configure({ multicolor: true }),
   Link.configure({ openOnClick: false }),
