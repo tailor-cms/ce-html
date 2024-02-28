@@ -23,6 +23,7 @@
       <VColorPicker
         v-model="currentColor"
         elevation="0"
+        swatches-max-height="unset"
         width="unset"
         hide-canvas
         hide-inputs

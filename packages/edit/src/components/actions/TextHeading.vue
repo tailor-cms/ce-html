@@ -7,11 +7,11 @@
             :active="editor.isActive({ level: /\d+/ })"
             aria-label="Text align"
             class="pa-0"
-            min-width="54"
+            min-width="46"
             rounded="lg"
             v-bind="mergeProps(menu, tooltip)"
           >
-            <VIcon size="24">
+            <VIcon class="ml-1 mr-n1" size="24">
               mdi-format-header-{{
                 editor.getAttributes('heading').level ?? 'pound'
               }}

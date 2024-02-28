@@ -8,18 +8,18 @@
             :disabled="!editor.can().chain().focus().setFontSize().run()"
             aria-label="Font Size"
             class="pa-0"
-            min-width="54"
+            min-width="46"
             rounded="lg"
             v-bind="mergeProps(menu, tooltip)"
           >
-            <VIcon size="24">mdi-format-size</VIcon>
+            <VIcon class="ml-1 mr-n1" size="24">mdi-format-size</VIcon>
             <VIcon small>mdi-menu-down</VIcon>
           </VBtn>
         </template>
         Font Size
       </VTooltip>
     </template>
-    <VList class="pa-1" color="primary" density="compact" max-height="176">
+    <VList class="pa-1" color="primary" density="compact" max-height="220">
       <VListItem
         v-for="fontSize in fontSizes"
         :key="fontSize"
@@ -58,7 +58,7 @@ const fontSizes = [
   '96px',
 ];
 
-const toggle = (fontSize) =>
+const toggle = (fontSize: string) =>
   props.editor.isActive({ fontSize })
     ? props.editor.chain().focus().unsetFontSize().run()
     : props.editor.chain().focus().setFontSize(fontSize).run();
@@ -67,14 +67,5 @@ const toggle = (fontSize) =>
 <style lang="scss" scoped>
 .v-list-item + .v-list-item {
   margin-top: 0.125rem;
-}
-
-:deep(.v-btn__content) {
-  border-radius: inherit;
-}
-
-.menu-icon {
-  border-top-right-radius: inherit;
-  border-bottom-right-radius: inherit;
 }
 </style>
