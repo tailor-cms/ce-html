@@ -19,27 +19,34 @@
         {{ label }}
       </VTooltip>
     </template>
-    <VSheet color="white">
-      <VColorPicker
-        v-model="currentColor"
-        elevation="0"
-        swatches-max-height="unset"
-        width="unset"
-        hide-canvas
-        hide-inputs
-        hide-sliders
-        show-swatches
-      />
-      <div class="pa-2">
+    <VSheet class="pa-2" color="white">
+      <div v-for="(colorRow, i) in COLORS" :key="i" class="d-flex">
         <VBtn
-          prepend-icon="mdi-water-off"
-          variant="plain"
-          block
-          @click="$emit('unset')"
+          v-for="color in colorRow"
+          :key="color"
+          :active="value === color"
+          :aria-label="color"
+          :color="color"
+          class="color-btn"
+          size="24"
+          variant="flat"
+          @click="currentColor = color"
         >
-          Reset
+          <VIcon v-if="value === color" color="white" size="small">
+            mdi-check-circle
+          </VIcon>
         </VBtn>
       </div>
+      <VBtn
+        class="mt-1"
+        size="small"
+        variant="plain"
+        block
+        @click="$emit('unset')"
+      >
+        <VIcon size="small">mdi-water-off</VIcon>
+        Reset
+      </VBtn>
     </VSheet>
   </VMenu>
 </template>
@@ -54,6 +61,53 @@ const props = defineProps<{
   icon: string;
 }>();
 const emit = defineEmits(['set', 'unset']);
+
+const COLORS = [
+  [
+    '#000000',
+    '#333333',
+    '#4D4D4D',
+    '#666666',
+    '#808080',
+    '#999999',
+    '#B3B3B3',
+    '#CCCCCC',
+    '#FFFFFF',
+  ],
+  [
+    '#F44E3B',
+    '#FE9200',
+    '#FCDC00',
+    '#DBDF00',
+    '#A4DD00',
+    '#68CCCA',
+    '#73D8FF',
+    '#AEA1FF',
+    '#FDA1FF',
+  ],
+  [
+    '#D33115',
+    '#E27300',
+    '#FCC400',
+    '#B0BC00',
+    '#68BC00',
+    '#16A5A5',
+    '#009CE0',
+    '#7B64FF',
+    '#FA28FF',
+  ],
+  [
+    '#9F0500',
+    '#C45100',
+    '#FB9E00',
+    '#808900',
+    '#194D33',
+    '#0C797D',
+    '#0062B1',
+    '#653294',
+    '#AB149E',
+  ],
+];
 
 const currentColor = computed({
   get() {
@@ -94,5 +148,10 @@ const currentColor = computed({
     max-height: 1.5rem;
     border-radius: 50%;
   }
+}
+
+.color-btn {
+  margin: 0.0625rem;
+  border: 1px solid #eee;
 }
 </style>

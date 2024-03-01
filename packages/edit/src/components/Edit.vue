@@ -18,7 +18,7 @@ const elementBus: any = inject('$elementBus');
 
 const editor = useEditor({
   content: props.element.data.content,
-  extensions
+  extensions,
 }) as any;
 
 watch(
