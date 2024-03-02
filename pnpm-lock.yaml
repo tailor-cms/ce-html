@@ -15,8 +15,8 @@ importers:
         specifier: 0.0.2
         version: 0.0.2(@typescript-eslint/eslint-plugin@7.0.2)(@typescript-eslint/parser@7.0.2)(eslint-config-prettier@9.1.0)(eslint-config-semistandard@17.0.0)(eslint-config-standard@17.1.0)(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.6.2)(eslint-plugin-prettier@5.1.3)(eslint-plugin-promise@6.1.1)(eslint-plugin-vue@9.21.1)(eslint-plugin-vuejs-accessibility@2.2.1)(eslint@8.56.0)
       '@tailor-cms/tce-boot':
-        specifier: 0.5.0-beta.2
-        version: 0.5.0-beta.2(@types/node@20.11.19)
+        specifier: 0.5.0-beta.3
+        version: 0.5.0-beta.3(@types/node@20.11.19)
       '@tailor-cms/tce-display-runtime':
         specifier: 0.4.0
         version: 0.4.0(@types/node@20.11.19)
@@ -999,11 +999,11 @@ packages:
       eslint-plugin-vuejs-accessibility: 2.2.1(eslint@8.56.0)
     dev: true
 
-  /@tailor-cms/tce-boot@0.5.0-beta.2(@types/node@20.11.19):
-    resolution: {integrity: sha512-SDIyvGs2SfxkvVJPPcUGR6emqPoYImezHxbQrUHyNogQIzjJl69lT2llhkAfEW+ihHy5Im8KohRM8FGRgyv78w==}
+  /@tailor-cms/tce-boot@0.5.0-beta.3(@types/node@20.11.19):
+    resolution: {integrity: sha512-+mjgz16Q2dfF39QSzRgBJaO4Jpi8NBEp81OI1j6re5lvWyOj1j7YZIJVHuzZtyyOcFM7c7ORnTG/5FdzGvAwbQ==}
     dependencies:
       '@tailor-cms/tce-display-runtime': 0.4.0(@types/node@20.11.19)
-      '@tailor-cms/tce-edit-next-runtime': 0.0.1(@types/node@20.11.19)
+      '@tailor-cms/tce-edit-next-runtime': 0.0.2(@types/node@20.11.19)
       '@tailor-cms/tce-edit-runtime': 0.4.0(@types/node@20.11.19)
       '@tailor-cms/tce-preview-runtime': 0.4.0(@types/node@20.11.19)
       '@tailor-cms/tce-server-runtime': 0.4.0(@types/node@20.11.19)
@@ -1080,8 +1080,8 @@ packages:
       - webpack-plugin-vuetify
     dev: true
 
-  /@tailor-cms/tce-edit-next-runtime@0.0.1(@types/node@20.11.19):
-    resolution: {integrity: sha512-A000UTYevgU0jinWhj3Kq1MQrSYnjqxXnwWZu450PLoPlcECRRmcY6qXFOp6o6xJpsyaq3mSThGgIax9t5bAow==}
+  /@tailor-cms/tce-edit-next-runtime@0.0.2(@types/node@20.11.19):
+    resolution: {integrity: sha512-GOSsxoSD1pmAjfKDdRYun035TVRORbJ0cNDn+bei9WpNv/PJIIpwv1YZJzyW3mki+rJ01lhdZvO8RIPfmcmQmg==}
     dependencies:
       '@mdi/font': 7.2.96
       '@tailor-cms/cek-common': 0.0.3
@@ -1100,10 +1100,10 @@ packages:
       unplugin-vue-components: 0.25.2(vue@3.3.4)
       url-join: 5.0.0
       vite: 4.4.9(@types/node@20.11.19)(sass@1.68.0)
-      vite-plugin-vuetify: 1.0.2(vite@4.4.9)(vue@3.3.4)(vuetify@3.3.17)
+      vite-plugin-vuetify: 1.0.2(vite@4.4.9)(vue@3.3.4)(vuetify@3.5.6)
       vue: 3.3.4
       vue-tsc: 1.8.13(typescript@5.2.2)
-      vuetify: 3.3.17(typescript@5.2.2)(vite-plugin-vuetify@1.0.2)(vue@3.3.4)
+      vuetify: 3.5.6(typescript@5.2.2)(vite-plugin-vuetify@1.0.2)(vue@3.3.4)
       webfontloader: 1.6.28
     transitivePeerDependencies:
       - '@babel/parser'
@@ -2074,6 +2074,18 @@ packages:
       upath: 2.0.1
       vue: 3.3.4
       vuetify: 3.4.0(typescript@5.2.2)(vite-plugin-vuetify@1.0.2)(vue@3.3.4)
+    dev: true
+
+  /@vuetify/loader-shared@1.7.1(vue@3.3.4)(vuetify@3.5.6):
+    resolution: {integrity: sha512-kLUvuAed6RCvkeeTNJzuy14pqnkur8lTuner7v7pNE/kVhPR97TuyXwBSBMR1cJeiLiOfu6SF5XlCYbXByEx1g==}
+    peerDependencies:
+      vue: ^3.0.0
+      vuetify: ^3.0.0-beta.4
+    dependencies:
+      find-cache-dir: 3.3.2
+      upath: 2.0.1
+      vue: 3.3.4
+      vuetify: 3.5.6(typescript@5.2.2)(vite-plugin-vuetify@1.0.2)(vue@3.3.4)
     dev: true
 
   /@vueuse/core@10.4.1(vue@3.3.4):
@@ -5864,6 +5876,7 @@ packages:
   /socks@2.7.3:
     resolution: {integrity: sha512-vfuYK48HXCTFD03G/1/zkIls3Ebr2YNa4qU9gHDZdblHLiqhJrJGkY3+0Nx0JpN9qBhJbVObc1CNciT1bIZJxw==}
     engines: {node: '>= 10.0.0', npm: '>= 3.0.0'}
+    deprecated: please use 2.7.4 or 2.8.1 to fix package-lock issue
     requiresBuild: true
     dependencies:
       ip-address: 9.0.5
@@ -6583,6 +6596,23 @@ packages:
       - vue
     dev: true
 
+  /vite-plugin-vuetify@1.0.2(vite@4.4.9)(vue@3.3.4)(vuetify@3.5.6):
+    resolution: {integrity: sha512-MubIcKD33O8wtgQXlbEXE7ccTEpHZ8nPpe77y9Wy3my2MWw/PgehP9VqTp92BLqr0R1dSL970Lynvisx3UxBFw==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      vite: ^2.7.0 || ^3.0.0 || ^4.0.0
+      vuetify: ^3.0.0-beta.4
+    dependencies:
+      '@vuetify/loader-shared': 1.7.1(vue@3.3.4)(vuetify@3.5.6)
+      debug: 4.3.4
+      upath: 2.0.1
+      vite: 4.4.9(@types/node@20.11.19)(sass@1.68.0)
+      vuetify: 3.5.6(typescript@5.2.2)(vite-plugin-vuetify@1.0.2)(vue@3.3.4)
+    transitivePeerDependencies:
+      - supports-color
+      - vue
+    dev: true
+
   /vite@4.4.9(@types/node@20.11.19)(sass@1.32.13):
     resolution: {integrity: sha512-2mbUn2LlUmNASWwSCNSJ/EG2HuSRTnVNaydp6vMCm5VIqJsjMfbIWtbH2kDuwUVW5mMUKKZvGPX/rqeqVvv1XA==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -6841,6 +6871,30 @@ packages:
     dependencies:
       typescript: 5.2.2
       vite-plugin-vuetify: 1.0.2(vite@4.4.9)(vue@3.3.4)(vuetify@3.4.0)
+      vue: 3.3.4
+    dev: true
+
+  /vuetify@3.5.6(typescript@5.2.2)(vite-plugin-vuetify@1.0.2)(vue@3.3.4):
+    resolution: {integrity: sha512-PfKSnHaSEGoz1QNHZ2sutOYwmYxtBbxAaeRy0L0qtMWLkKtxheg0he/NX+lsP11I2LevQBj2AgeBYDMZ/oPkPQ==}
+    engines: {node: ^12.20 || >=14.13}
+    peerDependencies:
+      typescript: '>=4.7'
+      vite-plugin-vuetify: '>=1.0.0-alpha.12'
+      vue: ^3.3.0
+      vue-i18n: ^9.0.0
+      webpack-plugin-vuetify: '>=2.0.0-alpha.11'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+      vite-plugin-vuetify:
+        optional: true
+      vue-i18n:
+        optional: true
+      webpack-plugin-vuetify:
+        optional: true
+    dependencies:
+      typescript: 5.2.2
+      vite-plugin-vuetify: 1.0.2(vite@4.4.9)(vue@3.3.4)(vuetify@3.5.6)
       vue: 3.3.4
     dev: true
 
