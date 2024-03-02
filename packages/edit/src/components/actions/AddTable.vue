@@ -16,7 +16,7 @@
         Add table
       </VTooltip>
     </template>
-    <VSheet class="pa-2" color="white">
+    <VSheet class="pa-2 text-center" color="white">
       <div v-for="rows in DIMENSIONS.rows" :key="rows" class="d-flex">
         <VBtn
           v-for="cols in DIMENSIONS.cols"
@@ -31,6 +31,9 @@
           @mouseover="updateSelection(rows, cols)"
         />
       </div>
+      <span class="text-body-2">
+        {{ selectedSize.rows }}x{{ selectedSize.cols }}
+      </span>
     </VSheet>
   </VMenu>
 </template>
