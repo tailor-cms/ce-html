@@ -1,5 +1,6 @@
 <template>
   <div class="tce-container">
+    <TableMenu v-if="editor" :editor="editor" />
     <EditorContent v-if="editor" :editor="editor" />
   </div>
 </template>
@@ -10,6 +11,7 @@ import { EditorContent, useEditor } from '@tiptap/vue-3';
 import { Element } from '@tailor-cms/ce-html-default-manifest';
 
 import extensions from './extensions';
+import TableMenu from './bubble-menus/TableMenu.vue';
 
 const props = defineProps<{ element: Element; isFocused: boolean }>();
 const emit = defineEmits(['save']);

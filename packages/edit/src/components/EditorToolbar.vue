@@ -2,23 +2,16 @@
   <VBtnGroup density="compact" variant="text">
     <!-- @vue-ignore -->
     <template v-for="(it, index) in toolbarItems" :key="index">
-      <VTooltip v-if="'action' in it" location="bottom">
-        <template #activator="{ props }">
-          <VBtn
-            :active="'isActive' in it && editor.isActive(it.isActive)"
-            :aria-label="it.label"
-            :disabled="
-              !editor.can().chain().focus()[it.action[0]](it.action[1]).run()
-            "
-            :icon="`mdi-${it.icon}`"
-            v-bind="props"
-            rounded="lg"
-            size="36"
-            @click="editor.chain().focus()[it.action[0]](it.action[1]).run()"
-          />
-        </template>
-        {{ it.label }}
-      </VTooltip>
+      <IconButton
+        v-if="'action' in it"
+        :active="'isActive' in it && editor.isActive(it.isActive)"
+        :disabled="
+          !editor.can().chain().focus()[it.action[0]](it.action[1]).run()
+        "
+        :icon="`mdi-${it.icon}`"
+        :label="it.label"
+        @click="editor.chain().focus()[it.action[0]](it.action[1]).run()"
+      />
       <component
         :is="it.component"
         v-else-if="'component' in it"
@@ -36,6 +29,7 @@ import AddLink from './actions/AddLink.vue';
 import AddTable from './actions/AddTable.vue';
 import FontFamily from './actions/FontFamily.vue';
 import FontSize from './actions/FontSize.vue';
+import IconButton from './IconButton.vue';
 import TextAlign from './actions/TextAlign.vue';
 import TextColor from './actions/TextColor.vue';
 import TextHeading from './actions/TextHeading.vue';
