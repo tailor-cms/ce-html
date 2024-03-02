@@ -16,7 +16,6 @@ export default [
   Color,
   FontFamily,
   FontSize,
-  Highlight.configure({ multicolor: true }),
   Link.configure({ openOnClick: false }),
   StarterKit,
   Subscript,
@@ -24,6 +23,7 @@ export default [
   Underline,
   TextStyle,
   TextAlign.configure({ types: ['heading', 'paragraph'] }),
+  Highlight.configure({ multicolor: true }),
   Placeholder.configure({
     showOnlyWhenEditable: false,
     placeholder: 'Enter your text...',
