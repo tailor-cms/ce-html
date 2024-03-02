@@ -27,9 +27,9 @@
         hide-details
         @click.stop
       />
-      <div v-for="rows in DIMENSIONS.rows" :key="rows" class="d-flex">
+      <div v-for="rows in gridSize.rows" :key="rows" class="d-flex">
         <VBtn
-          v-for="cols in DIMENSIONS.cols"
+          v-for="cols in gridSize.cols"
           :key="cols"
           :active="selectedSize.rows >= rows && selectedSize.cols >= cols"
           class="cell-btn"
@@ -51,14 +51,20 @@
 <script setup lang="ts">
 import { mergeProps, reactive, ref } from 'vue';
 
-const DIMENSIONS = { rows: 5, cols: 5 };
+const INIT_SIZE = 5;
+const MAX_SIZE = 10;
 
 const props = defineProps<{ editor: any }>();
 
 const withHeaderRow = ref(false);
 const selectedSize = reactive({ rows: 0, cols: 0 });
+const gridSize = reactive({ rows: INIT_SIZE, cols: INIT_SIZE });
 
 const updateSelection = (rows: number, cols: number) => {
+  if (rows === gridSize.rows) gridSize.rows = Math.min(rows + 1, MAX_SIZE);
+  else if (rows < gridSize.rows - 1 && rows >= INIT_SIZE - 1) gridSize.rows--;
+  if (cols === gridSize.cols) gridSize.cols = Math.min(cols + 1, MAX_SIZE);
+  else if (cols < gridSize.cols - 1 && cols > INIT_SIZE - 1) gridSize.cols--;
   selectedSize.rows = rows;
   selectedSize.cols = cols;
 };
