@@ -14,7 +14,7 @@
         />
         <IconButton
           icon="mdi-table-column-plus-after"
-          label="Add column adter"
+          label="Add column after"
           @click="editor.chain().focus().addColumnAfter().run()"
         />
         <IconButton
@@ -46,11 +46,13 @@
         />
         <VDivider class="mx-1" vertical />
         <IconButton
+          :disabled="!editor.can().chain().focus().mergeCells().run()"
           icon="mdi-table-merge-cells"
           label="Merge cells"
           @click="editor.chain().focus().mergeCells().run()"
         />
         <IconButton
+          :disabled="!editor.can().chain().focus().splitCell().run()"
           icon="mdi-table-split-cell"
           label="Split cell"
           @click="editor.chain().focus().splitCell().run()"
