@@ -150,6 +150,12 @@ const toolbarItems: (Action | Component | { type: string })[] = [
     action: ['toggleCode'],
     icon: 'code-tags',
   },
+  {
+    label: 'Code block',
+    isActive: 'codeBlock',
+    action: ['toggleCodeBlock'],
+    icon: 'code-block-tags',
+  },
   { type: 'divider' },
   {
     label: 'Clear formatting',

@@ -5,6 +5,7 @@
         <template #activator="{ props: tooltip }">
           <VBtn
             :active="!!editor.getAttributes('textStyle').fontFamily"
+            :disabled="!editor.can().chain().focus().setFontFamily().run()"
             aria-label="Text align"
             class="pa-0"
             min-width="46"
@@ -25,10 +26,11 @@
         v-for="fontFamily in fontFamilies"
         :key="fontFamily"
         :active="editor.isActive('textStyle', { fontFamily })"
+        :disabled="!editor.can().chain().focus().setFontFamily().run()"
         class="px-2"
         min-height="36"
         rounded="sm"
-        @click="editor.chain().focus().setFontFamily(fontFamily).run()"
+        @click="toggle(fontFamily)"
       >
         <VListItemTitle :style="`font-family: ${fontFamily}`">
           {{ fontFamily }}
@@ -41,7 +43,7 @@
 <script setup lang="ts">
 import { mergeProps } from 'vue';
 
-defineProps<{ editor: any }>();
+const props = defineProps<{ editor: any }>();
 
 const fontFamilies = [
   'Helvetica',
@@ -52,6 +54,11 @@ const fontFamilies = [
   'Times New Roman',
   'Verdana',
 ];
+
+const toggle = (fontFamily: string) =>
+  props.editor.isActive({ fontFamily })
+    ? props.editor.chain().focus().unsetFontFamily().run()
+    : props.editor.chain().focus().setFontFamily(fontFamily).run();
 </script>
 
 <style lang="scss" scoped>

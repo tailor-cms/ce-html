@@ -4,6 +4,7 @@
       <VTooltip location="bottom">
         <template #activator="{ props: tooltip }">
           <VBtn
+            :disabled="!editor.can().chain().focus().setTextAlign().run()"
             aria-label="Text align"
             class="pa-0"
             min-width="46"
@@ -22,6 +23,7 @@
         v-for="textAlign in alignments"
         :key="textAlign"
         :active="editor.isActive({ textAlign })"
+        :disabled="!editor.can().chain().focus().setTextAlign().run()"
         class="px-2"
         min-height="36"
         rounded="sm"
