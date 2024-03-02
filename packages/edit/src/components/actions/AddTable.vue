@@ -17,6 +17,16 @@
       </VTooltip>
     </template>
     <VSheet class="pa-2 text-center" color="white">
+      <VCheckbox
+        v-model="withHeaderRow"
+        :ripple="false"
+        class="mb-1"
+        color="primary"
+        density="compact"
+        label="Add header"
+        hide-details
+        @click.stop
+      />
       <div v-for="rows in DIMENSIONS.rows" :key="rows" class="d-flex">
         <VBtn
           v-for="cols in DIMENSIONS.cols"
@@ -39,15 +49,13 @@
 </template>
 
 <script setup lang="ts">
-import { mergeProps, reactive } from 'vue';
+import { mergeProps, reactive, ref } from 'vue';
 
-const DIMENSIONS = {
-  rows: 5,
-  cols: 5,
-};
+const DIMENSIONS = { rows: 5, cols: 5 };
 
 const props = defineProps<{ editor: any }>();
 
+const withHeaderRow = ref(false);
 const selectedSize = reactive({ rows: 0, cols: 0 });
 
 const updateSelection = (rows: number, cols: number) => {
@@ -56,7 +64,11 @@ const updateSelection = (rows: number, cols: number) => {
 };
 
 const insertTable = (rows: number, cols: number) => {
-  const options = { rows, cols, withHeaderRow: true };
+  const options = {
+    withHeaderRow: withHeaderRow.value,
+    rows: rows + Number(withHeaderRow.value),
+    cols,
+  };
   return props.editor.chain().focus().insertTable(options).run();
 };
 </script>
@@ -64,5 +76,9 @@ const insertTable = (rows: number, cols: number) => {
 <style lang="scss" scoped>
 .cell-btn {
   margin: 0.0625rem;
+}
+
+.v-input--density-compact {
+  --v-input-control-height: unset;
 }
 </style>
