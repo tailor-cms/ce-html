@@ -30,7 +30,9 @@
           class="color-btn"
           size="24"
           variant="flat"
-          @click="currentColor = color"
+          @click="
+            currentColor === color ? $emit('unset') : (currentColor = color)
+          "
         >
           <VIcon v-if="value === color" color="white" size="small">
             mdi-check-circle
@@ -152,6 +154,6 @@ const currentColor = computed({
 
 .color-btn {
   margin: 0.0625rem;
-  border: 1px solid #eee;
+  border: 1px solid #dadce0;
 }
 </style>
