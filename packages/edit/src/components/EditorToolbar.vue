@@ -33,6 +33,7 @@
 import { Component as VueComponent } from 'vue';
 
 import AddLink from './actions/AddLink.vue';
+import AddTable from './actions/AddTable.vue';
 import FontFamily from './actions/FontFamily.vue';
 import FontSize from './actions/FontSize.vue';
 import TextAlign from './actions/TextAlign.vue';
@@ -100,6 +101,7 @@ const toolbarItems: (Action | Component | { type: string })[] = [
     icon: 'minus',
   },
   { component: AddLink },
+  { component: AddTable },
   { type: 'divider' },
   { component: TextColor },
   { component: TextHighlight },
