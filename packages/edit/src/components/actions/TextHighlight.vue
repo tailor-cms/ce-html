@@ -3,7 +3,7 @@
     :disabled="!editor.can().chain().focus().setHighlight().run()"
     :value="editor.getAttributes('highlight').color"
     icon="mdi-format-color-highlight"
-    label="Text Highlight"
+    label="Text highlight"
     @set="editor.chain().focus().setHighlight({ color: $event }).run()"
     @unset="editor.chain().focus().unsetHighlight().run()"
   />

@@ -16,7 +16,7 @@
             <VIcon small>mdi-menu-down</VIcon>
           </VBtn>
         </template>
-        Font Size
+        Font size
       </VTooltip>
     </template>
     <VList class="pa-1" color="primary" density="compact" max-height="220">

@@ -14,7 +14,7 @@
             <VIcon size="24">mdi-link</VIcon>
           </VBtn>
         </template>
-        Link
+        Add link
       </VTooltip>
     </template>
     <VForm ref="form" @submit.prevent="setLink">

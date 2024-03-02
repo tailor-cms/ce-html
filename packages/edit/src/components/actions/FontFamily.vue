@@ -17,7 +17,7 @@
             </div>
           </VBtn>
         </template>
-        Text align
+        Font family
       </VTooltip>
     </template>
     <VList class="pa-1" color="primary" density="compact">

@@ -19,7 +19,7 @@
             <VIcon small>mdi-menu-down</VIcon>
           </VBtn>
         </template>
-        Text align
+        Headings
       </VTooltip>
     </template>
     <VList class="pa-1" color="primary" density="compact">
