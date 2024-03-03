@@ -21,13 +21,22 @@ const elementBus: any = inject('$elementBus');
 const editor = useEditor({
   content: props.element.data.content,
   extensions,
-}) as any;
+  onUpdate: ({ editor }) => {
+    const content = editor.isEmpty ? '' : editor.getHTML();
+    return emit('save', { content });
+  },
+});
 
 watch(
   () => props.isFocused,
-  (val) => {
-    if (!val && editor.value) emit('save', { content: editor.value.getHTML() });
-    elementBus.emit('initialize', editor.value);
+  () => elementBus.emit('initialize', editor.value),
+);
+
+watch(
+  () => props.element.data.content,
+  (value) => {
+    if (!editor.value) return;
+    editor.value.commands.setContent(value, false);
   },
 );
 </script>
