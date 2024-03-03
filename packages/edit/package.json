@@ -26,6 +26,7 @@
   "devDependencies": {
     "@tailor-cms/ce-html-default-manifest": "workspace:*",
     "@tailor-cms/eslint-config": "0.0.2",
+    "@types/lodash": "^4.14.202",
     "@types/validator": "^13.11.9",
     "@vitejs/plugin-vue": "^4.2.3",
     "typescript": "^5.1.6",
@@ -50,6 +51,7 @@
     "@tiptap/pm": "^2.2.3",
     "@tiptap/starter-kit": "^2.2.3",
     "@tiptap/vue-3": "^2.2.3",
+    "lodash": "^4.17.21",
     "validator": "^13.11.0"
   },
   "publishConfig": {

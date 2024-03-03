@@ -9,9 +9,12 @@
 import { defineEmits, defineProps, inject, watch } from 'vue';
 import { EditorContent, useEditor } from '@tiptap/vue-3';
 import { Element } from '@tailor-cms/ce-html-default-manifest';
+import debounce from 'lodash/debounce';
 
 import extensions from './extensions';
 import TableMenu from './bubble-menus/TableMenu.vue';
+
+const SAVE_DEBOUNCE = 3000;
 
 const props = defineProps<{ element: Element; isFocused: boolean }>();
 const emit = defineEmits(['save']);
@@ -21,10 +24,10 @@ const elementBus: any = inject('$elementBus');
 const editor = useEditor({
   content: props.element.data.content,
   extensions,
-  onUpdate: ({ editor }) => {
+  onUpdate: debounce(({ editor }) => {
     const content = editor.isEmpty ? '' : editor.getHTML();
     return emit('save', { content });
-  },
+  }, SAVE_DEBOUNCE),
 });
 
 watch(
