@@ -1,5 +1,6 @@
 <template>
   <div class="tce-container">
+    <ImageMenu v-if="editor" :editor="editor" />
     <TableMenu v-if="editor" :editor="editor" />
     <EditorContent v-if="editor" :editor="editor" />
   </div>
@@ -12,6 +13,7 @@ import { Element } from '@tailor-cms/ce-html-default-manifest';
 import debounce from 'lodash/debounce';
 
 import extensions from './extensions';
+import ImageMenu from './bubble-menus/ImageMenu.vue';
 import TableMenu from './bubble-menus/TableMenu.vue';
 
 const SAVE_DEBOUNCE = 3000;
@@ -101,6 +103,10 @@ watch(
   img {
     max-width: 100%;
     height: auto;
+
+    &.ProseMirror-selectednode {
+      outline: 2px solid #68cef8;
+    }
   }
 
   blockquote {

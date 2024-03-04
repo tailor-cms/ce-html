@@ -25,6 +25,7 @@
 <script setup lang="ts">
 import { Component as VueComponent } from 'vue';
 
+import AddImage from './actions/AddImage.vue';
 import AddLink from './actions/AddLink.vue';
 import AddTable from './actions/AddTable.vue';
 import FontFamily from './actions/FontFamily.vue';
@@ -91,6 +92,7 @@ const toolbarItems: (Action | Component | { type: string })[] = [
   { type: 'divider' },
   { component: AddLink },
   { component: AddTable },
+  { component: AddImage },
   {
     label: 'Horizontal line',
     action: ['setHorizontalRule'],

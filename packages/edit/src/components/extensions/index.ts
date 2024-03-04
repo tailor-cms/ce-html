@@ -14,12 +14,14 @@ import TextStyle from '@tiptap/extension-text-style';
 import Underline from '@tiptap/extension-underline';
 
 import FontSize from './fontSize.ts';
+import Image from './image.ts';
 import Link from './link.ts';
 
 export default [
   Color,
   FontFamily,
   FontSize,
+  Image,
   Link.configure({ openOnClick: false }),
   StarterKit,
   Subscript,

@@ -69,3 +69,13 @@ import IconButton from '../IconButton.vue';
 
 defineProps<{ editor: any }>();
 </script>
+
+<style lang="scss" scoped>
+:deep(.v-btn + .v-btn) {
+  margin-left: 0.125rem;
+}
+
+:deep(.v-btn.v-btn--active) {
+  color: rgba(var(--v-theme-primary));
+}
+</style>
