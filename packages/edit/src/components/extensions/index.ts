@@ -13,9 +13,10 @@ import TextAlign from '@tiptap/extension-text-align';
 import TextStyle from '@tiptap/extension-text-style';
 import Underline from '@tiptap/extension-underline';
 
-import FontSize from './fontSize.ts';
+import FontSize from './font-size.ts';
 import Image from './image.ts';
 import Link from './link.ts';
+import Paragraph from './paragraph.ts';
 
 export default [
   Color,
@@ -35,6 +36,7 @@ export default [
   TableRow,
   TextStyle,
   TextAlign.configure({ types: ['heading', 'paragraph'] }),
+  Paragraph,
   Highlight.configure({ multicolor: true }),
   Placeholder.configure({
     showOnlyWhenEditable: false,
