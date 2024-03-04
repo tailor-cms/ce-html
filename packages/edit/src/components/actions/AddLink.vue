@@ -18,7 +18,7 @@
       </VTooltip>
     </template>
     <VForm ref="form" @submit.prevent="setLink">
-      <VSheet class="pa-3" elevation="8" rounded>
+      <VSheet class="pa-3" elevation="8" width="230" rounded>
         <VTextField
           v-model="text"
           :rules="[rules.required]"
@@ -35,8 +35,15 @@
           label="Url"
           variant="outlined"
         />
-        <div class="actions">
-          <VBtn class="mr-2" variant="plain" @click="unlink">Unlink</VBtn>
+        <div class="actions d-flex justify-end">
+          <VBtn
+            v-if="editor.isActive('link')"
+            class="mr-2"
+            variant="plain"
+            @click="unlink"
+          >
+            Unlink
+          </VBtn>
           <VBtn color="primary" type="submit" variant="tonal">Confirm</VBtn>
         </div>
       </VSheet>
