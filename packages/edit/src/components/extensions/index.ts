@@ -26,7 +26,7 @@ export default [
   FontSize,
   Image,
   Link.configure({ openOnClick: false }),
-  StarterKit,
+  StarterKit.configure({ paragraph: false }),
   Subscript,
   Superscript,
   Underline,
