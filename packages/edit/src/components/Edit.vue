@@ -47,6 +47,10 @@ watch(
 </script>
 
 <style lang="scss" scoped>
+.tce-container {
+  text-align: left;
+}
+
 :deep(.ProseMirror) {
   min-height: 5rem;
   padding: 0.5rem;
