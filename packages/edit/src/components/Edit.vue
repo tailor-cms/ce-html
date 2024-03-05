@@ -3,6 +3,13 @@
     <ImageMenu v-if="editor" :editor="editor" />
     <TableMenu v-if="editor" :editor="editor" />
     <EditorContent v-if="editor" :editor="editor" />
+    <template v-if="editor && isFocused">
+      <VDivider class="mt-4" />
+      <span class="d-flex justify-end text-overline">
+        {{ editor?.storage.characterCount.characters() }} Chars •
+        {{ editor?.storage.characterCount.words() }} Words
+      </span>
+    </template>
   </div>
 </template>
 

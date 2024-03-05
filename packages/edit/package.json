@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@tiptap/extension-color": "^2.2.3",
+    "@tiptap/extension-character-count": "^2.2.3",
     "@tiptap/extension-font-family": "^2.2.3",
     "@tiptap/extension-highlight": "^2.2.3",
     "@tiptap/extension-image": "^2.2.3",

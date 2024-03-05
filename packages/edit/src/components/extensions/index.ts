@@ -1,4 +1,5 @@
 import Color from '@tiptap/extension-color';
+import CharacterCount from '@tiptap/extension-character-count';
 import FontFamily from '@tiptap/extension-font-family';
 import Highlight from '@tiptap/extension-highlight';
 import Placeholder from '@tiptap/extension-placeholder';
@@ -20,6 +21,7 @@ import Paragraph from './paragraph.ts';
 
 export default [
   Color,
+  CharacterCount,
   FontFamily,
   FontSize,
   Image,

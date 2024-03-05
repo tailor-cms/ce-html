@@ -9,6 +9,7 @@
         v-bind="tooltip"
         rounded="lg"
         size="36"
+        variant="text"
         @click="$emit('click')"
       />
     </template>
