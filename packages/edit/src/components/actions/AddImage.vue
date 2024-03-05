@@ -81,6 +81,8 @@ async function setImage() {
 
 watch(show, (val: boolean) => {
   if (!val) return;
+  url.value = '';
+  title.value = '';
   form.value?.resetValidation();
 });
 </script>

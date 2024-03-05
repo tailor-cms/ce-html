@@ -1,5 +1,5 @@
 <template>
-  <VMenu>
+  <VMenu v-model="show">
     <template #activator="{ props: menu }">
       <VTooltip location="bottom">
         <template #activator="{ props: tooltip }">
@@ -49,13 +49,14 @@
 </template>
 
 <script setup lang="ts">
-import { mergeProps, reactive, ref } from 'vue';
+import { mergeProps, reactive, ref, watch } from 'vue';
 
 const INIT_SIZE = 5;
 const MAX_SIZE = 10;
 
 const props = defineProps<{ editor: any }>();
 
+const show = ref(false);
 const withHeaderRow = ref(false);
 const selectedSize = reactive({ rows: 0, cols: 0 });
 const gridSize = reactive({ rows: INIT_SIZE, cols: INIT_SIZE });
@@ -64,7 +65,7 @@ const updateSelection = (rows: number, cols: number) => {
   if (rows === gridSize.rows) gridSize.rows = Math.min(rows + 1, MAX_SIZE);
   else if (rows < gridSize.rows - 1 && rows >= INIT_SIZE - 1) gridSize.rows--;
   if (cols === gridSize.cols) gridSize.cols = Math.min(cols + 1, MAX_SIZE);
-  else if (cols < gridSize.cols - 1 && cols > INIT_SIZE - 1) gridSize.cols--;
+  else if (cols < gridSize.cols - 1 && cols >= INIT_SIZE - 1) gridSize.cols--;
   selectedSize.rows = rows;
   selectedSize.cols = cols;
 };
@@ -77,6 +78,13 @@ const insertTable = (rows: number, cols: number) => {
   };
   return props.editor.chain().focus().insertTable(options).run();
 };
+
+watch(show, (val: boolean) => {
+  if (!val) return;
+  withHeaderRow.value = false;
+  gridSize.rows = INIT_SIZE;
+  gridSize.cols = INIT_SIZE;
+});
 </script>
 
 <style lang="scss" scoped>
