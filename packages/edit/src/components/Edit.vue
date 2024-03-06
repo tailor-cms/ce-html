@@ -5,10 +5,20 @@
     <EditorContent v-if="editor" :editor="editor" />
     <template v-if="editor && isFocused">
       <VDivider class="mt-4" />
-      <span class="d-flex justify-end text-overline">
-        {{ editor?.storage.characterCount.characters() }} Chars •
-        {{ editor?.storage.characterCount.words() }} Words
-      </span>
+      <div class="d-flex justify-space-between">
+        <IconButton
+          class="ma-1"
+          density="compact"
+          icon="mdi-select-all"
+          label="Select all"
+          size="small"
+          @click="editor.chain().focus().selectAll().run()"
+        />
+        <span class="text-overline">
+          {{ editor?.storage.characterCount.characters() }} Chars •
+          {{ editor?.storage.characterCount.words() }} Words
+        </span>
+      </div>
     </template>
   </div>
 </template>
@@ -20,6 +30,7 @@ import debounce from 'lodash/debounce';
 import { Element } from '@tailor-cms/ce-html-default-manifest';
 
 import extensions from './extensions';
+import IconButton from './IconButton.vue';
 import ImageMenu from './bubble-menus/ImageMenu.vue';
 import TableMenu from './bubble-menus/TableMenu.vue';
 
