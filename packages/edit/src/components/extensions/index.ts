@@ -1,5 +1,5 @@
-import Color from '@tiptap/extension-color';
 import CharacterCount from '@tiptap/extension-character-count';
+import Color from '@tiptap/extension-color';
 import FontFamily from '@tiptap/extension-font-family';
 import Highlight from '@tiptap/extension-highlight';
 import Placeholder from '@tiptap/extension-placeholder';
