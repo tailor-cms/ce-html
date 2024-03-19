@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineEmits, defineProps, inject, watch } from 'vue';
+import { defineEmits, defineProps, inject, nextTick, watch } from 'vue';
 import { EditorContent, useEditor } from '@tiptap/vue-3';
 import debounce from 'lodash/debounce';
 import { Element } from '@tailor-cms/ce-html-default-manifest';
@@ -52,7 +52,7 @@ const editor = useEditor({
 
 watch(
   () => props.isFocused,
-  () => elementBus.emit('initialize', editor.value),
+  () => nextTick(() => elementBus.emit('initialize', editor.value)),
 );
 
 watch(

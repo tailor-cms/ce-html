@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps, inject, onMounted, ref } from 'vue';
+import { defineEmits, defineProps, inject, ref } from 'vue';
 
 import EditorToolbar from './EditorToolbar.vue';
 
@@ -16,10 +16,8 @@ const editor = ref();
 
 const elementBus: any = inject('$elementBus');
 
-onMounted(() => {
-  elementBus.on('initialize', (value: any) => {
-    editor.value = value;
-  });
+elementBus.on('initialize', (value: any) => {
+  editor.value = value;
 });
 </script>
 
