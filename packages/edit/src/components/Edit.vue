@@ -3,23 +3,6 @@
     <ImageMenu v-if="editor" :editor="editor" />
     <TableMenu v-if="editor" :editor="editor" />
     <EditorContent v-if="editor" :editor="editor" />
-    <template v-if="editor && isFocused">
-      <VDivider class="mt-4" />
-      <div class="d-flex justify-space-between">
-        <IconButton
-          class="ma-1"
-          density="compact"
-          icon="mdi-select-all"
-          label="Select all"
-          size="small"
-          @click="editor.chain().focus().selectAll().run()"
-        />
-        <span class="text-overline">
-          {{ editor?.storage.characterCount.characters() }} Chars •
-          {{ editor?.storage.characterCount.words() }} Words
-        </span>
-      </div>
-    </template>
   </div>
 </template>
 
@@ -30,13 +13,16 @@ import debounce from 'lodash/debounce';
 import { Element } from '@tailor-cms/ce-html-default-manifest';
 
 import extensions from './extensions';
-import IconButton from './IconButton.vue';
 import ImageMenu from './bubble-menus/ImageMenu.vue';
 import TableMenu from './bubble-menus/TableMenu.vue';
 
 const SAVE_DEBOUNCE = 3000;
 
-const props = defineProps<{ element: Element; isFocused: boolean }>();
+const props = defineProps<{
+  element: Element;
+  isFocused: boolean;
+  isDisabled: boolean;
+}>();
 const emit = defineEmits(['save']);
 
 const elementBus: any = inject('$elementBus');
@@ -44,6 +30,7 @@ const elementBus: any = inject('$elementBus');
 const editor = useEditor({
   content: props.element.data.content,
   extensions,
+  editable: !props.isDisabled,
   onUpdate: debounce(({ editor }) => {
     const content = editor.isEmpty ? '' : editor.getHTML();
     return emit('save', { content });
