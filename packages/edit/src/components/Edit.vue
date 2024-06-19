@@ -30,7 +30,7 @@ const elementBus: any = inject('$elementBus');
 const editor = useEditor({
   content: props.element.data.content,
   extensions,
-  editable: !props.isDisabled,
+  editable: !props.isDisabled && props.isFocused,
   onUpdate: debounce(({ editor }) => {
     const content = editor.isEmpty ? '' : editor.getHTML();
     return emit('save', { content });
@@ -39,15 +39,17 @@ const editor = useEditor({
 
 watch(
   () => props.isFocused,
-  () => nextTick(() => elementBus.emit('initialize', editor.value)),
+  () => {
+    const editable = !props.isDisabled && props.isFocused;
+    editor.value?.setOptions({ editable });
+    if (editable) editor.value?.commands.focus();
+    nextTick(() => elementBus.emit('initialize', editor.value));
+  },
 );
 
 watch(
   () => props.element.data.content,
-  (value) => {
-    if (!editor.value) return;
-    editor.value.commands.setContent(value, false);
-  },
+  (value) => editor.value?.commands.setContent(value, false),
 );
 </script>
 
