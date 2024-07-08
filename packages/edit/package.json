@@ -1,7 +1,7 @@
 {
   "name": "@tailor-cms/ce-html-default-edit",
   "type": "module",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Tailor CMS default HTML editor authoring component",
   "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
   "exports": {
