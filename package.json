@@ -1,7 +1,7 @@
 {
   "name": "@tailor-cms/ce-html-default",
   "description": "Tailor CMS default HTML editor",
-  "version": "0.0.1",
+  "version": "0.0.7",
   "author": "Damir Perisic <info@gostudion.com> (https://github.com/tailor-cms)",
   "type": "module",
   "exports": {
@@ -31,9 +31,10 @@
     "@tailor-cms/tce-template": "bin/index.cjs"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.7",
     "@playwright/test": "1.41.1",
     "@tailor-cms/eslint-config": "0.0.2",
-    "@tailor-cms/tce-boot": "0.5.0-beta.2",
+    "@tailor-cms/tce-boot": "0.5.1",
     "@tailor-cms/tce-display-runtime": "0.4.0",
     "@types/node": "^20.5.7",
     "concurrently": "^8.2.2",
@@ -42,5 +43,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "packageManager": "pnpm@9.0.6+sha512.f6d863130973207cb7a336d6b439a242a26ac8068077df530d6a86069419853dc1ffe64029ec594a9c505a3a410d19643c870aba6776330f5cfddcf10a9c1617"
 }

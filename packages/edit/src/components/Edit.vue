@@ -1,71 +1,77 @@
 <template>
   <div class="tce-container">
-    <div v-if="editor">
-      <VBtn
-        v-for="btn in actions"
-        :key="btn.name"
-        :class="{ 'is-active': editor.isActive(btn.name) }"
-        :disabled="!editor.can().chain().focus()[btn.action]().run()"
-        class="mr-2 mb-2"
-        size="small"
-        variant="outlined"
-        @click="editor.chain().focus()[btn.action]().run()"
-      >
-        {{ btn.name }}
-      </VBtn>
-      <EditorContent :editor="editor" class="tiptap" />
-    </div>
+    <ImageMenu v-if="editor" :editor="editor" />
+    <TableMenu v-if="editor" :editor="editor" />
+    <EditorContent v-if="editor" :editor="editor" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { defineEmits, defineProps, watch } from 'vue';
+import { defineEmits, defineProps, inject, nextTick, watch } from 'vue';
 import { EditorContent, useEditor } from '@tiptap/vue-3';
-import { Element } from 'tce-manifest';
-import StarterKit from '@tiptap/starter-kit';
+import debounce from 'lodash/debounce';
+import { Element } from '@tailor-cms/ce-html-default-manifest';
 
-const actions = [
-  {
-    name: 'bold',
-    action: 'toggleBold',
-  },
-  {
-    name: 'italic',
-    action: 'toggleItalic',
-  },
-  {
-    name: 'strike',
-    action: 'toggleStrike',
-  },
-  {
-    name: 'code',
-    action: 'toggleCode',
-  },
-];
+import extensions from './extensions';
+import ImageMenu from './bubble-menus/ImageMenu.vue';
+import TableMenu from './bubble-menus/TableMenu.vue';
 
-const props = defineProps<{ element: Element; isFocused: boolean }>();
+const SAVE_DEBOUNCE = 3000;
+
+const props = defineProps<{
+  element: Element;
+  isFocused: boolean;
+  isDisabled: boolean;
+}>();
 const emit = defineEmits(['save']);
+
+const elementBus: any = inject('$elementBus');
 
 const editor = useEditor({
   content: props.element.data.content,
-  extensions: [StarterKit],
-}) as any;
+  extensions,
+  editable: !props.isDisabled && props.isFocused,
+  onUpdate: debounce(({ editor }) => {
+    const content = editor.isEmpty ? '' : editor.getHTML();
+    return emit('save', { content });
+  }, SAVE_DEBOUNCE),
+});
 
 watch(
   () => props.isFocused,
-  (val) => {
-    if (!val && editor.value) emit('save', { content: editor.value.getHTML() });
+  () => {
+    const editable = !props.isDisabled && props.isFocused;
+    editor.value?.setOptions({ editable });
+    if (editable) editor.value?.commands.focus();
+    nextTick(() => elementBus.emit('initialize', editor.value));
   },
+);
+
+watch(
+  () => props.element.data.content,
+  (value) => editor.value?.commands.setContent(value, false),
 );
 </script>
 
 <style lang="scss" scoped>
-.tiptap {
+.tce-container {
+  text-align: left;
+}
+
+:deep(.ProseMirror) {
   min-height: 5rem;
   padding: 0.5rem;
-  border: 1px solid #888;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
+  outline: none;
+
+  & p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    height: 0;
+    opacity: 0.5;
+    float: left;
+    pointer-events: none;
+  }
 
   > * + * {
     margin-top: 0.75em;
@@ -108,6 +114,10 @@ watch(
   img {
     max-width: 100%;
     height: auto;
+
+    &.ProseMirror-selectednode {
+      outline: 2px solid #68cef8;
+    }
   }
 
   blockquote {
@@ -120,5 +130,69 @@ watch(
     border-top: 2px solid rgba(#0d0d0d, 0.1);
     margin: 2rem 0;
   }
+
+  table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+
+    td,
+    th {
+      min-width: 1em;
+      border: 2px solid #ced4da;
+      padding: 3px 5px;
+      vertical-align: top;
+      box-sizing: border-box;
+      position: relative;
+
+      > * {
+        margin-bottom: 0;
+      }
+    }
+
+    th {
+      font-weight: bold;
+      text-align: left;
+      background-color: #f1f3f5;
+    }
+
+    .selectedCell:after {
+      z-index: 2;
+      position: absolute;
+      content: '';
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: rgba(200, 200, 255, 0.4);
+      pointer-events: none;
+    }
+
+    .column-resize-handle {
+      position: absolute;
+      right: -2px;
+      top: 0;
+      bottom: -2px;
+      width: 4px;
+      background-color: #adf;
+      pointer-events: none;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+:deep(.tableWrapper) {
+  padding: 1rem 0;
+  overflow-x: auto;
+}
+
+:deep(.resize-cursor) {
+  cursor: ew-resize;
+  cursor: col-resize;
 }
 </style>
