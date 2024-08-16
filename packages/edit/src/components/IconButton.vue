@@ -7,7 +7,7 @@
         :density="density ?? 'default'"
         :disabled="disabled"
         :icon="icon"
-        :size="size ?? 36"
+        :size="size ?? 32"
         rounded="lg"
         variant="text"
         v-bind="{ ...tooltip, ...$attrs }"

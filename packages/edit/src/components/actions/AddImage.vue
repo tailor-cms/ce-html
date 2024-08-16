@@ -8,7 +8,7 @@
             :disabled="!editor.can().chain().focus().setImage().run()"
             aria-label="Add image"
             rounded="lg"
-            size="36"
+            size="32"
             v-bind="mergeProps(menu, tooltip)"
           >
             <VIcon size="24">mdi-image-plus</VIcon>
