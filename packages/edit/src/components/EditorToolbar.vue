@@ -168,6 +168,12 @@ const toolbarItems: (Action | Component | { type: string })[] = [
 </script>
 
 <style lang="scss" scoped>
+.v-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  height: unset;
+}
+
 :deep(.v-btn + .v-btn) {
   margin-left: 0.125rem;
 }
