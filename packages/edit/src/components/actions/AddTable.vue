@@ -6,7 +6,7 @@
           <VBtn
             aria-label="Add table"
             rounded="lg"
-            size="36"
+            size="32"
             icon
             v-bind="mergeProps(menu, tooltip)"
           >

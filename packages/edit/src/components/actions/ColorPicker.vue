@@ -8,12 +8,12 @@
             :aria-label="label"
             :disabled="disabled"
             rounded="lg"
-            size="36"
+            size="32"
             icon
             v-bind="mergeProps(menu, tooltip)"
           >
             <VIcon size="24">{{ icon }}</VIcon>
-            <VIcon :color="currentColor">mdi-color-helper</VIcon>
+            <VIcon :color="currentColor" size="20">mdi-color-helper</VIcon>
           </VBtn>
         </template>
         {{ label }}

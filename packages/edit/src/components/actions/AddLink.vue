@@ -8,7 +8,7 @@
             :disabled="!editor.can().chain().focus().setLinkText().run()"
             aria-label="Add link"
             rounded="lg"
-            size="36"
+            size="32"
             v-bind="mergeProps(menu, tooltip)"
           >
             <VIcon size="24">mdi-link</VIcon>

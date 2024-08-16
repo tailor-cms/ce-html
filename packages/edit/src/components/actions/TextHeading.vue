@@ -5,7 +5,7 @@
         <template #activator="{ props: tooltip }">
           <VBtn
             :active="editor.isActive({ level: /\d+/ })"
-            aria-label="Text align"
+            aria-label="Text heading"
             class="pa-0"
             min-width="46"
             rounded="lg"
