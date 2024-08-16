@@ -6,7 +6,7 @@
           <VBtn
             :active="!!editor.getAttributes('textStyle').fontFamily"
             :disabled="!editor.can().chain().focus().setFontFamily().run()"
-            aria-label="Text align"
+            aria-label="Font family"
             class="pa-0"
             min-width="46"
             rounded="lg"

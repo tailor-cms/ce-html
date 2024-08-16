@@ -1,23 +1,25 @@
 <template>
   <VBtnGroup density="compact" variant="text">
-    <!-- @vue-ignore -->
-    <template v-for="(it, index) in toolbarItems" :key="index">
-      <IconButton
-        v-if="'action' in it"
-        :active="'isActive' in it && editor.isActive(it.isActive)"
-        :disabled="
-          !editor.can().chain().focus()[it.action[0]](it.action[1]).run()
-        "
-        :icon="`mdi-${it.icon}`"
-        :label="it.label"
-        @click="editor.chain().focus()[it.action[0]](it.action[1]).run()"
-      />
-      <component
-        :is="it.component"
-        v-else-if="'component' in it"
-        :editor="editor"
-      />
-      <VDivider v-else class="mx-1" vertical />
+    <template v-for="(group, i) in toolbarItems" :key="i">
+      <VDivider v-if="i" class="mx-1" vertical />
+      <!-- @vue-ignore -->
+      <template v-for="(it, j) in group" :key="j">
+        <component
+          :is="it.component"
+          v-if="'component' in it"
+          :editor="editor"
+        />
+        <IconButton
+          v-if="'action' in it"
+          :active="'isActive' in it && editor.isActive(it.isActive)"
+          :disabled="
+            !editor.can().chain().focus()[it.action[0]](it.action[1]).run()
+          "
+          :icon="`mdi-${it.icon}`"
+          :label="it.label"
+          @click="editor.chain().focus()[it.action[0]](it.action[1]).run()"
+        />
+      </template>
     </template>
   </VBtnGroup>
 </template>
@@ -49,121 +51,119 @@ interface Component {
   component: VueComponent;
 }
 
-const toolbarItems: (Action | Component | { type: string })[] = [
-  {
-    label: 'Undo',
-    action: ['undo'],
-    icon: 'undo',
-  },
-  {
-    label: 'Redo',
-    action: ['redo'],
-    icon: 'redo',
-  },
-  { type: 'divider' },
-  { component: TextHeading },
-  { component: FontFamily },
-  { component: FontSize },
-  { type: 'divider' },
-  {
-    label: 'Bold',
-    isActive: 'bold',
-    action: ['toggleBold'],
-    icon: 'format-bold',
-  },
-  {
-    label: 'Italic',
-    isActive: 'italic',
-    action: ['toggleItalic'],
-    icon: 'format-italic',
-  },
-  {
-    label: 'Underline',
-    isActive: 'underline',
-    action: ['toggleUnderline'],
-    icon: 'format-underline',
-  },
-  {
-    label: 'Strikethrough',
-    isActive: 'strike',
-    action: ['toggleStrike'],
-    icon: 'format-strikethrough',
-  },
-  { type: 'divider' },
-  { component: AddLink },
-  { component: AddTable },
-  { component: AddImage },
-  {
-    label: 'Horizontal line',
-    action: ['setHorizontalRule'],
-    icon: 'minus',
-  },
-  { type: 'divider' },
-  { component: TextColor },
-  { component: TextHighlight },
-  { type: 'divider' },
-  {
-    label: 'Numbered list',
-    isActive: 'orderedList',
-    action: ['toggleOrderedList'],
-    icon: 'format-list-numbered',
-  },
-  {
-    label: 'Numbered list',
-    isActive: 'bulletList',
-    action: ['toggleBulletList'],
-    icon: 'format-list-bulleted',
-  },
-  {
-    label: 'Decrease indent',
-    action: ['liftListItem', 'listItem'],
-    icon: 'format-indent-decrease',
-  },
-  {
-    label: 'Increase indent',
-    action: ['sinkListItem', 'listItem'],
-    icon: 'format-indent-increase',
-  },
-  { type: 'divider' },
-  { component: TextAlign },
-  { type: 'divider' },
-  {
-    label: 'Superscript',
-    isActive: 'superscript',
-    action: ['toggleSuperscript'],
-    icon: 'format-superscript',
-  },
-  {
-    label: 'Subscript',
-    isActive: 'subscript',
-    action: ['toggleSubscript'],
-    icon: 'format-subscript',
-  },
-  { type: 'divider' },
-  {
-    label: 'Quote',
-    isActive: 'blockquote',
-    action: ['toggleBlockquote'],
-    icon: 'format-quote-close',
-  },
-  {
-    label: 'Code',
-    isActive: 'code',
-    action: ['toggleCode'],
-    icon: 'code-tags',
-  },
-  {
-    label: 'Code block',
-    isActive: 'codeBlock',
-    action: ['toggleCodeBlock'],
-    icon: 'code-block-tags',
-  },
-  { type: 'divider' },
-  {
-    label: 'Clear formatting',
-    action: ['unsetAllMarks'],
-    icon: 'format-clear',
-  },
+const toolbarItems: (Action | Component)[][] = [
+  [
+    { label: 'Undo', action: ['undo'], icon: 'undo' },
+    { label: 'Redo', action: ['redo'], icon: 'redo' },
+  ],
+  [
+    { component: TextHeading },
+    { component: FontFamily },
+    { component: FontSize },
+  ],
+  [
+    {
+      label: 'Bold',
+      isActive: 'bold',
+      action: ['toggleBold'],
+      icon: 'format-bold',
+    },
+    {
+      label: 'Italic',
+      isActive: 'italic',
+      action: ['toggleItalic'],
+      icon: 'format-italic',
+    },
+    {
+      label: 'Underline',
+      isActive: 'underline',
+      action: ['toggleUnderline'],
+      icon: 'format-underline',
+    },
+    {
+      label: 'Strikethrough',
+      isActive: 'strike',
+      action: ['toggleStrike'],
+      icon: 'format-strikethrough',
+    },
+  ],
+  [
+    { component: AddLink },
+    { component: AddTable },
+    { component: AddImage },
+    {
+      label: 'Horizontal line',
+      action: ['setHorizontalRule'],
+      icon: 'minus',
+    },
+  ],
+  [{ component: TextColor }, { component: TextHighlight }],
+  [
+    {
+      label: 'Numbered list',
+      isActive: 'orderedList',
+      action: ['toggleOrderedList'],
+      icon: 'format-list-numbered',
+    },
+    {
+      label: 'Numbered list',
+      isActive: 'bulletList',
+      action: ['toggleBulletList'],
+      icon: 'format-list-bulleted',
+    },
+    {
+      label: 'Decrease indent',
+      action: ['liftListItem', 'listItem'],
+      icon: 'format-indent-decrease',
+    },
+    {
+      label: 'Increase indent',
+      action: ['sinkListItem', 'listItem'],
+      icon: 'format-indent-increase',
+    },
+  ],
+  [{ component: TextAlign }],
+  [
+    {
+      label: 'Superscript',
+      isActive: 'superscript',
+      action: ['toggleSuperscript'],
+      icon: 'format-superscript',
+    },
+    {
+      label: 'Subscript',
+      isActive: 'subscript',
+      action: ['toggleSubscript'],
+      icon: 'format-subscript',
+    },
+  ],
+  [
+    {
+      label: 'Quote',
+      isActive: 'blockquote',
+      action: ['toggleBlockquote'],
+      icon: 'format-quote-close',
+    },
+    {
+      label: 'Code',
+      isActive: 'code',
+      action: ['toggleCode'],
+      icon: 'code-tags',
+    },
+    {
+      label: 'Code block',
+      isActive: 'codeBlock',
+      action: ['toggleCodeBlock'],
+      icon: 'code-block-tags',
+    },
+  ],
+  [
+    {
+      label: 'Clear formatting',
+      action: ['unsetAllMarks'],
+      icon: 'format-clear',
+    },
+  ],
 ];
 </script>
 
