@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <EditorToolbar v-if="editor" :editor="editor" />
-  </div>
+  <EditorToolbar v-if="editor" :editor="editor" />
 </template>
 
 <script setup lang="ts">
