@@ -12,7 +12,6 @@ export const name = 'HTML';
 
 // Function which inits element state (data property on the Content Element
 // entity)
-// e.g. for simple counter component:
 export const initState: DataInitializer = (): ElementData => ({ content: '' });
 
 // Can be loaded from package.json
@@ -27,20 +26,13 @@ const ui = {
   forceFullWidth: false,
 };
 
-export const mocks = {
-  displayContexts: [
-    { name: 'Test preset 1', data: { state: 'I have a value' } },
-  ],
-};
-
 const manifest: ElementManifest = {
   type,
-  version: '1.0',
+  version,
   name,
   ssr: false,
   initState,
   ui,
-  mocks,
 };
 
 export default manifest;

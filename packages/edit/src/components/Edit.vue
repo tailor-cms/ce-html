@@ -7,8 +7,8 @@
 </template>
 
 <script lang="ts" setup>
-import { defineEmits, defineProps, inject, nextTick, watch } from 'vue';
 import { EditorContent, useEditor } from '@tiptap/vue-3';
+import { inject, nextTick, watch } from 'vue';
 import debounce from 'lodash/debounce';
 import { Element } from '@tailor-cms/ce-html-default-manifest';
 
