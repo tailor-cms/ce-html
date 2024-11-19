@@ -6,7 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
 import { ElementData } from '@tailor-cms/ce-html-default-manifest';
 
 defineProps<{ id: number; data: ElementData }>();

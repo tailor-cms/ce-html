@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps, inject, ref } from 'vue';
+import { inject, ref } from 'vue';
 
 import EditorToolbar from './EditorToolbar.vue';
 
