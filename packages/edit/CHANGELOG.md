@@ -1,5 +1,11 @@
 # @tailor-cms/ce-html-edit
 
+## 0.0.11
+
+### Patch Changes
+
+- Changed package name and element type.
+
 ## 0.0.10
 
 ### Patch Changes
