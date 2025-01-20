@@ -10,7 +10,7 @@
 import { EditorContent, useEditor } from '@tiptap/vue-3';
 import { inject, nextTick, watch } from 'vue';
 import debounce from 'lodash/debounce';
-import { Element } from '@tailor-cms/ce-html-default-manifest';
+import { Element } from '@tailor-cms/ce-html-manifest';
 
 import extensions from './extensions';
 import ImageMenu from './bubble-menus/ImageMenu.vue';
@@ -99,7 +99,6 @@ watch(
   pre {
     background: #0d0d0d;
     color: #fff;
-    font-family: 'JetBrainsMono', monospace;
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
 
@@ -184,15 +183,5 @@ watch(
       margin: 0;
     }
   }
-}
-
-:deep(.tableWrapper) {
-  padding: 1rem 0;
-  overflow-x: auto;
-}
-
-:deep(.resize-cursor) {
-  cursor: ew-resize;
-  cursor: col-resize;
 }
 </style>

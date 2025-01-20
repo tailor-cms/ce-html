@@ -1,6 +1,6 @@
 {
-  "name": "@tailor-cms/ce-html-default",
-  "description": "Tailor CMS default HTML editor",
+  "name": "@tailor-cms/ce-html",
+  "description": "Tailor CMS HTML editor",
   "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
   "type": "module",
   "version": "0.0.7",
@@ -18,11 +18,11 @@
     "@tailor-cms/tce-template": "bin/index.cjs"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.7",
-    "@playwright/test": "1.41.1",
+    "@changesets/cli": "^2.27.11",
+    "@playwright/test": "1.49.1",
     "@tailor-cms/eslint-config": "0.0.2",
-    "@tailor-cms/tce-boot": "0.6.5",
-    "@tailor-cms/tce-display-runtime": "0.6.0",
+    "@tailor-cms/tce-boot": "0.6.29",
+    "@tailor-cms/tce-display-runtime": "0.6.7",
     "@types/node": "^20.5.7",
     "concurrently": "^8.2.2",
     "prettier": "3.1.1",

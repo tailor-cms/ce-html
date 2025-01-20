@@ -1,6 +1,6 @@
-# ce-html-default
+# ce-html
 
-Tailor default HTML editor component.
+Tailor HTML editor component.
 
 Make sure to set `TAILOR_NEXT=true` .env variable to enable Vue 3
 based authoring runtime.

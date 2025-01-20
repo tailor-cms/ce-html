@@ -1,4 +1,10 @@
-# @tailor-cms/ce-html-default-manifest
+# @tailor-cms/ce-html-manifest
+
+## 0.0.11
+
+### Patch Changes
+
+- Changed package name and element type.
 
 ## 0.0.10
 
