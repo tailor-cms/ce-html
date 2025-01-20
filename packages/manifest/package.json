@@ -1,6 +1,6 @@
 {
-  "name": "@tailor-cms/ce-html-default-manifest",
-  "description": "Tailor CMS default HTML editor manifest",
+  "name": "@tailor-cms/ce-html-manifest",
+  "description": "Tailor CMS HTML editor manifest",
   "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
   "type": "module",
   "version": "0.0.10",

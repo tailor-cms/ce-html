@@ -1,18 +1,18 @@
 <template>
-  <div class="ce-html-default-root">
+  <div class="ce-html-root">
     <!-- eslint-disable-next-line -->
     <span v-html="data.content" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ElementData } from '@tailor-cms/ce-html-default-manifest';
+import { ElementData } from '@tailor-cms/ce-html-manifest';
 
 defineProps<{ id: number; data: ElementData }>();
 </script>
 
 <style scoped lang="scss">
-.ce-html-default-root {
+.ce-html-root {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
 }

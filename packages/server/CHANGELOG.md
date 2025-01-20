@@ -1,4 +1,4 @@
-# @tailor-cms/ce-html-default-server
+# @tailor-cms/ce-html-server
 
 ## 0.0.10
 

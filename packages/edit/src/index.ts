@@ -1,5 +1,5 @@
-import baseManifest from '@tailor-cms/ce-html-default-manifest';
-import type { ElementManifest } from '@tailor-cms/ce-html-default-manifest';
+import baseManifest from '@tailor-cms/ce-html-manifest';
+import type { ElementManifest } from '@tailor-cms/ce-html-manifest';
 
 import Edit from './components/Edit.vue';
 import TopToolbar from './components/TopToolbar.vue';

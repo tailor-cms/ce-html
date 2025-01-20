@@ -1,4 +1,4 @@
-# @tailor-cms/ce-html-default-manifest
+# @tailor-cms/ce-html-manifest
 
 ## 0.0.10
 

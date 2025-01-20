@@ -1,4 +1,4 @@
-# @tailor-cms/ce-html-default-display
+# @tailor-cms/ce-html-display
 
 ## 0.0.10
 

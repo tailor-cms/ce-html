@@ -1,6 +1,6 @@
 {
-  "name": "@tailor-cms/ce-html-default-edit",
-  "description": "Tailor CMS default HTML editor authoring component",
+  "name": "@tailor-cms/ce-html-edit",
+  "description": "Tailor CMS HTML editor authoring component",
   "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
   "type": "module",
   "version": "0.0.10",
@@ -24,7 +24,7 @@
     "vue": "^3.3.4"
   },
   "devDependencies": {
-    "@tailor-cms/ce-html-default-manifest": "workspace:*",
+    "@tailor-cms/ce-html-manifest": "workspace:*",
     "@tailor-cms/eslint-config": "0.0.2",
     "@types/lodash": "^4.14.202",
     "@types/validator": "^13.11.9",
