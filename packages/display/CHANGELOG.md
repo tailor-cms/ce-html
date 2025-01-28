@@ -1,5 +1,11 @@
 # @tailor-cms/ce-html-display
 
+## 0.0.12
+
+### Patch Changes
+
+- Update content-element type.
+
 ## 0.0.11
 
 ### Patch Changes
