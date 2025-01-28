@@ -5,7 +5,7 @@ import type {
 } from './interfaces';
 
 // Element unique id within the target system (e.g. Tailor)
-export const type = 'HTML';
+export const type = 'TIPTAP_HTML';
 
 // Display name (e.g. shown to the author)
 export const name = 'HTML';
