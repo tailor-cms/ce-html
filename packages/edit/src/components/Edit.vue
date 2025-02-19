@@ -42,8 +42,14 @@ watch(
   () => {
     const editable = !props.isDisabled && props.isFocused;
     editor.value?.setOptions({ editable });
-    if (editable) editor.value?.commands.focus();
-    nextTick(() => elementBus.emit('initialize', editor.value));
+    if (editable) {
+      editor.value?.commands.focus();
+      nextTick(() => elementBus.emit('initialize', editor.value));
+    }
+    if (!props.isFocused) {
+      const content = editor.value?.isEmpty ? '' : editor.value?.getHTML();
+      return emit('save', { content });
+    }
   },
 );
 
