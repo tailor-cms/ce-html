@@ -21,17 +21,17 @@
     "lint:fix": "pnpm lint --fix"
   },
   "peerDependencies": {
-    "vue": "^3.3.4"
+    "vue": "^3.5.13"
   },
   "devDependencies": {
     "@tailor-cms/ce-html-manifest": "workspace:*",
     "@tailor-cms/eslint-config": "0.0.2",
     "@types/lodash": "^4.14.202",
     "@types/validator": "^13.11.9",
-    "@vitejs/plugin-vue": "^4.2.3",
-    "typescript": "^5.1.6",
-    "vite": "^4.4.5",
-    "vue-tsc": "^1.8.5"
+    "@vitejs/plugin-vue": "^5.2.1",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0",
+    "vue-tsc": "^2.2.0"
   },
   "dependencies": {
     "@tiptap/extension-color": "^2.2.3",

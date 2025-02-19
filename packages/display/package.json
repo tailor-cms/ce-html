@@ -25,11 +25,11 @@
   },
   "devDependencies": {
     "@tailor-cms/eslint-config": "0.0.2",
-    "@vitejs/plugin-vue": "^4.2.3",
+    "@vitejs/plugin-vue": "^5.2.1",
     "@tailor-cms/ce-html-manifest": "workspace:*",
-    "typescript": "^5.1.6",
-    "vite": "^4.4.5",
-    "vue-tsc": "^1.8.5"
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0",
+    "vue-tsc": "^2.2.0"
   },
   "publishConfig": {
     "access": "public"
