@@ -1,5 +1,11 @@
 # @tailor-cms/ce-html-server
 
+## 0.0.13
+
+### Patch Changes
+
+- Added normal style to headings, added saving on focus out.
+
 ## 0.0.12
 
 ### Patch Changes
