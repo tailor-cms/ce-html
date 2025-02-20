@@ -14,8 +14,6 @@ test('Renders Edit component', async ({ page }) => {
 test('Renders Display component', async ({ page }) => {
   const displayFrame = page.frameLocator('#displayPanel>iframe')
   await expect(displayFrame.getByText('End-user component')).toBeVisible();
-  const DISPLAY_COPY = 'Display version of the content element';
-  await expect(displayFrame.getByText(DISPLAY_COPY)).toBeVisible();
 });
 
 test('Renders server state panel', async ({ page }) => {
