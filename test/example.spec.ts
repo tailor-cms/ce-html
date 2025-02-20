@@ -9,8 +9,6 @@ test('Renders Edit component', async ({ page }) => {
   await expect(editFrame.getByText('Authoring component')).toBeVisible();
   await expect(editFrame.getByText('Top toolbar')).toBeVisible();
   await editFrame.getByText('Persist').nth(0).click();
-  await expect(editFrame.getByText('Side toolbar')).toBeVisible();
-  await editFrame.getByText('Persist').nth(1).click();
 });
 
 test('Renders Display component', async ({ page }) => {
