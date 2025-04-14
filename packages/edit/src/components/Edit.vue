@@ -31,19 +31,24 @@ const editor = useEditor({
   content: props.element.data.content,
   extensions,
   editable: !props.isDisabled && props.isFocused,
-  onUpdate: debounce(({ editor }) => {
-    const content = editor.isEmpty ? '' : editor.getHTML();
-    return emit('save', { content });
-  }, SAVE_DEBOUNCE),
+  onUpdate: debounce(() => save(), SAVE_DEBOUNCE),
 });
+
+const save = () => {
+  const content = editor.value?.isEmpty ? '' : editor.value?.getHTML();
+  return emit('save', { content });
+};
 
 watch(
   () => props.isFocused,
   () => {
-    const editable = !props.isDisabled && props.isFocused;
-    editor.value?.setOptions({ editable });
-    if (editable) editor.value?.commands.focus();
-    nextTick(() => elementBus.emit('initialize', editor.value));
+    const { isDisabled, isFocused } = props;
+    editor.value?.setOptions({ editable: !isDisabled && isFocused });
+    if (!isFocused) return save();
+    if (!isDisabled) {
+      editor.value?.commands.focus();
+      nextTick(() => elementBus.emit('initialize', editor.value));
+    }
   },
 );
 

@@ -34,6 +34,15 @@
       >
         <VListItemTitle>Heading {{ level }}</VListItemTitle>
       </VListItem>
+      <VListItem
+        :active="editor.isActive('paragraph')"
+        class="px-2"
+        min-height="36"
+        rounded="sm"
+        @click="editor.chain().focus().setParagraph().run()"
+      >
+        <VListItemTitle>Normal</VListItemTitle>
+      </VListItem>
     </VList>
   </VMenu>
 </template>
