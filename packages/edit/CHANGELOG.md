@@ -1,5 +1,11 @@
 # @tailor-cms/ce-html-edit
 
+## 0.0.15
+
+### Patch Changes
+
+- Fixed save content function so it doesn't override other data.
+
 ## 0.0.14
 
 ### Patch Changes
