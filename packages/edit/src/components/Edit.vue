@@ -36,7 +36,7 @@ const editor = useEditor({
 
 const save = () => {
   const content = editor.value?.isEmpty ? '' : editor.value?.getHTML();
-  return emit('save', { content });
+  return emit('save', { ...props.element.data, content });
 };
 
 watch(
