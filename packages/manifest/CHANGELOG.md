@@ -1,5 +1,11 @@
 # @tailor-cms/ce-html-manifest
 
+## 0.0.14
+
+### Patch Changes
+
+- Added check in watcher to prevent content update if it didn't change.
+
 ## 0.0.13
 
 ### Patch Changes

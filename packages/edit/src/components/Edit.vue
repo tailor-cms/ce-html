@@ -54,7 +54,11 @@ watch(
 
 watch(
   () => props.element.data.content,
-  (value) => editor.value?.commands.setContent(value, false),
+  (value) => {
+    if (!editor.value) return;
+    const isSame = editor.value.getHTML() === value;
+    return !isSame && editor.value?.commands.setContent(value, false);
+  },
 );
 </script>
 
