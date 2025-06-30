@@ -1,7 +1,7 @@
-import dotenv from 'dotenv';
 import { defineConfig, devices } from '@playwright/test';
+import { config as dotenvConfig } from 'dotenv';
 
-dotenv.config();
+dotenvConfig();
 
 if (!process.env.PREVIEW_RUNTIME_URL) process.env.PREVIEW_RUNTIME_URL = 'http://localhost:8080';
 
@@ -11,8 +11,6 @@ if (!process.env.PREVIEW_RUNTIME_URL) process.env.PREVIEW_RUNTIME_URL = 'http://
 export default defineConfig({
   testDir: '.',
   outputDir: './out',
-  timeout: 10 * 60 * 1000,
-  expect: { timeout: 30 * 1000 },
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 3 : 0,
@@ -20,7 +18,7 @@ export default defineConfig({
   use: {
     baseURL: process.env.PREVIEW_RUNTIME_URL,
     trace: 'on-first-retry',
-    video: 'on-first-retry'
+    video: 'on-first-retry',
   },
   projects: [
     {
@@ -30,5 +28,5 @@ export default defineConfig({
         channel: 'chrome',
       },
     },
-  ]
+  ],
 });
