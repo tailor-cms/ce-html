@@ -15,7 +15,7 @@ importers:
         specifier: 1.53.1
         version: 1.53.1
       '@tailor-cms/cek-e2e':
-        specifier: ^1.2.2
+        specifier: ^1.2.3
         version: 1.2.3(@playwright/test@1.53.1)
       '@tailor-cms/eslint-config':
         specifier: 1.0.2
@@ -161,7 +161,7 @@ importers:
   packages/manifest:
     devDependencies:
       '@tailor-cms/cek-common':
-        specifier: ^1.2.2
+        specifier: ^1.2.3
         version: 1.2.3
       '@tailor-cms/eslint-config':
         specifier: 1.0.2
@@ -179,7 +179,7 @@ importers:
         specifier: workspace:*
         version: link:../manifest
       '@tailor-cms/cek-common':
-        specifier: ^1.2.2
+        specifier: ^1.2.3
         version: 1.2.3
       '@tailor-cms/eslint-config':
         specifier: 1.0.2
