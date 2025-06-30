@@ -3,6 +3,7 @@ import type {
   ElementData,
   ElementManifest,
 } from './interfaces';
+import ai from './ai';
 
 // Element unique id within the target system (e.g. Tailor)
 export const type = 'TIPTAP_HTML';
@@ -26,6 +27,8 @@ const ui = {
   forceFullWidth: false,
 };
 
+export { ai };
+
 const manifest: ElementManifest = {
   type,
   version,
@@ -33,6 +36,7 @@ const manifest: ElementManifest = {
   ssr: false,
   initState,
   ui,
+  ai,
 };
 
 export default manifest;

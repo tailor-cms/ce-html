@@ -20,8 +20,9 @@ const SAVE_DEBOUNCE = 3000;
 
 const props = defineProps<{
   element: Element;
+  isDragged: boolean;
   isFocused: boolean;
-  isDisabled: boolean;
+  isReadonly: boolean;
 }>();
 const emit = defineEmits(['save']);
 
@@ -30,7 +31,7 @@ const elementBus: any = inject('$elementBus');
 const editor = useEditor({
   content: props.element.data.content,
   extensions,
-  editable: !props.isDisabled && props.isFocused,
+  editable: !props.isReadonly && props.isFocused,
   onUpdate: debounce(() => save(), SAVE_DEBOUNCE),
 });
 
@@ -42,10 +43,10 @@ const save = () => {
 watch(
   () => props.isFocused,
   () => {
-    const { isDisabled, isFocused } = props;
-    editor.value?.setOptions({ editable: !isDisabled && isFocused });
+    const { isReadonly, isFocused } = props;
+    editor.value?.setOptions({ editable: !isReadonly && isFocused });
     if (!isFocused) return save();
-    if (!isDisabled) {
+    if (!isReadonly) {
       editor.value?.commands.focus();
       nextTick(() => elementBus.emit('initialize', editor.value));
     }
