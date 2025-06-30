@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.5",
-    "@playwright/test": "1.53.1",
+    "@playwright/test": "1.53.2",
     "@tailor-cms/cek-e2e": "^1.2.3",
     "@tailor-cms/eslint-config": "1.0.2",
     "@tailor-cms/tce-boot": "1.2.3",
