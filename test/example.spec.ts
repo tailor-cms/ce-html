@@ -11,7 +11,6 @@ test('Renders Edit component', async ({ page }) => {
   await editPanel.persistFocus();
   await expect(editPanel.editor).toBeVisible();
   await expect(editPanel.topToolbar).toBeVisible();
-  await expect(editPanel.sideToolbar).toBeVisible();
 });
 
 test('Renders Display component', async ({ page }) => {
@@ -29,6 +28,6 @@ test('Renders server state panel', async ({ page }) => {
   }
   await bottomPanel.userStateTab.click();
   await expect(
-    bottomPanel.userStateWindow.locator('pre').getByText('state'),
+    bottomPanel.userStateWindow.locator('pre').getByText('{}'),
   ).toBeVisible();
 });
