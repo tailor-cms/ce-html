@@ -9,7 +9,7 @@
 <script lang="ts" setup>
 import { EditorContent, useEditor } from '@tiptap/vue-3';
 import { inject, nextTick, watch } from 'vue';
-import debounce from 'lodash/debounce';
+import { debounce } from 'lodash-es';
 import { Element } from '@tailor-cms/ce-html-manifest';
 
 import extensions from './extensions';
