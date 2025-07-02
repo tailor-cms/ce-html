@@ -1,9 +1,10 @@
+import { OpenAISchema } from '@tailor-cms/cek-common';
+
 import type {
   DataInitializer,
   ElementData,
   ElementManifest,
 } from './interfaces';
-import ai from './ai';
 
 // Element unique id within the target system (e.g. Tailor)
 export const type = 'TIPTAP_HTML';
@@ -27,7 +28,27 @@ const ui = {
   forceFullWidth: false,
 };
 
-export { ai };
+export const ai = {
+  Schema: {
+    type: 'json_schema',
+    name: 'ce_counter',
+    schema: {
+      type: 'object',
+      properties: {
+        content: { type: 'string' },
+      },
+      required: ['content'],
+      additionalProperties: false,
+    },
+  } as OpenAISchema,
+  getPrompt: () => `
+    Generate rich text for a page as an object with the following
+    properties: { "content": "" }.
+    where:
+    - 'content' is the text of the page in HTML format.
+  `,
+  processResponse: (val: any) => val,
+};
 
 const manifest: ElementManifest = {
   type,

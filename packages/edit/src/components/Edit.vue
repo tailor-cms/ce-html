@@ -87,11 +87,6 @@ watch(
     margin-top: 0.75em;
   }
 
-  ul,
-  ol {
-    padding: 0 1rem;
-  }
-
   h1,
   h2,
   h3,
@@ -101,22 +96,59 @@ watch(
     line-height: 1.1;
   }
 
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  h4 {
+    font-size: 1.75rem;
+  }
+
+  h5 {
+    font-size: 1.5rem;
+  }
+
+  h6 {
+    font-size: 1.25rem;
+  }
+
+  blockquote {
+    padding: 0.25rem 1rem;
+    border-left: 2px solid rgba(#0d0d0d, 0.1);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+  }
+
+  ul,
+  ol {
+    padding: 0 1.25rem;
+  }
+
   code {
-    background-color: rgba(#616161, 0.1);
-    color: #616161;
+    font-family: 'Source Code Pro', monospace !important;
+    background: #eee;
+    padding: 0.125rem 0.5rem;
+    border-radius: 8px;
   }
 
   pre {
-    background: #0d0d0d;
-    color: #fff;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: #eee;
+    white-space: pre-wrap;
 
     code {
-      color: inherit;
       padding: 0;
+      font-size: 0.875rem;
       background: none;
-      font-size: 0.8rem;
     }
   }
 
@@ -127,11 +159,6 @@ watch(
     &.ProseMirror-selectednode {
       outline: 2px solid #68cef8;
     }
-  }
-
-  blockquote {
-    padding-left: 1rem;
-    border-left: 2px solid rgba(#0d0d0d, 0.1);
   }
 
   hr {

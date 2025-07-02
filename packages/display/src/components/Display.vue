@@ -13,8 +13,6 @@ defineProps<{ element: Element }>();
 
 <style scoped lang="scss">
 .ce-html-root {
-  word-break: break-word;
-
   :deep(span) {
     * {
       word-break: break-word;
@@ -22,6 +20,15 @@ defineProps<{ element: Element }>();
 
     > * + * {
       margin-top: 0.75em;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      line-height: 1;
     }
 
     h1 {
@@ -60,21 +67,7 @@ defineProps<{ element: Element }>();
       padding: 0 1.25rem;
     }
 
-    li {
-      counter-increment: item;
-
-      li::marker {
-        content: counter(item, lower-alpha) '. ';
-      }
-
-      li li::marker {
-        content: counter(item, lower-roman) '. ';
-      }
-    }
-
     code {
-      padding: 0;
-      background: inherit;
       font-family: 'Source Code Pro', monospace !important;
       background: #eee;
       padding: 0.125rem 0.5rem;
@@ -82,17 +75,22 @@ defineProps<{ element: Element }>();
     }
 
     pre {
-      display: block;
       border-radius: 8px;
       padding: 0.5rem 1rem;
       background: #eee;
-      white-space: pre-wrap;
+      // white-space: pre-wrap;
 
       code {
         padding: 0;
         font-size: 0.875rem;
         background: none;
       }
+    }
+
+    hr {
+      border: none;
+      border-top: 2px solid rgba(#0d0d0d, 0.1);
+      margin: 2rem 0;
     }
 
     table {
