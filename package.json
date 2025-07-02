@@ -15,9 +15,6 @@
     "nuke": "pnpm -r run nuke && pnpm dlx del-cli node_modules",
     "test": "pnpm playwright test --config ./test/playwright.config.ts"
   },
-  "bin": {
-    "@tailor-cms/tce-template": "bin/index.cjs"
-  },
   "devDependencies": {
     "@changesets/cli": "^2.29.5",
     "@playwright/test": "1.53.2",
