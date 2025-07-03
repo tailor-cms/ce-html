@@ -31,7 +31,7 @@ const ui = {
 export const ai = {
   Schema: {
     type: 'json_schema',
-    name: 'ce_counter',
+    name: 'ce_tiptap_html',
     schema: {
       type: 'object',
       properties: {
