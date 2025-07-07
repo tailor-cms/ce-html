@@ -43,7 +43,7 @@ export const ai = {
   } as OpenAISchema,
   getPrompt: () => `
     Generate rich text for a page as an object with the following
-    properties: { "content": "" }.
+    properties: { "content": "" }
     where:
     - 'content' is the text of the page in HTML format.
   `,
