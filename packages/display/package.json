@@ -29,10 +29,10 @@
   },
   "devDependencies": {
     "@tailor-cms/ce-html-manifest": "workspace:*",
-    "@tailor-cms/eslint-config": "1.1.1",
+    "@tailor-cms/eslint-config": "1.1.2",
     "@vitejs/plugin-vue": "^6.0.0",
     "typescript": "^5.8.3",
-    "vite": "^7.0.2",
+    "vite": "^7.0.3",
     "vue-tsc": "^3.0.1"
   },
   "publishConfig": {
