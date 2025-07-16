@@ -17,6 +17,7 @@ import FontSize from './font-size.ts';
 import Image from './image.ts';
 import Link from './link.ts';
 import Paragraph from './paragraph.ts';
+import Tooltip from './tooltip.ts';
 
 export default [
   Color,
@@ -24,6 +25,7 @@ export default [
   FontSize,
   Image,
   Link.configure({ openOnClick: false }),
+  Tooltip,
   StarterKit.configure({ paragraph: false }),
   Subscript,
   Superscript,

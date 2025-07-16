@@ -30,6 +30,7 @@ import { Component as VueComponent } from 'vue';
 import AddImage from './actions/AddImage.vue';
 import AddLink from './actions/AddLink.vue';
 import AddTable from './actions/AddTable.vue';
+import AddTooltip from './actions/AddTooltip.vue';
 import FontFamily from './actions/FontFamily.vue';
 import FontSize from './actions/FontSize.vue';
 import IconButton from './IconButton.vue';
@@ -91,6 +92,7 @@ const toolbarItems: (Action | Component)[][] = [
     { component: AddLink },
     { component: AddTable },
     { component: AddImage },
+    { component: AddTooltip },
     {
       label: 'Horizontal line',
       action: ['setHorizontalRule'],
