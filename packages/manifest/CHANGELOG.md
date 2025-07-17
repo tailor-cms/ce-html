@@ -1,5 +1,11 @@
 # @tailor-cms/ce-html-manifest
 
+## 0.1.3
+
+### Patch Changes
+
+- Fix tiptap behavior upon adding tooltip and link.
+
 ## 0.1.2
 
 ### Patch Changes
