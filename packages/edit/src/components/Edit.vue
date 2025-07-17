@@ -221,4 +221,54 @@ watch(
     }
   }
 }
+
+:deep(.has-tooltip) {
+  $tooltip-color: rgba(33, 33, 33, 0.8);
+  $border-size: 6px;
+
+  position: relative;
+  display: inline-block;
+  background: rgb(205 215 220 / 70%);
+  text-decoration: underline dashed $tooltip-color;
+  cursor: help;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    border-left: $border-size solid transparent;
+    border-right: $border-size solid transparent;
+    border-top: $border-size solid $tooltip-color;
+  }
+
+  &::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + #{$border-size});
+    left: -0.625rem;
+    border-radius: 4px;
+    max-width: 14rem;
+    padding: 0.375rem 0.675rem;
+    background: $tooltip-color;
+    font-size: 0.875rem;
+    color: #fff;
+    font-weight: normal;
+    width: max-content;
+  }
+
+  &::before,
+  &::after {
+    text-decoration: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease-out;
+  }
+
+  &:hover::after,
+  &:hover::before {
+    visibility: visible;
+    opacity: 1;
+    margin-bottom: 0.25rem;
+  }
+}
 </style>

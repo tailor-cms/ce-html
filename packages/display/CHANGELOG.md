@@ -1,5 +1,11 @@
 # @tailor-cms/ce-html-display
 
+## 0.1.2
+
+### Patch Changes
+
+- Add option to add text tooltips.
+
 ## 0.1.1
 
 ### Patch Changes

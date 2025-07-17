@@ -1,8 +1,7 @@
 ARG PNPM_HOME="/root/.local/share/pnpm"
-ARG PNPM_VERSION="8.8.0"
+ARG PNPM_VERSION="10.12.3"
 
-FROM node:20.10.0-alpine3.18
-ARG PNPM_HOME
+FROM node:24-alpine
 ARG PNPM_VERSION
 # github and ssh
 RUN apk add openssh-client && apk add git
