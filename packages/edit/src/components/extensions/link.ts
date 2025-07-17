@@ -6,14 +6,14 @@ export default Link.extend({
     return {
       ...this.parent?.(),
       setLinkText:
-        ({ attributes, text }: { attributes?: any; text?: string } = {}) =>
-        ({ chain }: CommandProps) => {
+        ({ href, text } = { href: '', text: '' }) =>
+        ({ chain, state }: CommandProps) => {
+          const { from } = state.selection;
+          const to = from + text.length;
           return chain()
-            .setMark(this.name, { href: attributes?.href })
-            .command(({ tr }: any) => {
-              tr.insertText(text);
-              return true;
-            })
+            .insertContent(text)
+            .setTextSelection({ from, to })
+            .setMark(this.name, { href })
             .setMeta('preventAutolink', true)
             .run();
         },

@@ -94,12 +94,7 @@ async function setLink() {
     ? url.value
     : `https://${url.value}`;
   if (href) {
-    const attributes = { href };
-    props.editor
-      .chain()
-      .focus()
-      .setLinkText({ attributes, text: text.value })
-      .run();
+    props.editor.chain().focus().setLinkText({ href, text: text.value }).run();
   } else props.editor.chain().focus().unsetLink().run();
   show.value = false;
   form.value.resetValidation();

@@ -3,10 +3,7 @@ import { Mark, mergeAttributes } from '@tiptap/vue-3';
 declare module '@tiptap/vue-3' {
   interface Commands<ReturnType> {
     tooltip: {
-      setTooltip: (attributes: {
-        tooltip?: string;
-        text?: string;
-      }) => ReturnType;
+      setTooltip: (attributes: { tooltip: string; text: string }) => ReturnType;
       unsetTooltip: () => ReturnType;
     };
   }
@@ -14,6 +11,8 @@ declare module '@tiptap/vue-3' {
 
 export default Mark.create({
   name: 'tooltip',
+  keepOnSplit: false,
+  exitable: true,
 
   addAttributes() {
     return {
@@ -42,14 +41,14 @@ export default Mark.create({
   addCommands() {
     return {
       setTooltip:
-        ({ tooltip, text } = {}) =>
-        ({ chain }) => {
+        ({ tooltip, text } = { tooltip: '', text: '' }) =>
+        ({ chain, state }) => {
+          const { from } = state.selection;
+          const to = from + text.length;
           return chain()
+            .insertContent(text)
+            .setTextSelection({ from, to })
             .setMark(this.name, { 'data-tooltip': tooltip })
-            .command(({ tr }: any) => {
-              tr.insertText(text);
-              return true;
-            })
             .run();
         },
       unsetTooltip:
