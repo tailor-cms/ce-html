@@ -1,5 +1,11 @@
 # @tailor-cms/ce-html-manifest
 
+## 0.2.0
+
+### Minor Changes
+
+- Bump Tiptap to v4 and migrate and cleanup text editor.
+
 ## 0.1.3
 
 ### Patch Changes

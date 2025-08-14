@@ -31,13 +31,13 @@ import AddImage from './actions/AddImage.vue';
 import AddLink from './actions/AddLink.vue';
 import AddTable from './actions/AddTable.vue';
 import AddTooltip from './actions/AddTooltip.vue';
+import BackgroundColor from './actions/BackgroundColor.vue';
 import FontFamily from './actions/FontFamily.vue';
 import FontSize from './actions/FontSize.vue';
 import IconButton from './IconButton.vue';
 import TextAlign from './actions/TextAlign.vue';
 import TextColor from './actions/TextColor.vue';
 import TextHeading from './actions/TextHeading.vue';
-import TextHighlight from './actions/TextHighlight.vue';
 
 defineProps<{ editor: any }>();
 
@@ -99,7 +99,7 @@ const toolbarItems: (Action | Component)[][] = [
       icon: 'minus',
     },
   ],
-  [{ component: TextColor }, { component: TextHighlight }],
+  [{ component: TextColor }, { component: BackgroundColor }],
   [
     {
       label: 'Numbered list',
