@@ -1,45 +1,30 @@
-import Color from '@tiptap/extension-color';
-import FontFamily from '@tiptap/extension-font-family';
-import Highlight from '@tiptap/extension-highlight';
-import Placeholder from '@tiptap/extension-placeholder';
+import { Table, TableRow, TableCell, TableHeader } from '@tiptap/extension-table'
 import StarterKit from '@tiptap/starter-kit';
 import Subscript from '@tiptap/extension-subscript';
 import Superscript from '@tiptap/extension-superscript';
-import Table from '@tiptap/extension-table';
-import TableCell from '@tiptap/extension-table-cell';
-import TableHeader from '@tiptap/extension-table-header';
-import TableRow from '@tiptap/extension-table-row';
 import TextAlign from '@tiptap/extension-text-align';
-import TextStyle from '@tiptap/extension-text-style';
-import Underline from '@tiptap/extension-underline';
+import { TextStyleKit } from '@tiptap/extension-text-style';
+import { Placeholder } from '@tiptap/extensions';
 
-import FontSize from './font-size.ts';
 import Image from './image.ts';
 import Link from './link.ts';
 import Paragraph from './paragraph.ts';
 import Tooltip from './tooltip.ts';
 
 export default [
-  Color,
-  FontFamily,
-  FontSize,
   Image,
   Link.configure({ openOnClick: false }),
   Tooltip,
   StarterKit.configure({ paragraph: false }),
   Subscript,
   Superscript,
-  Underline,
-  Table.configure({
-    resizable: true,
-  }),
+  Table.configure({ resizable: true }),
   TableCell,
   TableHeader,
   TableRow,
-  TextStyle,
+  TextStyleKit,
   TextAlign.configure({ types: ['heading', 'paragraph'] }),
   Paragraph,
-  Highlight.configure({ multicolor: true }),
   Placeholder.configure({
     showOnlyWhenEditable: false,
     placeholder: 'Enter your text...',
