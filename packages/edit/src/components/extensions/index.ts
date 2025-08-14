@@ -1,4 +1,4 @@
-import { Table, TableRow, TableCell, TableHeader } from '@tiptap/extension-table'
+import { Table, TableCell, TableHeader, TableRow } from '@tiptap/extension-table'
 import StarterKit from '@tiptap/starter-kit';
 import Subscript from '@tiptap/extension-subscript';
 import Superscript from '@tiptap/extension-superscript';
