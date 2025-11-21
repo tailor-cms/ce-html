@@ -1,6 +1,7 @@
 import Color from '@tiptap/extension-color';
 import FontFamily from '@tiptap/extension-font-family';
 import Highlight from '@tiptap/extension-highlight';
+import OfficePaste from '@intevation/tiptap-extension-office-paste';
 import Placeholder from '@tiptap/extension-placeholder';
 import StarterKit from '@tiptap/starter-kit';
 import Subscript from '@tiptap/extension-subscript';
@@ -20,6 +21,7 @@ import Paragraph from './paragraph.ts';
 import Tooltip from './tooltip.ts';
 
 export default [
+  OfficePaste,
   Color,
   FontFamily,
   FontSize,

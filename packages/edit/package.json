@@ -38,6 +38,7 @@
     "vue-tsc": "^3.0.1"
   },
   "dependencies": {
+    "@intevation/tiptap-extension-office-paste": "^0.1.2",
     "@tiptap/extension-color": "^2.25.0",
     "@tiptap/extension-font-family": "^2.25.0",
     "@tiptap/extension-highlight": "^2.25.0",
