@@ -1,5 +1,11 @@
 # @tailor-cms/ce-html-display
 
+## 0.1.4
+
+### Patch Changes
+
+- Added extension for copy from MS Word.
+
 ## 0.1.3
 
 ### Patch Changes
