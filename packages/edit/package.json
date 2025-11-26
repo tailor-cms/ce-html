@@ -3,7 +3,7 @@
   "description": "Tailor CMS HTML editor authoring component",
   "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
   "type": "module",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "exports": {
     ".": {
       "import": "./dist/index.js",

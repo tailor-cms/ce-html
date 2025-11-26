@@ -1,5 +1,11 @@
 # @tailor-cms/ce-html-server
 
+## 0.1.5
+
+### Patch Changes
+
+- Remove custom paragraph extension and use native.
+
 ## 0.1.4
 
 ### Patch Changes
