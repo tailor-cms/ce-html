@@ -1,5 +1,11 @@
 # @tailor-cms/ce-html-edit
 
+## 0.1.6
+
+### Patch Changes
+
+- Fixed condition for disabling text align.
+
 ## 0.1.5
 
 ### Patch Changes
