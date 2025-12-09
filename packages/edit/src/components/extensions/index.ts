@@ -21,7 +21,7 @@ export default [
   Image,
   Link.configure({ openOnClick: false }),
   Tooltip,
-  StarterKit,
+  StarterKit.configure({ link: false }),
   Subscript,
   Superscript,
   Table.configure({ resizable: true }),

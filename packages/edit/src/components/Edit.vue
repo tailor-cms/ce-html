@@ -1,7 +1,7 @@
 <template>
   <div class="tce-container">
-    <ImageMenu v-if="editor" :editor="editor" />
-    <TableMenu v-if="editor" :editor="editor" />
+    <ImageMenu v-if="editor && !isReadonly" :editor="editor" />
+    <TableMenu v-if="editor && !isReadonly" :editor="editor" />
     <EditorContent v-if="editor" :editor="editor" />
   </div>
 </template>
