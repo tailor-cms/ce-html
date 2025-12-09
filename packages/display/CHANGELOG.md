@@ -1,5 +1,11 @@
 # @tailor-cms/ce-html-display
 
+## 0.2.1
+
+### Patch Changes
+
+- Fix migration issues with new TipTap version and cleanup code.
+
 ## 0.2.0
 
 ### Minor Changes
