@@ -6,6 +6,24 @@
 
 - Bump Tiptap to v4 and migrate and cleanup text editor.
 
+## 0.1.6
+
+### Patch Changes
+
+- Fixed condition for disabling text align.
+
+## 0.1.5
+
+### Patch Changes
+
+- Remove custom paragraph extension and use native.
+
+## 0.1.4
+
+### Patch Changes
+
+- Added extension for copy from MS Word.
+
 ## 0.1.3
 
 ### Patch Changes

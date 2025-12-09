@@ -36,7 +36,7 @@
         <VDivider class="mx-1" vertical />
         <IconButton
           icon="mdi-table-remove"
-          label="Remove rable"
+          label="Remove table"
           @click="editor.chain().focus().deleteTable().run()"
         />
         <VDivider class="mx-1" vertical />

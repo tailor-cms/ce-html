@@ -23,7 +23,7 @@
     </template>
     <VList class="pa-1" color="primary" density="compact">
       <VListItem
-        v-for="fontFamily in fontFamilies"
+        v-for="fontFamily in FONT_FAMILIES"
         :key="fontFamily"
         :active="editor.isActive('textStyle', { fontFamily })"
         :disabled="!editor.can().chain().focus().setFontFamily().run()"
@@ -43,17 +43,9 @@
 <script setup lang="ts">
 import { mergeProps } from 'vue';
 
-const props = defineProps<{ editor: any }>();
+import { FONT_FAMILIES } from './constants';
 
-const fontFamilies = [
-  'Helvetica',
-  'Arial',
-  'Georgia',
-  'Impact',
-  'Tahoma',
-  'Times New Roman',
-  'Verdana',
-];
+const props = defineProps<{ editor: any }>();
 
 const toggle = (fontFamily: string) =>
   props.editor.isActive({ fontFamily })

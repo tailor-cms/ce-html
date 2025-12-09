@@ -21,7 +21,7 @@
     </template>
     <VList class="pa-1" color="primary" density="compact" max-height="220">
       <VListItem
-        v-for="fontSize in fontSizes"
+        v-for="fontSize in FONT_SIZES"
         :key="fontSize"
         :active="editor.isActive({ fontSize })"
         class="px-2"
@@ -38,25 +38,9 @@
 <script setup lang="ts">
 import { mergeProps } from 'vue';
 
-const props = defineProps<{ editor: any }>();
+import { FONT_SIZES } from './constants';
 
-const fontSizes = [
-  '8px',
-  '9px',
-  '10px',
-  '11px',
-  '12px',
-  '14px',
-  '16px',
-  '18px',
-  '24px',
-  '30px',
-  '36px',
-  '48px',
-  '60px',
-  '72px',
-  '96px',
-];
+const props = defineProps<{ editor: any }>();
 
 const toggle = (fontSize: string) =>
   props.editor.isActive({ fontSize })
