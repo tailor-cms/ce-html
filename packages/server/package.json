@@ -3,7 +3,7 @@
   "description": "Tailor CMS HTML editor server component",
   "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
   "type": "module",
-  "version": "0.1.6",
+  "version": "0.2.1",
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -28,8 +28,8 @@
     "@tailor-cms/ce-html-manifest": "workspace:*",
     "@tailor-cms/cek-common": "^1.3.2",
     "@tailor-cms/eslint-config": "1.1.2",
-    "tsup": "^8.5.0",
-    "typescript": "^5.8.3"
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
   },
   "tsup": {
     "entry": [

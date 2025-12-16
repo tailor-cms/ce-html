@@ -54,9 +54,7 @@
 <script setup lang="ts">
 import { mergeProps, ref, watch } from 'vue';
 
-const rules = {
-  required: (val: string) => !!val || 'The field is required',
-};
+import { rules } from './rules';
 
 const props = defineProps<{ editor: any }>();
 
@@ -83,7 +81,6 @@ async function setTooltip() {
   if (!valid) return;
   if (tooltip.value) {
     const attributes = { tooltip: tooltip.value, text: text.value };
-    console.log('Setting tooltip with attributes:', attributes);
     props.editor.chain().focus().setTooltip(attributes).run();
   } else props.editor.chain().focus().unsetTooltip().run();
   show.value = false;

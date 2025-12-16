@@ -1,5 +1,5 @@
 <template>
-  <VTooltip location="bottom">
+  <VTooltip v-model="isOpen" location="bottom">
     <template #activator="{ props: tooltip }">
       <VBtn
         :active="active"
@@ -10,8 +10,8 @@
         :size="size ?? 32"
         rounded="lg"
         variant="text"
-        v-bind="{ ...tooltip, ...$attrs }"
-        @click="$emit('click')"
+        v-bind="{ ...$attrs, ...tooltip }"
+        @click="onClick"
       />
     </template>
     {{ label }}
@@ -19,6 +19,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+
 defineProps<{
   active?: boolean;
   disabled?: boolean;
@@ -28,7 +30,14 @@ defineProps<{
   icon: string;
 }>();
 
-defineEmits(['click']);
+const emit = defineEmits(['click']);
+
+const isOpen = ref(false);
+
+const onClick = () => {
+  isOpen.value = false;
+  emit('click');
+};
 </script>
 
 <style lang="scss" scoped>

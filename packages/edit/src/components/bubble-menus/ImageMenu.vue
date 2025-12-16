@@ -1,5 +1,5 @@
 <template>
-  <BubbleMenu v-show="editor.isActive('image')" :editor="editor">
+  <BubbleMenu :editor="editor" :should-show="() => editor.isActive('image')">
     <VCard class="pa-1" rounded="lg">
       <VBtnGroup density="compact" variant="text">
         <IconButton
@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { BubbleMenu } from '@tiptap/vue-3';
+import { BubbleMenu } from '@tiptap/vue-3/menus';
 
 import IconButton from '../IconButton.vue';
 

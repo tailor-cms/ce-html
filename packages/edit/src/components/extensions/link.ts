@@ -1,5 +1,12 @@
-import { CommandProps } from '@tiptap/vue-3';
 import Link from '@tiptap/extension-link';
+
+declare module '@tiptap/vue-3' {
+  interface Commands<ReturnType> {
+    customLink: {
+      setLinkText: (attributes: { href: string; text: string }) => ReturnType;
+    };
+  }
+}
 
 export default Link.extend({
   addCommands() {
@@ -7,7 +14,7 @@ export default Link.extend({
       ...this.parent?.(),
       setLinkText:
         ({ href, text } = { href: '', text: '' }) =>
-        ({ chain, state }: CommandProps) => {
+        ({ chain, state }) => {
           const { from } = state.selection;
           const to = from + text.length;
           return chain()

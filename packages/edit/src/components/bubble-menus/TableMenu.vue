@@ -1,10 +1,5 @@
 <template>
-  <BubbleMenu
-    v-show="editor.isActive('table')"
-    :editor="editor"
-    :should-show="() => true"
-    :tippy-options="{ maxWidth: 'unset' }"
-  >
+  <BubbleMenu :editor="editor" :should-show="() => editor.isActive('table')">
     <VCard class="pa-1" rounded="lg">
       <VBtnGroup density="compact" variant="text">
         <IconButton
@@ -41,7 +36,7 @@
         <VDivider class="mx-1" vertical />
         <IconButton
           icon="mdi-table-remove"
-          label="Remove rable"
+          label="Remove table"
           @click="editor.chain().focus().deleteTable().run()"
         />
         <VDivider class="mx-1" vertical />
@@ -63,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import { BubbleMenu } from '@tiptap/vue-3';
+import { BubbleMenu } from '@tiptap/vue-3/menus';
 
 import IconButton from '../IconButton.vue';
 

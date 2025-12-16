@@ -45,16 +45,8 @@
 
 <script setup lang="ts">
 import { mergeProps, ref, watch } from 'vue';
-import isURL from 'validator/lib/isURL';
 
-const rules = {
-  required: (val: string) => !!val || 'The field is required',
-  url: (val: string) => {
-    const url = val.trim();
-    if (!url) return true;
-    return isURL(url) || 'Please enter valid URL';
-  },
-};
+import { rules } from './rules';
 
 const props = defineProps<{ editor: any }>();
 

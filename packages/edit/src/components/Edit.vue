@@ -1,7 +1,7 @@
 <template>
   <div class="tce-container">
-    <ImageMenu v-if="editor" :editor="editor" />
-    <TableMenu v-if="editor" :editor="editor" />
+    <ImageMenu v-if="editor && !isReadonly" :editor="editor" />
+    <TableMenu v-if="editor && !isReadonly" :editor="editor" />
     <EditorContent v-if="editor" :editor="editor" />
   </div>
 </template>
@@ -56,9 +56,8 @@ watch(
 watch(
   () => props.element.data.content,
   (value) => {
-    if (!editor.value) return;
-    const isSame = editor.value.getHTML() === value;
-    return !isSame && editor.value?.commands.setContent(value, false);
+    if (!editor.value || editor.value.getHTML() === value) return;
+    return editor.value?.commands.setContent(value, { emitUpdate: false });
   },
 );
 </script>

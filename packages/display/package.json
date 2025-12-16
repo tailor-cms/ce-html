@@ -3,7 +3,7 @@
   "description": "Tailor CMS HTML editor end-user component",
   "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
   "type": "module",
-  "version": "0.1.6",
+  "version": "0.2.1",
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -30,10 +30,10 @@
   "devDependencies": {
     "@tailor-cms/ce-html-manifest": "workspace:*",
     "@tailor-cms/eslint-config": "1.1.2",
-    "@vitejs/plugin-vue": "^6.0.0",
-    "typescript": "^5.8.3",
-    "vite": "^7.0.3",
-    "vue-tsc": "^3.0.1"
+    "@vitejs/plugin-vue": "^6.0.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.7",
+    "vue-tsc": "^3.1.8"
   },
   "publishConfig": {
     "access": "public"
