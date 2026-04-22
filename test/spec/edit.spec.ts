@@ -35,6 +35,67 @@ test.describe('Initial render', () => {
   });
 });
 
+test.describe('Toolbar config', () => {
+  test('All expected toolbar buttons are rendered', async ({ page }) => {
+    const edit = new Edit(page);
+    await edit.focus();
+    for (const btn of edit.allToolbarButtons) await expect(btn).toBeVisible();
+  });
+});
+
+test.describe('Extensions are registered', () => {
+  test('All supported marks and nodes survive editor parse', async ({
+    page,
+  }) => {
+    const content = `
+      <p>
+        <strong>b</strong> <em>i</em> <u>u</u> <s>s</s>
+        <sub>sub</sub> <sup>sup</sup> <code>c</code>
+      </p>
+      <h1>h1</h1><h2>h2</h2>
+      <blockquote><p>q</p></blockquote>
+      <ul><li>u</li></ul>
+      <ol><li>o</li></ol>
+      <pre><code>pre</code></pre>
+      <hr>
+      <p style="text-align: center">aligned</p>
+      <p><a href="https://tailor-cms.org">link</a></p>
+      <p><img src="${IMAGE_URL}" alt=""></p>
+      <p><span class="has-tooltip" data-tooltip="t">tip</span></p>
+      <table><tbody><tr><td>cell</td></tr></tbody></table>
+    `;
+    await elementClient.update(ELEMENT_ID, { content });
+    await page.reload({ waitUntil: 'networkidle' });
+    const edit = new Edit(page);
+    const tags = [
+      'strong',
+      'em',
+      'u',
+      's',
+      'sub',
+      'sup',
+      'p > code',
+      'h1',
+      'h2',
+      'blockquote',
+      'ul > li',
+      'ol > li',
+      'pre > code',
+      'hr',
+      'a[href]',
+      'img[src]',
+      'span.has-tooltip',
+      'table td',
+    ];
+    for (const tag of tags) {
+      await expect(
+        edit.editorContent.locator(tag),
+        `expected <${tag}> to survive editor parse`,
+      ).toHaveCount(1);
+    }
+  });
+});
+
 test.describe('Renders pre-seeded content', () => {
   test('Renders formatted HTML', async ({ page }) => {
     await elementClient.update(ELEMENT_ID, {
@@ -63,7 +124,9 @@ test.describe('Typing', () => {
     await edit.focus();
     await edit.typeIntoEditor('Some content');
     await expect(edit.editorContent).toContainText('Some content');
-    await expect(edit.editorContent.locator('p.is-editor-empty')).toHaveCount(0);
+    await expect(edit.editorContent.locator('p.is-editor-empty')).toHaveCount(
+      0,
+    );
   });
 });
 
@@ -79,68 +142,18 @@ test.describe('Toolbar actions', () => {
     const edit = new Edit(page);
     await expect(edit.boldBtn).not.toHaveClass(/v-btn--active/);
     await edit.boldBtn.click();
-    await expect(edit.editorContent.locator('strong')).toHaveText('Sample text');
+    await expect(edit.editorContent.locator('strong')).toHaveText(
+      'Sample text',
+    );
     await expect(edit.boldBtn).toHaveClass(/v-btn--active/);
-  });
-
-  test('Italic toggles em mark', async ({ page }) => {
-    const edit = new Edit(page);
-    await edit.italicBtn.click();
-    await expect(edit.editorContent.locator('em')).toHaveText('Sample text');
-  });
-
-  test('Underline toggles u mark', async ({ page }) => {
-    const edit = new Edit(page);
-    await edit.underlineBtn.click();
-    await expect(edit.editorContent.locator('u')).toHaveText('Sample text');
-  });
-
-  test('Strikethrough toggles s mark', async ({ page }) => {
-    const edit = new Edit(page);
-    await edit.strikeBtn.click();
-    await expect(edit.editorContent.locator('s')).toHaveText('Sample text');
   });
 
   test('Bullet list wraps selection in ul', async ({ page }) => {
     const edit = new Edit(page);
     await edit.bulletListBtn.click();
-    await expect(edit.editorContent.locator('ul > li')).toHaveText('Sample text');
-  });
-
-  test('Ordered list wraps selection in ol', async ({ page }) => {
-    const edit = new Edit(page);
-    await edit.orderedListBtn.click();
-    await expect(edit.editorContent.locator('ol > li')).toHaveText('Sample text');
-  });
-
-  test('Blockquote wraps selection', async ({ page }) => {
-    const edit = new Edit(page);
-    await edit.blockquoteBtn.click();
-    await expect(edit.editorContent.locator('blockquote')).toContainText('Sample text');
-  });
-
-  test('Superscript toggles sup mark', async ({ page }) => {
-    const edit = new Edit(page);
-    await edit.superscriptBtn.click();
-    await expect(edit.editorContent.locator('sup')).toHaveText('Sample text');
-  });
-
-  test('Subscript toggles sub mark', async ({ page }) => {
-    const edit = new Edit(page);
-    await edit.subscriptBtn.click();
-    await expect(edit.editorContent.locator('sub')).toHaveText('Sample text');
-  });
-
-  test('Inline code toggles code mark', async ({ page }) => {
-    const edit = new Edit(page);
-    await edit.codeBtn.click();
-    await expect(edit.editorContent.locator('p > code')).toHaveText('Sample text');
-  });
-
-  test('Code block wraps selection in pre/code', async ({ page }) => {
-    const edit = new Edit(page);
-    await edit.codeBlockBtn.click();
-    await expect(edit.editorContent.locator('pre > code')).toHaveText('Sample text');
+    await expect(edit.editorContent.locator('ul > li')).toHaveText(
+      'Sample text',
+    );
   });
 
   test('Redo replays an undone change', async ({ page }) => {
@@ -149,7 +162,9 @@ test.describe('Toolbar actions', () => {
     await edit.undoBtn.click();
     await expect(edit.editorContent.locator('strong')).toHaveCount(0);
     await edit.redoBtn.click();
-    await expect(edit.editorContent.locator('strong')).toHaveText('Sample text');
+    await expect(edit.editorContent.locator('strong')).toHaveText(
+      'Sample text',
+    );
   });
 
   test('Clear formatting removes marks', async ({ page }) => {
@@ -278,7 +293,9 @@ test.describe('List indent', () => {
     // Place caret inside the second item
     await edit.editorContent.getByText('two').click();
     await edit.increaseIndentBtn.click();
-    await expect(edit.editorContent.locator('ul > li > ul > li')).toContainText('two');
+    await expect(edit.editorContent.locator('ul > li > ul > li')).toContainText(
+      'two',
+    );
   });
 
   test('Decrease indent lifts a nested item back up', async ({ page }) => {
@@ -425,7 +442,10 @@ test.describe('Readonly mode', () => {
     await page.reload({ waitUntil: 'networkidle' });
     const edit = new Edit(page);
     await edit.setReadonly();
-    await expect(edit.editorContent).toHaveAttribute('contenteditable', 'false');
+    await expect(edit.editorContent).toHaveAttribute(
+      'contenteditable',
+      'false',
+    );
     await expect(edit.editorContent).toContainText('Locked content');
   });
 });

@@ -159,6 +159,38 @@ export class Edit extends pom.EditPanel {
     });
   }
 
+  get allToolbarButtons(): Locator[] {
+    return [
+      this.undoBtn,
+      this.redoBtn,
+      this.boldBtn,
+      this.italicBtn,
+      this.underlineBtn,
+      this.strikeBtn,
+      this.superscriptBtn,
+      this.subscriptBtn,
+      this.blockquoteBtn,
+      this.codeBtn,
+      this.codeBlockBtn,
+      this.orderedListBtn,
+      this.bulletListBtn,
+      this.horizontalRuleBtn,
+      this.clearFormattingBtn,
+      this.increaseIndentBtn,
+      this.decreaseIndentBtn,
+      this.addLinkBtn,
+      this.addImageBtn,
+      this.addTableBtn,
+      this.addTooltipBtn,
+      this.headingBtn,
+      this.fontSizeBtn,
+      this.fontFamilyBtn,
+      this.textAlignBtn,
+      this.textColorBtn,
+      this.backgroundColorBtn,
+    ];
+  }
+
   private openMenuList() {
     return this.el.locator('.v-overlay--active .v-list');
   }
