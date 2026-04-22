@@ -88,10 +88,12 @@ test.describe('Extensions are registered', () => {
       'table td',
     ];
     for (const tag of tags) {
-      await expect(
-        edit.editorContent.locator(tag),
-        `expected <${tag}> to survive editor parse`,
-      ).toHaveCount(1);
+      await expect
+        .soft(
+          edit.editorContent.locator(tag),
+          `expected <${tag}> to survive editor parse`,
+        )
+        .toHaveCount(1);
     }
   });
 });
