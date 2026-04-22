@@ -160,9 +160,10 @@ test.describe('Content rendering', () => {
     await expect(
       display.content.locator('p', { hasText: 'centered' }),
     ).toHaveCSS('text-align', 'center');
-    await expect(
-      display.content.locator('p', { hasText: 'right' }),
-    ).toHaveCSS('text-align', 'right');
+    await expect(display.content.locator('p', { hasText: 'right' })).toHaveCSS(
+      'text-align',
+      'right',
+    );
   });
 
   test('Preserves font size inline style', async ({ page }) => {
