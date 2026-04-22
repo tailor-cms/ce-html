@@ -8,9 +8,9 @@
 
 <script lang="ts" setup>
 import { EditorContent, useEditor } from '@tiptap/vue-3';
+import type { Element, ElementData } from '@tailor-cms/ce-html-manifest';
 import { inject, nextTick, watch } from 'vue';
 import { debounce } from 'lodash-es';
-import type { Element, ElementData } from '@tailor-cms/ce-html-manifest';
 
 import extensions from './extensions';
 import ImageMenu from './bubble-menus/ImageMenu.vue';

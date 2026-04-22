@@ -3,8 +3,8 @@
 </template>
 
 <script setup lang="ts">
-import { inject, ref } from 'vue';
 import type { Element, ElementData } from '@tailor-cms/ce-html-manifest';
+import { inject, ref } from 'vue';
 
 import EditorToolbar from './EditorToolbar.vue';
 
