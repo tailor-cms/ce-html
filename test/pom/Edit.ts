@@ -261,6 +261,6 @@ export class Edit extends pom.EditPanel {
 
   async selectAll() {
     await this.editorContent.focus();
-    await this.editorContent.press('ControlOrMeta+a');
+    await this.editorContent.selectText();
   }
 }
