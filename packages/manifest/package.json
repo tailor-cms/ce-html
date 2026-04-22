@@ -25,16 +25,19 @@
     "prepublish": "pnpm build"
   },
   "dependencies": {
-    "@tailor-cms/cek-common": "^2.0.0-beta.13"
+    "@tailor-cms/cek-common": "2.0.0-beta.13"
   },
   "devDependencies": {
-    "@tailor-cms/eslint-config": "^2.0.0-beta.13",
-    "tsdown": "^0.21.7",
-    "typescript": "^6.0.2"
+    "@tailor-cms/eslint-config": "2.0.0-beta.13",
+    "tsdown": "^0.21.9",
+    "typescript": "^6.0.3"
   },
   "tsdown": {
     "target": "node24",
-    "format": ["cjs", "esm"]
+    "format": [
+      "cjs",
+      "esm"
+    ]
   },
   "publishConfig": {
     "access": "public"
