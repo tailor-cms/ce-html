@@ -333,7 +333,7 @@ test.describe('Link menu', () => {
     await edit.typeIntoEditor('Tailor');
     await edit.selectAll();
     await edit.addLinkBtn.click();
-    await expect(edit.linkMenu).toBeVisible();
+    await expect(edit.addLinkMenu).toBeVisible();
     await expect(edit.linkTextInput).toHaveValue('Tailor');
     await edit.linkUrlInput.fill('https://tailor-cms.org');
     await edit.linkConfirmBtn.click();
@@ -356,12 +356,12 @@ test.describe('Link menu', () => {
   });
 });
 
-test.describe('Image menu', () => {
+test.describe('Add image menu', () => {
   test('Inserts an image from a URL', async ({ page }) => {
     const edit = new Edit(page);
     await edit.focus();
     await edit.addImageBtn.click();
-    await expect(edit.imageMenu).toBeVisible();
+    await expect(edit.addImageMenu).toBeVisible();
     await edit.imageTitleInput.fill('Sunset');
     await edit.imageUrlInput.fill(IMAGE_URL);
     await edit.imageConfirmBtn.click();
@@ -376,17 +376,17 @@ test.describe('Image menu', () => {
     await edit.focus();
     await edit.addImageBtn.click();
     await edit.imageConfirmBtn.click();
-    await expect(edit.imageMenu).toBeVisible();
+    await expect(edit.addImageMenu).toBeVisible();
     await expect(edit.editorContent.locator('img[src]')).toHaveCount(0);
   });
 });
 
-test.describe('Table menu', () => {
+test.describe('Add table menu', () => {
   test('Inserts a 2x2 table without header', async ({ page }) => {
     const edit = new Edit(page);
     await edit.focus();
     await edit.addTableBtn.click();
-    await expect(edit.tableMenu).toBeVisible();
+    await expect(edit.addTableMenu).toBeVisible();
     // Initial grid is 5x5 row-major; (row=2, col=2) is flat index 6
     await edit.tableCellBtns.nth(6).click();
     const table = edit.editorContent.locator('table');
@@ -414,7 +414,7 @@ test.describe('Tooltip menu', () => {
     const edit = new Edit(page);
     await edit.focus();
     await edit.addTooltipBtn.click();
-    await expect(edit.tooltipMenu).toBeVisible();
+    await expect(edit.addTooltipMenu).toBeVisible();
     await edit.tooltipTextInput.fill('hover me');
     await edit.tooltipInput.fill('Hello there');
     await edit.tooltipConfirmBtn.click();
@@ -438,6 +438,81 @@ test.describe('Tooltip menu', () => {
   });
 });
 
+test.describe('Image bubble menu', () => {
+  test.beforeEach(async ({ page }) => {
+    await elementClient.update(ELEMENT_ID, {
+      content: `<p><img src="${IMAGE_URL}" alt="test"></p>`,
+    });
+    await page.reload({ waitUntil: 'networkidle' });
+  });
+
+  test('Appears when image is selected', async ({ page }) => {
+    const edit = new Edit(page);
+    await edit.focus();
+    await edit.editorContent.locator('img[src]').click();
+    await expect(edit.imageMenu.smallBtn).toBeVisible();
+  });
+
+  test('Resizes image via size button', async ({ page }) => {
+    const edit = new Edit(page);
+    await edit.focus();
+    await edit.editorContent.locator('img[src]').click();
+    await edit.imageMenu.mediumBtn.click();
+    await expect(edit.editorContent.locator('img[src]')).toHaveAttribute(
+      'style',
+      /width:\s*50%/,
+    );
+  });
+
+  test('All expected buttons are rendered', async ({ page }) => {
+    const edit = new Edit(page);
+    await edit.focus();
+    await edit.editorContent.locator('img[src]').click();
+    for (const btn of edit.imageMenu.allButtons)
+      await expect(btn).toBeVisible();
+  });
+});
+
+test.describe('Table bubble menu', () => {
+  test.beforeEach(async ({ page }) => {
+    await elementClient.update(ELEMENT_ID, {
+      content: '<table><tbody><tr><td><p>a</p></td></tr></tbody></table>',
+    });
+    await page.reload({ waitUntil: 'networkidle' });
+  });
+
+  test('Appears when cell is selected', async ({ page }) => {
+    const edit = new Edit(page);
+    await edit.focus();
+    await edit.editorContent.locator('table td').click();
+    await expect(edit.tableMenu.removeBtn).toBeVisible();
+  });
+
+  test('All expected buttons are rendered', async ({ page }) => {
+    const edit = new Edit(page);
+    await edit.focus();
+    await edit.editorContent.locator('table td').click();
+    for (const btn of edit.tableMenu.allButtons)
+      await expect(btn).toBeVisible();
+  });
+
+  test('Adds a column after the current one', async ({ page }) => {
+    const edit = new Edit(page);
+    await edit.focus();
+    await edit.editorContent.locator('table td').click();
+    await edit.tableMenu.addColumnAfterBtn.click();
+    await expect(edit.editorContent.locator('table td')).toHaveCount(2);
+  });
+
+  test('Removes the table', async ({ page }) => {
+    const edit = new Edit(page);
+    await edit.focus();
+    await edit.editorContent.locator('table td').click();
+    await edit.tableMenu.removeBtn.click();
+    await expect(edit.editorContent.locator('table')).toHaveCount(0);
+  });
+});
+
 test.describe('Readonly mode', () => {
   test('Keeps editor visible but non-editable', async ({ page }) => {
     await elementClient.update(ELEMENT_ID, {
@@ -451,6 +526,28 @@ test.describe('Readonly mode', () => {
       'false',
     );
     await expect(edit.editorContent).toContainText('Locked content');
+  });
+
+  test('Image bubble menu does not appear', async ({ page }) => {
+    await elementClient.update(ELEMENT_ID, {
+      content: `<p><img src="${IMAGE_URL}" alt="test"></p>`,
+    });
+    await page.reload({ waitUntil: 'networkidle' });
+    const edit = new Edit(page);
+    await edit.setReadonly();
+    await edit.editorContent.locator('img[src]').click();
+    await expect(edit.imageMenu.smallBtn).not.toBeVisible();
+  });
+
+  test('Table bubble menu does not appear', async ({ page }) => {
+    await elementClient.update(ELEMENT_ID, {
+      content: '<table><tbody><tr><td><p>cell</p></td></tr></tbody></table>',
+    });
+    await page.reload({ waitUntil: 'networkidle' });
+    const edit = new Edit(page);
+    await edit.setReadonly();
+    await edit.editorContent.locator('table td').click();
+    await expect(edit.tableMenu.removeBtn).not.toBeVisible();
   });
 });
 

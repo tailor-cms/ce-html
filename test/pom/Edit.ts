@@ -1,6 +1,9 @@
 import type { Locator, Page } from '@playwright/test';
 import { pom } from '@tailor-cms/cek-e2e';
 
+import { ImageMenu } from './bubble-menus/ImageMenu';
+import { TableMenu } from './bubble-menus/TableMenu';
+
 export class Edit extends pom.EditPanel {
   readonly editorContent: Locator;
   readonly placeholder: Locator;
@@ -20,22 +23,22 @@ export class Edit extends pom.EditPanel {
   readonly horizontalRuleBtn: Locator;
   readonly clearFormattingBtn: Locator;
   readonly addLinkBtn: Locator;
-  readonly linkMenu: Locator;
+  readonly addLinkMenu: Locator;
   readonly linkTextInput: Locator;
   readonly linkUrlInput: Locator;
   readonly linkConfirmBtn: Locator;
   readonly linkUnlinkBtn: Locator;
   readonly addImageBtn: Locator;
-  readonly imageMenu: Locator;
+  readonly addImageMenu: Locator;
   readonly imageTitleInput: Locator;
   readonly imageUrlInput: Locator;
   readonly imageConfirmBtn: Locator;
   readonly addTableBtn: Locator;
-  readonly tableMenu: Locator;
+  readonly addTableMenu: Locator;
   readonly tableHeaderCheckbox: Locator;
   readonly tableCellBtns: Locator;
   readonly addTooltipBtn: Locator;
-  readonly tooltipMenu: Locator;
+  readonly addTooltipMenu: Locator;
   readonly tooltipTextInput: Locator;
   readonly tooltipInput: Locator;
   readonly tooltipConfirmBtn: Locator;
@@ -48,6 +51,8 @@ export class Edit extends pom.EditPanel {
   readonly backgroundColorBtn: Locator;
   readonly increaseIndentBtn: Locator;
   readonly decreaseIndentBtn: Locator;
+  readonly imageMenu: ImageMenu;
+  readonly tableMenu: TableMenu;
 
   constructor(page: Page) {
     super(page);
@@ -89,48 +94,50 @@ export class Edit extends pom.EditPanel {
       name: 'Clear formatting',
     });
     this.addLinkBtn = this.topToolbar.getByRole('button', { name: 'Add link' });
-    this.linkMenu = this.el
+    this.addLinkMenu = this.el
       .locator('.v-overlay.v-menu')
       .filter({ hasText: 'Url' });
-    this.linkTextInput = this.linkMenu.getByLabel('Text');
-    this.linkUrlInput = this.linkMenu.getByLabel('Url');
-    this.linkConfirmBtn = this.linkMenu.getByRole('button', {
+    this.linkTextInput = this.addLinkMenu.getByLabel('Text');
+    this.linkUrlInput = this.addLinkMenu.getByLabel('Url');
+    this.linkConfirmBtn = this.addLinkMenu.getByRole('button', {
       name: 'Confirm',
     });
-    this.linkUnlinkBtn = this.linkMenu.getByRole('button', { name: 'Unlink' });
+    this.linkUnlinkBtn = this.addLinkMenu.getByRole('button', {
+      name: 'Unlink',
+    });
     this.addImageBtn = this.topToolbar.getByRole('button', {
       name: 'Add image',
     });
-    this.imageMenu = this.el
+    this.addImageMenu = this.el
       .locator('.v-overlay.v-menu')
       .filter({ hasText: 'Title' });
-    this.imageTitleInput = this.imageMenu.getByLabel('Title');
-    this.imageUrlInput = this.imageMenu.getByLabel('Url');
-    this.imageConfirmBtn = this.imageMenu.getByRole('button', {
+    this.imageTitleInput = this.addImageMenu.getByLabel('Title');
+    this.imageUrlInput = this.addImageMenu.getByLabel('Url');
+    this.imageConfirmBtn = this.addImageMenu.getByRole('button', {
       name: 'Confirm',
     });
     this.addTableBtn = this.topToolbar.getByRole('button', {
       name: 'Add table',
     });
-    this.tableMenu = this.el
+    this.addTableMenu = this.el
       .locator('.v-overlay.v-menu')
       .filter({ hasText: 'Add header' });
-    this.tableHeaderCheckbox = this.tableMenu.getByRole('checkbox', {
+    this.tableHeaderCheckbox = this.addTableMenu.getByRole('checkbox', {
       name: 'Add header',
     });
-    this.tableCellBtns = this.tableMenu.locator('.cell-btn');
+    this.tableCellBtns = this.addTableMenu.locator('.cell-btn');
     this.addTooltipBtn = this.topToolbar.getByRole('button', {
       name: 'Add tooltip',
     });
-    this.tooltipMenu = this.el
+    this.addTooltipMenu = this.el
       .locator('.v-overlay.v-menu')
       .filter({ hasText: 'Tooltip' });
-    this.tooltipTextInput = this.tooltipMenu.getByLabel('Text');
-    this.tooltipInput = this.tooltipMenu.getByLabel('Tooltip');
-    this.tooltipConfirmBtn = this.tooltipMenu.getByRole('button', {
+    this.tooltipTextInput = this.addTooltipMenu.getByLabel('Text');
+    this.tooltipInput = this.addTooltipMenu.getByLabel('Tooltip');
+    this.tooltipConfirmBtn = this.addTooltipMenu.getByRole('button', {
       name: 'Confirm',
     });
-    this.tooltipRemoveBtn = this.tooltipMenu.getByRole('button', {
+    this.tooltipRemoveBtn = this.addTooltipMenu.getByRole('button', {
       name: 'Remove',
     });
     this.headingBtn = this.topToolbar.getByRole('button', {
@@ -157,6 +164,8 @@ export class Edit extends pom.EditPanel {
     this.decreaseIndentBtn = this.topToolbar.getByRole('button', {
       name: 'Decrease indent',
     });
+    this.imageMenu = new ImageMenu(this.el);
+    this.tableMenu = new TableMenu(this.el);
   }
 
   get allToolbarButtons(): Locator[] {
