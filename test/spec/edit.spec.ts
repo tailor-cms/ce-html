@@ -59,7 +59,7 @@ test.describe('Extensions are registered', () => {
       <pre><code>pre</code></pre>
       <hr>
       <p style="text-align: center">aligned</p>
-      <p><a href="https://tailor-cms.org">link</a></p>
+      <p><a href="https://tailor-cms.com">link</a></p>
       <p><img src="${IMAGE_URL}" alt=""></p>
       <p><span class="has-tooltip" data-tooltip="t">tip</span></p>
       <table><tbody><tr><td>cell</td></tr></tbody></table>
@@ -335,16 +335,16 @@ test.describe('Link menu', () => {
     await edit.addLinkBtn.click();
     await expect(edit.addLinkMenu).toBeVisible();
     await expect(edit.linkTextInput).toHaveValue('Tailor');
-    await edit.linkUrlInput.fill('https://tailor-cms.org');
+    await edit.linkUrlInput.fill('https://tailor-cms.com');
     await edit.linkConfirmBtn.click();
     const link = edit.editorContent.locator('a');
-    await expect(link).toHaveAttribute('href', 'https://tailor-cms.org');
+    await expect(link).toHaveAttribute('href', 'https://tailor-cms.com');
     await expect(link).toHaveText('Tailor');
   });
 
   test('Unlinks existing link', async ({ page }) => {
     await elementClient.update(ELEMENT_ID, {
-      content: '<p><a href="https://tailor-cms.org">Tailor</a></p>',
+      content: '<p><a href="https://tailor-cms.com">Tailor</a></p>',
     });
     await page.reload({ waitUntil: 'networkidle' });
     const edit = new Edit(page);
