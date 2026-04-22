@@ -1,4 +1,4 @@
-import type { Locator, Page } from '@playwright/test';
+import { expect, type Locator, type Page } from '@playwright/test';
 import { pom } from '@tailor-cms/cek-e2e';
 
 import { ImageMenu } from './bubble-menus/ImageMenu';
@@ -256,6 +256,7 @@ export class Edit extends pom.EditPanel {
   async typeIntoEditor(text: string) {
     await this.editorContent.click();
     await this.editorContent.pressSequentially(text);
+    await expect(this.editorContent).toContainText(text);
   }
 
   async selectAll() {
