@@ -206,7 +206,9 @@ test.describe('Heading menu', () => {
     await edit.selectAll();
     await edit.selectHeading('Normal');
     await expect(edit.editorContent.locator('h3')).toHaveCount(0);
-    await expect(edit.editorContent.locator('p')).toContainText('Sample text');
+    await expect(
+      edit.editorContent.locator('p', { hasText: 'Sample text' }),
+    ).toBeVisible();
   });
 });
 
