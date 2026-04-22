@@ -1,4 +1,4 @@
-import { OpenAISchema } from '@tailor-cms/cek-common';
+import type { AiConfig } from '@tailor-cms/cek-common';
 
 import type {
   DataInitializer,
@@ -28,7 +28,7 @@ const ui = {
   forceFullWidth: false,
 };
 
-export const ai = {
+export const ai: AiConfig = {
   Schema: {
     type: 'json_schema',
     name: 'ce_tiptap_html',
@@ -40,7 +40,7 @@ export const ai = {
       required: ['content'],
       additionalProperties: false,
     },
-  } as OpenAISchema,
+  },
   getPrompt: () => `
     Generate rich text for a page as an object with the following
     properties: { "content": "" }
@@ -51,12 +51,15 @@ export const ai = {
   processResponse: (val: any) => val,
 };
 
+export const isEmpty = (data: ElementData): boolean => !data.content;
+
 const manifest: ElementManifest = {
   type,
   version,
   name,
   ssr: false,
   initState,
+  isEmpty,
   ui,
   ai,
 };

@@ -7,12 +7,11 @@
             :active="editor.isActive('image')"
             :disabled="!editor.can().chain().focus().setImage().run()"
             aria-label="Add image"
+            icon="mdi-image-plus"
             rounded="lg"
             size="32"
             v-bind="mergeProps(menu, tooltip)"
-          >
-            <VIcon size="24">mdi-image-plus</VIcon>
-          </VBtn>
+          />
         </template>
         Add image
       </VTooltip>
@@ -36,7 +35,7 @@
           variant="outlined"
         />
         <div class="actions d-flex justify-end">
-          <VBtn color="primary" type="submit" variant="tonal">Confirm</VBtn>
+          <VBtn color="primary" text="Confirm" type="submit" variant="tonal" />
         </div>
       </VSheet>
     </VForm>

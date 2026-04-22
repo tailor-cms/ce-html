@@ -7,12 +7,11 @@
             :active="editor.isActive('link')"
             :disabled="!editor.can().chain().focus().setLinkText().run()"
             aria-label="Add link"
+            icon="mdi-link-variant-plus"
             rounded="lg"
             size="32"
             v-bind="mergeProps(menu, tooltip)"
-          >
-            <VIcon size="24">mdi-link-variant-plus</VIcon>
-          </VBtn>
+          />
         </template>
         Add link
       </VTooltip>
@@ -40,14 +39,16 @@
             v-if="editor.isActive('link')"
             class="mr-2"
             color="primary-darken-3"
+            text="Unlink"
             variant="text"
             @click="unlink"
-          >
-            Unlink
-          </VBtn>
-          <VBtn color="primary-darken-3" type="submit" variant="tonal">
-            Confirm
-          </VBtn>
+          />
+          <VBtn
+            color="primary-darken-3"
+            text="Confirm"
+            type="submit"
+            variant="tonal"
+          />
         </div>
       </VSheet>
     </VForm>

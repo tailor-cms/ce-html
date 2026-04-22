@@ -4,11 +4,12 @@
 
 <script setup lang="ts">
 import { inject, ref } from 'vue';
+import type { Element, ElementData } from '@tailor-cms/ce-html-manifest';
 
 import EditorToolbar from './EditorToolbar.vue';
 
 defineProps<{ element: Element }>();
-defineEmits(['save']);
+defineEmits<{ save: [data: ElementData] }>();
 
 const editor = ref();
 

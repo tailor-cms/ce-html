@@ -10,7 +10,7 @@
 import { EditorContent, useEditor } from '@tiptap/vue-3';
 import { inject, nextTick, watch } from 'vue';
 import { debounce } from 'lodash-es';
-import { Element } from '@tailor-cms/ce-html-manifest';
+import type { Element, ElementData } from '@tailor-cms/ce-html-manifest';
 
 import extensions from './extensions';
 import ImageMenu from './bubble-menus/ImageMenu.vue';
@@ -24,7 +24,7 @@ const props = defineProps<{
   isFocused: boolean;
   isReadonly: boolean;
 }>();
-const emit = defineEmits(['save']);
+const emit = defineEmits<{ save: [data: ElementData] }>();
 
 const elementBus: any = inject('$elementBus');
 
@@ -36,7 +36,7 @@ const editor = useEditor({
 });
 
 const save = () => {
-  const content = editor.value?.isEmpty ? '' : editor.value?.getHTML();
+  const content = editor.value?.isEmpty ? '' : (editor.value?.getHTML() ?? '');
   return emit('save', { ...props.element.data, content });
 };
 

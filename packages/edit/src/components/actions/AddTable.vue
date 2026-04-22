@@ -5,13 +5,11 @@
         <template #activator="{ props: tooltip }">
           <VBtn
             aria-label="Add table"
+            icon="mdi-table-plus"
             rounded="lg"
             size="32"
-            icon
             v-bind="mergeProps(menu, tooltip)"
-          >
-            <VIcon size="24">mdi-table-plus</VIcon>
-          </VBtn>
+          />
         </template>
         Add table
       </VTooltip>
@@ -41,7 +39,7 @@
           @mouseover="updateSelection(rows, cols)"
         />
       </div>
-      <span class="text-body-2">
+      <span class="text-body-medium">
         {{ selectedSize.rows }}x{{ selectedSize.cols }}
       </span>
     </VSheet>
