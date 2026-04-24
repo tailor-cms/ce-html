@@ -550,7 +550,3 @@ test.describe('Readonly mode', () => {
     await expect(edit.tableMenu.removeBtn).not.toBeVisible();
   });
 });
-
-test.afterAll(async () => {
-  await elementClient.reset(ELEMENT_ID);
-});

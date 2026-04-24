@@ -8,6 +8,7 @@ const IMAGE_URL = 'https://picsum.photos/200';
 
 test.beforeEach(async ({ page }) => {
   await elementClient.reset(ELEMENT_ID);
+  await elementClient.resetState(ELEMENT_ID);
   await page.goto(`/?id=${ELEMENT_ID}`);
   await page.waitForLoadState('networkidle');
 });
@@ -222,8 +223,4 @@ test.describe('Content rendering', () => {
     const display = new Display(page);
     await expect(display.content.locator('hr')).toBeVisible();
   });
-});
-
-test.afterAll(async () => {
-  await elementClient.reset(ELEMENT_ID);
 });
