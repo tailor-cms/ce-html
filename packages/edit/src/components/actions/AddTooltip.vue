@@ -7,12 +7,11 @@
             :active="editor.isActive('tooltip')"
             :disabled="!editor.can().chain().focus().setTooltip().run()"
             aria-label="Add tooltip"
+            icon="mdi-tooltip-text"
             rounded="lg"
             size="32"
             v-bind="mergeProps(menu, tooltipProps)"
-          >
-            <VIcon size="24">mdi-tooltip-text</VIcon>
-          </VBtn>
+          />
         </template>
         Add tooltip
       </VTooltip>
@@ -39,12 +38,11 @@
           <VBtn
             v-if="editor.isActive('tooltip')"
             class="mr-2"
+            text="Remove"
             variant="plain"
             @click="unset"
-          >
-            Remove
-          </VBtn>
-          <VBtn color="primary" type="submit" variant="tonal">Confirm</VBtn>
+          />
+          <VBtn color="primary" text="Confirm" type="submit" variant="tonal" />
         </div>
       </VSheet>
     </VForm>

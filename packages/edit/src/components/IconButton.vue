@@ -24,8 +24,8 @@ import { ref } from 'vue';
 defineProps<{
   active?: boolean;
   disabled?: boolean;
-  density?: string;
-  size?: string;
+  density?: 'default' | 'comfortable' | 'compact';
+  size?: string | number;
   label: string;
   icon: string;
 }>();

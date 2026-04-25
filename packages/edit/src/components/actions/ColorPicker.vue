@@ -41,14 +41,13 @@
       </div>
       <VBtn
         class="mt-1"
+        prepend-icon="mdi-water-off"
         size="small"
+        text="Reset"
         variant="plain"
         block
         @click="$emit('unset')"
-      >
-        <VIcon size="small">mdi-water-off</VIcon>
-        Reset
-      </VBtn>
+      />
     </VSheet>
   </VMenu>
 </template>

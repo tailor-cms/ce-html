@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { Element } from '@tailor-cms/ce-html-manifest';
+import type { Element } from '@tailor-cms/ce-html-manifest';
 
 defineProps<{ element: Element }>();
 </script>

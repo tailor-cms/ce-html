@@ -1,5 +1,8 @@
 <template>
-  <BubbleMenu :editor="editor" :should-show="() => editor.isActive('table')">
+  <BubbleMenu
+    :editor="editor"
+    :should-show="() => editor.isEditable && editor.isActive('table')"
+  >
     <VCard class="pa-1" rounded="lg">
       <VBtnGroup density="compact" variant="text">
         <IconButton
