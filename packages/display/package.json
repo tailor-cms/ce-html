@@ -2,6 +2,13 @@
   "name": "@tailor-cms/ce-html-display",
   "description": "Tailor CMS HTML editor end-user component",
   "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tailor-cms/ce_html_default.git",
+    "directory": "packages/display"
+  },
+  "homepage": "https://github.com/tailor-cms/ce_html_default#readme",
+  "bugs": "https://github.com/tailor-cms/ce_html_default/issues",
   "type": "module",
   "version": "2.0.2",
   "exports": {
