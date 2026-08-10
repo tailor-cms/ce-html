@@ -2,6 +2,7 @@
   "name": "@tailor-cms/ce-html",
   "description": "Tailor CMS HTML editor",
   "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
+  "license": "MIT",
   "type": "module",
   "private": true,
   "scripts": {
