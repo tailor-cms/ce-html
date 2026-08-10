@@ -11,7 +11,7 @@
   "homepage": "https://github.com/tailor-cms/ce_html_default#readme",
   "bugs": "https://github.com/tailor-cms/ce_html_default/issues",
   "type": "module",
-  "version": "2.0.2",
+  "version": "2.0.1",
   "exports": {
     ".": {
       "import": "./dist/index.js",
