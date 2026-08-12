@@ -38,17 +38,11 @@
           <VBtn
             v-if="editor.isActive('link')"
             class="mr-2"
-            color="primary-darken-3"
             text="Unlink"
             variant="text"
             @click="unlink"
           />
-          <VBtn
-            color="primary-darken-3"
-            text="Confirm"
-            type="submit"
-            variant="tonal"
-          />
+          <VBtn text="Confirm" type="submit" variant="tonal" />
         </div>
       </VSheet>
     </VForm>
