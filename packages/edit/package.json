@@ -11,7 +11,7 @@
   "homepage": "https://github.com/tailor-cms/ce_html_default#readme",
   "bugs": "https://github.com/tailor-cms/ce_html_default/issues",
   "type": "module",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@tailor-cms/ce-html-manifest": "workspace:*",
-    "@tailor-cms/eslint-config": "2.0.3",
+    "@tailor-cms/eslint-config": "2.1.0",
     "@types/lodash-es": "^4.17.12",
     "@types/validator": "^13.15.10",
     "@vitejs/plugin-vue": "^6.0.8",
@@ -50,7 +50,7 @@
   "dependencies": {
     "@floating-ui/dom": "^1.7.6",
     "@intevation/tiptap-extension-office-paste": "^0.1.2",
-    "@tailor-cms/cek-common": "2.0.3",
+    "@tailor-cms/cek-common": "2.1.0",
     "@tiptap/extension-image": "^3.22.4",
     "@tiptap/extension-link": "^3.22.4",
     "@tiptap/extension-subscript": "^3.22.4",
