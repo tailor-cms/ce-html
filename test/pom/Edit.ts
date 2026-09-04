@@ -68,12 +68,12 @@ export class Edit extends pom.EditPanel {
     });
     this.undoBtn = this.topToolbar.getByRole('button', { name: 'Undo' });
     this.redoBtn = this.topToolbar.getByRole('button', { name: 'Redo' });
-    this.orderedListBtn = this.topToolbar
-      .getByRole('button', { name: 'Numbered list' })
-      .first();
-    this.bulletListBtn = this.topToolbar
-      .getByRole('button', { name: 'Numbered list' })
-      .nth(1);
+    this.orderedListBtn = this.topToolbar.getByRole('button', {
+      name: 'Numbered list',
+    });
+    this.bulletListBtn = this.topToolbar.getByRole('button', {
+      name: 'Bullet list',
+    });
     this.superscriptBtn = this.topToolbar.getByRole('button', {
       name: 'Superscript',
     });

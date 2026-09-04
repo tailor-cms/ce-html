@@ -108,7 +108,7 @@ const toolbarItems: (Action | Component)[][] = [
       icon: 'format-list-numbered',
     },
     {
-      label: 'Numbered list',
+      label: 'Bullet list',
       isActive: 'bulletList',
       action: ['toggleBulletList'],
       icon: 'format-list-bulleted',
