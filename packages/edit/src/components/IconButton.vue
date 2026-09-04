@@ -4,22 +4,33 @@
       <VBtn
         :active="active"
         :aria-label="label"
+        :class="{ 'pa-0': dropdown }"
         :density="density ?? 'default'"
         :disabled="disabled"
-        :icon="icon"
+        :icon="dropdown ? undefined : icon"
+        :min-width="dropdown ? 46 : undefined"
         :size="size ?? 32"
-        rounded="lg"
+        rounded="6"
         variant="text"
-        v-bind="{ ...$attrs, ...tooltip }"
+        v-bind="mergeProps($attrs, tooltip)"
         @click="onClick"
-      />
+      >
+        <template v-if="dropdown || $slots.default" #default>
+          <slot>
+            <VIcon class="ml-1 mr-n1" size="24">{{ icon }}</VIcon>
+            <VIcon>mdi-menu-down</VIcon>
+          </slot>
+        </template>
+      </VBtn>
     </template>
     {{ label }}
   </VTooltip>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { mergeProps, ref } from 'vue';
+
+defineOptions({ inheritAttrs: false });
 
 defineProps<{
   active?: boolean;
@@ -27,22 +38,18 @@ defineProps<{
   density?: 'default' | 'comfortable' | 'compact';
   size?: string | number;
   label: string;
-  icon: string;
+  icon?: string;
+  // Renders a wider button with the icon and a menu-down chevron.
+  dropdown?: boolean;
 }>();
 
-const emit = defineEmits(['click']);
+// The event must be forwarded; menu activator listeners rely on it.
+const emit = defineEmits<{ click: [event: MouseEvent] }>();
 
 const isOpen = ref(false);
 
-const onClick = () => {
+const onClick = (event: MouseEvent) => {
   isOpen.value = false;
-  emit('click');
+  emit('click', event);
 };
 </script>
-
-<style lang="scss" scoped>
-.v-btn.v-btn--density-compact {
-  width: calc(var(--v-btn-height) - 0.25rem);
-  height: calc(var(--v-btn-height) - 0.25rem);
-}
-</style>

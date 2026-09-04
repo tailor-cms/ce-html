@@ -1,25 +1,16 @@
 <template>
   <VMenu>
     <template #activator="{ props: menu }">
-      <VTooltip location="bottom">
-        <template #activator="{ props: tooltip }">
-          <VBtn
-            :active="!!editor.getAttributes('textStyle').fontSize"
-            :disabled="!editor.can().chain().focus().setFontSize().run()"
-            aria-label="Font Size"
-            class="pa-0"
-            min-width="46"
-            rounded="lg"
-            v-bind="mergeProps(menu, tooltip)"
-          >
-            <VIcon class="ml-1 mr-n1" size="24">mdi-format-size</VIcon>
-            <VIcon small>mdi-menu-down</VIcon>
-          </VBtn>
-        </template>
-        Font size
-      </VTooltip>
+      <IconButton
+        v-bind="menu"
+        :active="!!editor.getAttributes('textStyle').fontSize"
+        :disabled="!editor.can().chain().focus().setFontSize().run()"
+        icon="mdi-format-size"
+        label="Font size"
+        dropdown
+      />
     </template>
-    <VList class="pa-1" color="primary" density="compact" max-height="220">
+    <VList class="pa-1" density="compact" max-height="220">
       <VListItem
         v-for="fontSize in FONT_SIZES"
         :key="fontSize"
@@ -36,9 +27,8 @@
 </template>
 
 <script setup lang="ts">
-import { mergeProps } from 'vue';
-
 import { FONT_SIZES } from './constants';
+import IconButton from '../IconButton.vue';
 
 const props = defineProps<{ editor: any }>();
 

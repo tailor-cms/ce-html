@@ -1,23 +1,16 @@
 <template>
   <VMenu>
     <template #activator="{ props: menu }">
-      <VTooltip location="bottom">
-        <template #activator="{ props: tooltip }">
-          <VBtn
-            :active="!!value"
-            :aria-label="label"
-            :disabled="disabled"
-            rounded="lg"
-            size="32"
-            icon
-            v-bind="mergeProps(menu, tooltip)"
-          >
-            <VIcon size="24">{{ icon }}</VIcon>
-            <VIcon :color="currentColor" size="20">mdi-color-helper</VIcon>
-          </VBtn>
-        </template>
-        {{ label }}
-      </VTooltip>
+      <IconButton
+        v-bind="menu"
+        :active="!!value"
+        :disabled="disabled"
+        :icon="icon"
+        :label="label"
+      >
+        <VIcon size="24">{{ icon }}</VIcon>
+        <VIcon :color="currentColor" size="20">mdi-color-helper</VIcon>
+      </IconButton>
     </template>
     <VSheet class="pa-2" color="white">
       <div v-for="(colorRow, i) in COLORS" :key="i" class="d-flex">
@@ -53,9 +46,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, mergeProps } from 'vue';
+import { computed } from 'vue';
 
 import { COLORS } from './constants';
+import IconButton from '../IconButton.vue';
 
 const props = defineProps<{
   disabled: boolean;

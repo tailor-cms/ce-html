@@ -1,24 +1,15 @@
 <template>
   <VMenu>
     <template #activator="{ props: menu }">
-      <VTooltip location="bottom">
-        <template #activator="{ props: tooltip }">
-          <VBtn
-            :disabled="!editor.can().chain().focus().setTextAlign('left').run()"
-            aria-label="Text align"
-            class="pa-0"
-            min-width="46"
-            rounded="lg"
-            v-bind="mergeProps(menu, tooltip)"
-          >
-            <VIcon class="ml-1 mr-n1" size="24">mdi-format-align-justify</VIcon>
-            <VIcon small>mdi-menu-down</VIcon>
-          </VBtn>
-        </template>
-        Text align
-      </VTooltip>
+      <IconButton
+        v-bind="menu"
+        :disabled="!editor.can().chain().focus().setTextAlign('left').run()"
+        icon="mdi-format-align-justify"
+        label="Text align"
+        dropdown
+      />
     </template>
-    <VList class="pa-1" color="primary" density="compact">
+    <VList class="pa-1" density="compact">
       <VListItem
         v-for="textAlign in alignments"
         :key="textAlign"
@@ -40,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { mergeProps } from 'vue';
+import IconButton from '../IconButton.vue';
 
 defineProps<{ editor: any }>();
 

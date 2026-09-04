@@ -141,7 +141,7 @@ export class Edit extends pom.EditPanel {
       name: 'Remove',
     });
     this.headingBtn = this.topToolbar.getByRole('button', {
-      name: 'Text heading',
+      name: 'Headings',
     });
     this.fontSizeBtn = this.topToolbar.getByRole('button', {
       name: 'Font size',

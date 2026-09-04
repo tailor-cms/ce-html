@@ -1,28 +1,15 @@
 <template>
   <VMenu>
     <template #activator="{ props: menu }">
-      <VTooltip location="bottom">
-        <template #activator="{ props: tooltip }">
-          <VBtn
-            :active="editor.isActive({ level: /\d+/ })"
-            aria-label="Text heading"
-            class="pa-0"
-            min-width="46"
-            rounded="lg"
-            v-bind="mergeProps(menu, tooltip)"
-          >
-            <VIcon class="ml-1 mr-n1" size="24">
-              mdi-format-header-{{
-                editor.getAttributes('heading').level ?? 'pound'
-              }}
-            </VIcon>
-            <VIcon small>mdi-menu-down</VIcon>
-          </VBtn>
-        </template>
-        Headings
-      </VTooltip>
+      <IconButton
+        v-bind="menu"
+        :active="editor.isActive({ level: /\d+/ })"
+        :icon="`mdi-format-header-${editor.getAttributes('heading').level ?? 'pound'}`"
+        label="Headings"
+        dropdown
+      />
     </template>
-    <VList class="pa-1" color="primary" density="compact">
+    <VList class="pa-1" density="compact">
       <VListItem
         v-for="level in [1, 2, 3, 4, 5, 6]"
         :key="level"
@@ -48,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { mergeProps } from 'vue';
+import IconButton from '../IconButton.vue';
 
 defineProps<{ editor: any }>();
 </script>

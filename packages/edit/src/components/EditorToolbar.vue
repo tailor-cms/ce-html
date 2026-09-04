@@ -85,7 +85,7 @@ const toolbarItems: (Action | Component)[][] = [
       label: 'Strikethrough',
       isActive: 'strike',
       action: ['toggleStrike'],
-      icon: 'format-strikethrough',
+      icon: 'format-strikethrough-variant',
     },
   ],
   [
@@ -178,9 +178,5 @@ const toolbarItems: (Action | Component)[][] = [
 
 :deep(.v-btn + .v-btn) {
   margin-left: 0.125rem;
-}
-
-:deep(.v-btn.v-btn--active) {
-  color: rgba(var(--v-theme-primary));
 }
 </style>

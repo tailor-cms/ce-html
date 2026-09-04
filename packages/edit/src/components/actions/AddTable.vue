@@ -1,18 +1,7 @@
 <template>
   <VMenu v-model="show">
     <template #activator="{ props: menu }">
-      <VTooltip location="bottom">
-        <template #activator="{ props: tooltip }">
-          <VBtn
-            aria-label="Add table"
-            icon="mdi-table-plus"
-            rounded="lg"
-            size="32"
-            v-bind="mergeProps(menu, tooltip)"
-          />
-        </template>
-        Add table
-      </VTooltip>
+      <IconButton v-bind="menu" icon="mdi-table-plus" label="Add table" />
     </template>
     <VSheet class="pa-2 text-center" color="white">
       <VCheckbox
@@ -31,7 +20,7 @@
           :key="cols"
           :active="selectedSize.rows >= rows && selectedSize.cols >= cols"
           class="cell-btn"
-          color="primary"
+          color="secondary"
           size="24"
           variant="tonal"
           @click="insertTable(rows, cols)"
@@ -47,7 +36,9 @@
 </template>
 
 <script setup lang="ts">
-import { mergeProps, reactive, ref, watch } from 'vue';
+import { reactive, ref, watch } from 'vue';
+
+import IconButton from '../IconButton.vue';
 
 const INIT_SIZE = 5;
 const MAX_SIZE = 10;

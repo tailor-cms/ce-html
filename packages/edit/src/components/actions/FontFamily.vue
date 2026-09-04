@@ -1,27 +1,16 @@
 <template>
   <VMenu>
     <template #activator="{ props: menu }">
-      <VTooltip location="bottom">
-        <template #activator="{ props: tooltip }">
-          <VBtn
-            :active="!!editor.getAttributes('textStyle').fontFamily"
-            :disabled="!editor.can().chain().focus().setFontFamily().run()"
-            aria-label="Font family"
-            class="pa-0"
-            min-width="46"
-            rounded="lg"
-            v-bind="mergeProps(menu, tooltip)"
-          >
-            <VIcon class="ml-1 mr-n1" size="24">mdi-format-font</VIcon>
-            <div>
-              <VIcon small>mdi-menu-down</VIcon>
-            </div>
-          </VBtn>
-        </template>
-        Font family
-      </VTooltip>
+      <IconButton
+        v-bind="menu"
+        :active="!!editor.getAttributes('textStyle').fontFamily"
+        :disabled="!editor.can().chain().focus().setFontFamily().run()"
+        icon="mdi-format-font"
+        label="Font family"
+        dropdown
+      />
     </template>
-    <VList class="pa-1" color="primary" density="compact">
+    <VList class="pa-1" density="compact">
       <VListItem
         v-for="fontFamily in FONT_FAMILIES"
         :key="fontFamily"
@@ -41,9 +30,8 @@
 </template>
 
 <script setup lang="ts">
-import { mergeProps } from 'vue';
-
 import { FONT_FAMILIES } from './constants';
+import IconButton from '../IconButton.vue';
 
 const props = defineProps<{ editor: any }>();
 

@@ -1,20 +1,13 @@
 <template>
   <VMenu v-model="show" :close-on-content-click="false">
     <template #activator="{ props: menu }">
-      <VTooltip location="bottom">
-        <template #activator="{ props: tooltip }">
-          <VBtn
-            :active="editor.isActive('link')"
-            :disabled="!editor.can().chain().focus().setLinkText().run()"
-            aria-label="Add link"
-            icon="mdi-link-variant-plus"
-            rounded="lg"
-            size="32"
-            v-bind="mergeProps(menu, tooltip)"
-          />
-        </template>
-        Add link
-      </VTooltip>
+      <IconButton
+        v-bind="menu"
+        :active="editor.isActive('link')"
+        :disabled="!editor.can().chain().focus().setLinkText().run()"
+        icon="mdi-link-variant-plus"
+        label="Add link"
+      />
     </template>
     <VForm ref="form" @submit.prevent="setLink">
       <VSheet class="pa-3" elevation="8" width="230" rounded>
@@ -42,7 +35,7 @@
             variant="text"
             @click="unlink"
           />
-          <VBtn text="Confirm" type="submit" variant="tonal" />
+          <VBtn color="primary" text="Confirm" type="submit" variant="tonal" />
         </div>
       </VSheet>
     </VForm>
@@ -50,8 +43,9 @@
 </template>
 
 <script setup lang="ts">
-import { mergeProps, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 
+import IconButton from '../IconButton.vue';
 import { rules } from './rules';
 
 const props = defineProps<{ editor: any }>();

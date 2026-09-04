@@ -1,20 +1,13 @@
 <template>
   <VMenu v-model="show" :close-on-content-click="false">
     <template #activator="{ props: menu }">
-      <VTooltip location="bottom">
-        <template #activator="{ props: tooltip }">
-          <VBtn
-            :active="editor.isActive('image')"
-            :disabled="!editor.can().chain().focus().setImage().run()"
-            aria-label="Add image"
-            icon="mdi-image-plus"
-            rounded="lg"
-            size="32"
-            v-bind="mergeProps(menu, tooltip)"
-          />
-        </template>
-        Add image
-      </VTooltip>
+      <IconButton
+        v-bind="menu"
+        :active="editor.isActive('image')"
+        :disabled="!editor.can().chain().focus().setImage().run()"
+        icon="mdi-image-plus"
+        label="Add image"
+      />
     </template>
     <VForm ref="form" @submit.prevent="setImage">
       <VSheet class="pa-3" elevation="8" width="230" rounded>
@@ -43,8 +36,9 @@
 </template>
 
 <script setup lang="ts">
-import { mergeProps, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 
+import IconButton from '../IconButton.vue';
 import { rules } from './rules';
 
 const props = defineProps<{ editor: any }>();

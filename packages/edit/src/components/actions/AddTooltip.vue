@@ -1,20 +1,13 @@
 <template>
   <VMenu v-model="show" :close-on-content-click="false">
     <template #activator="{ props: menu }">
-      <VTooltip location="bottom">
-        <template #activator="{ props: tooltipProps }">
-          <VBtn
-            :active="editor.isActive('tooltip')"
-            :disabled="!editor.can().chain().focus().setTooltip().run()"
-            aria-label="Add tooltip"
-            icon="mdi-tooltip-text"
-            rounded="lg"
-            size="32"
-            v-bind="mergeProps(menu, tooltipProps)"
-          />
-        </template>
-        Add tooltip
-      </VTooltip>
+      <IconButton
+        v-bind="menu"
+        :active="editor.isActive('tooltip')"
+        :disabled="!editor.can().chain().focus().setTooltip().run()"
+        icon="mdi-tooltip-text"
+        label="Add tooltip"
+      />
     </template>
     <VForm ref="form" @submit.prevent="setTooltip">
       <VSheet class="pa-3" elevation="8" width="240" rounded>
@@ -50,8 +43,9 @@
 </template>
 
 <script setup lang="ts">
-import { mergeProps, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 
+import IconButton from '../IconButton.vue';
 import { rules } from './rules';
 
 const props = defineProps<{ editor: any }>();
