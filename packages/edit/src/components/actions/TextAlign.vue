@@ -9,7 +9,7 @@
         dropdown
       />
     </template>
-    <VList density="compact" lines="1" nav>
+    <VList :lines="false" density="compact" nav>
       <VListItem
         v-for="textAlign in alignments"
         :key="textAlign"

@@ -10,7 +10,7 @@
         dropdown
       />
     </template>
-    <VList density="compact" lines="1" max-height="220" nav>
+    <VList :lines="false" density="compact" max-height="220" nav>
       <VListItem
         v-for="fontSize in FONT_SIZES"
         :key="fontSize"

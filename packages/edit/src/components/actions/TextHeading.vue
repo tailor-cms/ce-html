@@ -9,7 +9,7 @@
         dropdown
       />
     </template>
-    <VList density="compact" lines="1" nav>
+    <VList :lines="false" density="compact" nav>
       <VListItem
         v-for="level in [1, 2, 3, 4, 5, 6]"
         :key="level"
