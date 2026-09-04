@@ -1,5 +1,11 @@
 # @tailor-cms/ce-html-display
 
+## 2.1.1
+
+### Patch Changes
+
+- Unify buttons, cleanup styles, bump dependencies.
+
 ## 2.1.0
 
 ### Minor Changes

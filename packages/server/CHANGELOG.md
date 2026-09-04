@@ -1,5 +1,13 @@
 # @tailor-cms/ce-html-server
 
+## 2.1.1
+
+### Patch Changes
+
+- Unify buttons, cleanup styles, bump dependencies.
+- Updated dependencies
+  - @tailor-cms/ce-html-manifest@2.1.1
+
 ## 2.1.0
 
 ### Minor Changes
