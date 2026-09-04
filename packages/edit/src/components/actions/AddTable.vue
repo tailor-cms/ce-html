@@ -3,7 +3,7 @@
     <template #activator="{ props: menu }">
       <IconButton v-bind="menu" icon="mdi-table-plus" label="Add table" />
     </template>
-    <VSheet class="pa-2 text-center" color="white">
+    <VSheet class="pa-2 text-center" elevation="3">
       <VCheckbox
         v-model="withHeaderRow"
         :ripple="false"

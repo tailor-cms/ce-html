@@ -4,7 +4,7 @@
     :should-show="() => editor.isEditable && editor.isActive('table')"
   >
     <VCard class="pa-1" rounded="lg">
-      <VBtnGroup density="compact" variant="text">
+      <div class="table-toolbar">
         <IconButton
           icon="mdi-table-column-plus-before"
           label="Add column before"
@@ -55,7 +55,7 @@
           label="Split cell"
           @click="editor.chain().focus().splitCell().run()"
         />
-      </VBtnGroup>
+      </div>
     </VCard>
   </BubbleMenu>
 </template>
@@ -69,11 +69,8 @@ defineProps<{ editor: any }>();
 </script>
 
 <style lang="scss" scoped>
-:deep(.v-btn + .v-btn) {
-  margin-left: 0.125rem;
-}
-
-:deep(.v-btn.v-btn--active) {
-  color: rgba(var(--v-theme-primary));
+.table-toolbar {
+  display: flex;
+  gap: 0.125rem;
 }
 </style>

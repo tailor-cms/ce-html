@@ -10,7 +10,7 @@
       />
     </template>
     <VForm ref="form" @submit.prevent="setImage">
-      <VSheet class="pa-3" elevation="8" width="230" rounded>
+      <VSheet class="pa-3" elevation="3" width="230" rounded>
         <VTextField
           v-model="title"
           :rules="[rules.required]"

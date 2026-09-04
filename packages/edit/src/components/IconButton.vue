@@ -7,20 +7,18 @@
         :class="{ 'pa-0': dropdown }"
         :density="density ?? 'default'"
         :disabled="disabled"
-        :icon="dropdown ? undefined : icon"
-        :min-width="dropdown ? 46 : undefined"
-        :size="size ?? 32"
+        :icon="!dropdown"
+        :min-width="dropdown ? 40 : undefined"
+        :size="size ?? 30"
         rounded="6"
         variant="text"
         v-bind="mergeProps($attrs, tooltip)"
         @click="onClick"
       >
-        <template v-if="dropdown || $slots.default" #default>
-          <slot>
-            <VIcon class="ml-1 mr-n1" size="24">{{ icon }}</VIcon>
-            <VIcon>mdi-menu-down</VIcon>
-          </slot>
-        </template>
+        <slot>
+          <VIcon :class="{ 'ml-1 mr-n1': dropdown }" :icon="icon" size="20" />
+        </slot>
+        <VIcon v-if="dropdown">mdi-menu-down</VIcon>
       </VBtn>
     </template>
     {{ label }}

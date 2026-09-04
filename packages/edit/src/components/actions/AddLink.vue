@@ -10,7 +10,7 @@
       />
     </template>
     <VForm ref="form" @submit.prevent="setLink">
-      <VSheet class="pa-3" elevation="8" width="230" rounded>
+      <VSheet class="pa-3" elevation="3" width="230" rounded>
         <VTextField
           v-model="text"
           :rules="[rules.required]"

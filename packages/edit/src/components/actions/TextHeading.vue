@@ -9,27 +9,19 @@
         dropdown
       />
     </template>
-    <VList class="pa-1" density="compact">
+    <VList density="compact" lines="1" nav>
       <VListItem
         v-for="level in [1, 2, 3, 4, 5, 6]"
         :key="level"
         :active="editor.isActive({ level })"
-        class="px-2"
-        min-height="36"
-        rounded="sm"
+        :title="`Heading ${level}`"
         @click="editor.chain().focus().toggleHeading({ level }).run()"
-      >
-        <VListItemTitle>Heading {{ level }}</VListItemTitle>
-      </VListItem>
+      />
       <VListItem
         :active="editor.isActive('paragraph')"
-        class="px-2"
-        min-height="36"
-        rounded="sm"
+        title="Normal"
         @click="editor.chain().focus().setParagraph().run()"
-      >
-        <VListItemTitle>Normal</VListItemTitle>
-      </VListItem>
+      />
     </VList>
   </VMenu>
 </template>
@@ -39,9 +31,3 @@ import IconButton from '../IconButton.vue';
 
 defineProps<{ editor: any }>();
 </script>
-
-<style lang="scss" scoped>
-.v-list-item + .v-list-item {
-  margin-top: 0.125rem;
-}
-</style>

@@ -8,11 +8,11 @@
         :icon="icon"
         :label="label"
       >
-        <VIcon size="24">{{ icon }}</VIcon>
+        <VIcon size="20">{{ icon }}</VIcon>
         <VIcon :color="currentColor" size="20">mdi-color-helper</VIcon>
       </IconButton>
     </template>
-    <VSheet class="pa-2" color="white">
+    <VSheet class="pa-2" elevation="3">
       <div v-for="(colorRow, i) in COLORS" :key="i" class="d-flex">
         <VBtn
           v-for="color in colorRow"

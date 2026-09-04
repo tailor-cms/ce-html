@@ -4,7 +4,7 @@
     :should-show="() => editor.isEditable && editor.isActive('image')"
   >
     <VCard class="pa-1" rounded="lg">
-      <VBtnGroup density="compact" variant="text">
+      <div class="image-toolbar">
         <IconButton
           v-for="{ width, label, icon } in sizes"
           :key="label"
@@ -13,7 +13,7 @@
           :label="label"
           @click="setWidth(width)"
         />
-      </VBtnGroup>
+      </div>
     </VCard>
   </BubbleMenu>
 </template>
@@ -39,11 +39,8 @@ function setWidth(value: string) {
 </script>
 
 <style lang="scss" scoped>
-:deep(.v-btn + .v-btn) {
-  margin-left: 0.125rem;
-}
-
-:deep(.v-btn.v-btn--active) {
-  color: rgba(var(--v-theme-primary));
+.image-toolbar {
+  display: flex;
+  gap: 0.125rem;
 }
 </style>

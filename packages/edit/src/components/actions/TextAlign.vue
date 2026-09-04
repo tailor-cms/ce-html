@@ -9,20 +9,20 @@
         dropdown
       />
     </template>
-    <VList class="pa-1" density="compact">
+    <VList density="compact" lines="1" nav>
       <VListItem
         v-for="textAlign in alignments"
         :key="textAlign"
         :active="editor.isActive({ textAlign })"
-        class="px-2"
-        min-height="36"
-        rounded="sm"
         @click="editor.chain().focus().setTextAlign(textAlign).run()"
       >
         <VListItemTitle class="text-capitalize">
-          <VIcon class="mr-1" size="small" aria-hidden>
-            mdi-format-align-{{ textAlign }}
-          </VIcon>
+          <VIcon
+            :icon="`mdi-format-align-${textAlign}`"
+            class="mr-1"
+            size="small"
+            aria-hidden
+          />
           {{ textAlign }}
         </VListItemTitle>
       </VListItem>
@@ -37,9 +37,3 @@ defineProps<{ editor: any }>();
 
 const alignments = ['left', 'center', 'right', 'justify'];
 </script>
-
-<style lang="scss" scoped>
-.v-list-item + .v-list-item {
-  margin-top: 0.125rem;
-}
-</style>

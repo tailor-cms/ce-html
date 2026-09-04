@@ -10,18 +10,14 @@
         dropdown
       />
     </template>
-    <VList class="pa-1" density="compact" max-height="220">
+    <VList density="compact" lines="1" max-height="220" nav>
       <VListItem
         v-for="fontSize in FONT_SIZES"
         :key="fontSize"
         :active="editor.isActive({ fontSize })"
-        class="px-2"
-        min-height="36"
-        rounded="sm"
+        :title="fontSize"
         @click="toggle(fontSize)"
-      >
-        <VListItemTitle class="text-capitalize">{{ fontSize }}</VListItemTitle>
-      </VListItem>
+      />
     </VList>
   </VMenu>
 </template>
@@ -37,9 +33,3 @@ const toggle = (fontSize: string) =>
     ? props.editor.chain().focus().unsetFontSize().run()
     : props.editor.chain().focus().setFontSize(fontSize).run();
 </script>
-
-<style lang="scss" scoped>
-.v-list-item + .v-list-item {
-  margin-top: 0.125rem;
-}
-</style>

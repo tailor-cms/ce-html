@@ -10,15 +10,12 @@
         dropdown
       />
     </template>
-    <VList class="pa-1" density="compact">
+    <VList density="compact" lines="1" nav>
       <VListItem
         v-for="fontFamily in FONT_FAMILIES"
         :key="fontFamily"
         :active="editor.isActive('textStyle', { fontFamily })"
         :disabled="!editor.can().chain().focus().setFontFamily().run()"
-        class="px-2"
-        min-height="36"
-        rounded="sm"
         @click="toggle(fontFamily)"
       >
         <VListItemTitle :style="`font-family: ${fontFamily}`">
@@ -40,9 +37,3 @@ const toggle = (fontFamily: string) =>
     ? props.editor.chain().focus().unsetFontFamily().run()
     : props.editor.chain().focus().setFontFamily(fontFamily).run();
 </script>
-
-<style lang="scss" scoped>
-.v-list-item + .v-list-item {
-  margin-top: 0.125rem;
-}
-</style>

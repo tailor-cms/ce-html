@@ -1,7 +1,7 @@
 <template>
-  <VBtnGroup density="compact" variant="text">
+  <div class="editor-toolbar">
     <template v-for="(group, i) in toolbarItems" :key="i">
-      <VDivider v-if="i" class="mx-1" vertical />
+      <VDivider v-if="i" vertical />
       <!-- @vue-ignore -->
       <template v-for="(it, j) in group" :key="j">
         <component
@@ -21,7 +21,7 @@
         />
       </template>
     </template>
-  </VBtnGroup>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -170,13 +170,13 @@ const toolbarItems: (Action | Component)[][] = [
 </script>
 
 <style lang="scss" scoped>
-.v-btn-group {
+.editor-toolbar {
   display: flex;
   flex-wrap: wrap;
-  height: unset;
+  gap: 0.125rem;
 }
 
-:deep(.v-btn + .v-btn) {
-  margin-left: 0.125rem;
+.editor-toolbar > .v-divider {
+  margin: 0.25rem 0.125rem;
 }
 </style>
