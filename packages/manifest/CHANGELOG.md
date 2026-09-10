@@ -1,5 +1,11 @@
 # @tailor-cms/ce-html-manifest
 
+## 2.1.2
+
+### Patch Changes
+
+- Fix lockfile.
+
 ## 2.1.1
 
 ### Patch Changes

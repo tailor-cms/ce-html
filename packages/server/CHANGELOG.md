@@ -1,5 +1,13 @@
 # @tailor-cms/ce-html-server
 
+## 2.1.2
+
+### Patch Changes
+
+- Fix lockfile.
+- Updated dependencies
+  - @tailor-cms/ce-html-manifest@2.1.2
+
 ## 2.1.1
 
 ### Patch Changes
