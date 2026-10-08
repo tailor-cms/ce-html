@@ -1,7 +1,9 @@
 <template>
+  <!-- Above the in-card toolbar (z-index 2), which can overlap a top block -->
   <BubbleMenu
     :editor="editor"
     :should-show="() => editor.isEditable && editor.isActive('image')"
+    style="z-index: 3"
   >
     <VCard class="pa-1" rounded="lg">
       <div class="image-toolbar">
