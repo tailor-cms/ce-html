@@ -15,9 +15,8 @@ export default defineConfig({
     cssCodeSplit: false,
     lib: {
       entry: resolve(import.meta.dirname, './src/index.ts'),
-      name: 'TceDisplay',
       fileName: 'index',
-      formats: ['es', 'cjs'],
+      formats: ['es'],
     },
     rolldownOptions: {
       // make sure to externalize deps that shouldn't be bundled
