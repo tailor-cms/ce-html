@@ -1,16 +1,19 @@
 <template>
-  <VMenu>
+  <VMenu :submenu="inMenu">
     <template #activator="{ props: menu }">
-      <IconButton
+      <ToolbarButton
         v-bind="menu"
         :active="!!value"
         :disabled="disabled"
         :icon="icon"
+        :in-menu="inMenu"
         :label="label"
       >
-        <VIcon size="20">{{ icon }}</VIcon>
-        <VIcon :color="currentColor" size="20">mdi-color-helper</VIcon>
-      </IconButton>
+        <template #default="{ iconSize }">
+          <VIcon :size="iconSize">{{ icon }}</VIcon>
+          <VIcon :color="currentColor" :size="iconSize">mdi-color-helper</VIcon>
+        </template>
+      </ToolbarButton>
     </template>
     <VSheet class="pa-2" elevation="3">
       <div v-for="(colorRow, i) in COLORS" :key="i" class="d-flex">
@@ -49,13 +52,14 @@
 import { computed } from 'vue';
 
 import { COLORS } from './constants';
-import IconButton from '../IconButton.vue';
+import ToolbarButton from '../ToolbarButton.vue';
 
 const props = defineProps<{
   disabled: boolean;
   value: string;
   label: string;
   icon: string;
+  inMenu?: boolean;
 }>();
 const emit = defineEmits(['set', 'unset']);
 

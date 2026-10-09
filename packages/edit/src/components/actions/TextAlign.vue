@@ -1,9 +1,10 @@
 <template>
-  <VMenu>
+  <VMenu :submenu="inMenu">
     <template #activator="{ props: menu }">
-      <IconButton
+      <ToolbarButton
         v-bind="menu"
         :disabled="!editor.can().chain().focus().setTextAlign('left').run()"
+        :in-menu="inMenu"
         icon="mdi-format-align-justify"
         label="Text align"
         dropdown
@@ -31,9 +32,9 @@
 </template>
 
 <script setup lang="ts">
-import IconButton from '../IconButton.vue';
+import ToolbarButton from '../ToolbarButton.vue';
 
-defineProps<{ editor: any }>();
+defineProps<{ editor: any; inMenu?: boolean }>();
 
 const alignments = ['left', 'center', 'right', 'justify'];
 </script>
