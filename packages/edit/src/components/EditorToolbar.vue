@@ -1,12 +1,9 @@
-<!-- eslint-disable vuejs-accessibility/no-static-element-interactions -->
 <template>
   <div
     ref="root"
     aria-label="Text formatting"
     class="editor-toolbar"
-    role="toolbar"
-    @focusin="onFocusin"
-    @keydown="onKeydown"
+    role="group"
   >
     <ToolbarGroup
       v-for="(group, i) in groups"
@@ -44,14 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  computed,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  watch,
-} from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 
 import AddImage from './actions/AddImage.vue';
 import AddLink from './actions/AddLink.vue';
@@ -226,54 +216,12 @@ const layout = () => {
   visibleCount.value = count;
 };
 
-// Roving tabindex (WAI-ARIA toolbar pattern): the toolbar is a single tab
-// stop and arrow keys move focus between its buttons.
-let currentBtn: HTMLElement | null = null;
-
-const getButtons = () =>
-  Array.from(root.value?.querySelectorAll('button') ?? []).filter(
-    (it) => !it.disabled && it.offsetParent,
-  );
-
-const syncTabindex = () => {
-  const buttons = getButtons();
-  if (!currentBtn || !buttons.includes(currentBtn as HTMLButtonElement)) {
-    currentBtn = buttons[0] ?? null;
-  }
-  root.value?.querySelectorAll('button').forEach((it) => {
-    it.setAttribute('tabindex', it === currentBtn ? '0' : '-1');
-  });
-};
-
-const onFocusin = (e: FocusEvent) => {
-  if (!(e.target instanceof HTMLButtonElement)) return;
-  currentBtn = e.target;
-  syncTabindex();
-};
-
-const onKeydown = (e: KeyboardEvent) => {
-  const buttons = getButtons();
-  const index = buttons.indexOf(document.activeElement as HTMLButtonElement);
-  if (index < 0) return;
-  const last = buttons.length - 1;
-  const target = {
-    ArrowRight: index === last ? 0 : index + 1,
-    ArrowLeft: index === 0 ? last : index - 1,
-    Home: 0,
-    End: last,
-  }[e.key];
-  if (target === undefined) return;
-  e.preventDefault();
-  buttons[target].focus();
-};
-
 // Every toolbar action runs an editor command, which dispatches a
 // transaction; focus changes do too, but are not actions.
 const onTransaction = ({ transaction }: { transaction: any }) => {
   if (!transaction.getMeta('focus') && !transaction.getMeta('blur')) {
     isOverflowOpen.value = false;
   }
-  nextTick(syncTabindex);
 };
 
 watch(
@@ -285,13 +233,10 @@ watch(
   { immediate: true },
 );
 
-watch(visibleCount, () => nextTick(syncTabindex), { flush: 'post' });
-
 let resizeObserver: ResizeObserver | null = null;
 
 onMounted(() => {
   layout();
-  syncTabindex();
   resizeObserver = new ResizeObserver(() => layout());
   if (root.value) resizeObserver.observe(root.value);
 });
