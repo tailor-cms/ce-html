@@ -1,7 +1,12 @@
 <template>
-  <VMenu v-model="show">
+  <VMenu v-model="show" :submenu="inMenu">
     <template #activator="{ props: menu }">
-      <IconButton v-bind="menu" icon="mdi-table-plus" label="Add table" />
+      <ToolbarButton
+        :in-menu="inMenu"
+        v-bind="menu"
+        icon="mdi-table-plus"
+        label="Add table"
+      />
     </template>
     <VSheet class="pa-2 text-center" elevation="3">
       <VCheckbox
@@ -21,6 +26,7 @@
           :active="selectedSize.rows >= rows && selectedSize.cols >= cols"
           class="cell-btn"
           color="secondary"
+          rounded="md"
           size="24"
           variant="tonal"
           @click="insertTable(rows, cols)"
@@ -38,12 +44,12 @@
 <script setup lang="ts">
 import { reactive, ref, watch } from 'vue';
 
-import IconButton from '../IconButton.vue';
+import ToolbarButton from '../ToolbarButton.vue';
 
 const INIT_SIZE = 5;
 const MAX_SIZE = 10;
 
-const props = defineProps<{ editor: any }>();
+const props = defineProps<{ editor: any; inMenu?: boolean }>();
 
 const show = ref(false);
 const withHeaderRow = ref(false);
