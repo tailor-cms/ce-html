@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 
 import AddImage from './actions/AddImage.vue';
 import AddLink from './actions/AddLink.vue';
@@ -224,18 +224,10 @@ const onTransaction = ({ transaction }: { transaction: any }) => {
   }
 };
 
-watch(
-  () => props.editor,
-  (editor, prevEditor) => {
-    prevEditor?.off('transaction', onTransaction);
-    editor?.on('transaction', onTransaction);
-  },
-  { immediate: true },
-);
-
 let resizeObserver: ResizeObserver | null = null;
 
 onMounted(() => {
+  props.editor.on('transaction', onTransaction);
   layout();
   resizeObserver = new ResizeObserver(() => layout());
   if (root.value) resizeObserver.observe(root.value);
@@ -243,7 +235,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   resizeObserver?.disconnect();
-  props.editor?.off('transaction', onTransaction);
+  props.editor.off('transaction', onTransaction);
 });
 </script>
 
