@@ -14,8 +14,8 @@
       :editor="editor"
       :items="group"
     />
-    <!-- Closing on content click would also close submenus as they open;
-      the menu closes once an action runs instead (see onTransaction) -->
+    <!-- Closed by onTransaction; closing on content click would also close
+      submenus as they open -->
     <VMenu
       v-if="hiddenGroups.length"
       v-model="isOverflowOpen"
@@ -42,6 +42,7 @@
 
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { drop, findLast, map, range, sum, take } from 'lodash-es';
 
 import AddImage from './actions/AddImage.vue';
 import AddLink from './actions/AddLink.vue';
@@ -165,8 +166,6 @@ const groups: ToolbarItem[][] = [
       action: ['toggleCodeBlock'],
       icon: 'code-block-tags',
     },
-  ],
-  [
     {
       label: 'Clear formatting',
       action: ['unsetAllMarks'],
@@ -175,49 +174,27 @@ const groups: ToolbarItem[][] = [
   ],
 ];
 
-// Matches the ToolbarButton default size.
-const MORE_BTN_WIDTH = 30;
+// ToolbarButton default size plus spacing before it
+const MORE_BTN_WIDTH = 34;
 
 const root = ref<HTMLElement>();
 const groupEls: HTMLElement[] = [];
-// Last measured width per group; hidden groups keep their cached width.
-const groupWidths: number[] = [];
 const isOverflowOpen = ref(false);
-// Groups from this index on are moved to the overflow menu.
+
+// Groups from this index on are moved to the overflow menu
 const visibleCount = ref(groups.length);
-const hiddenGroups = computed(() => groups.slice(visibleCount.value));
+const hiddenGroups = computed(() => drop(groups, visibleCount.value));
 
-const getWidth = (count: number, gap: number) =>
-  groupWidths.slice(0, count).reduce((sum, it) => sum + it, 0) +
-  gap * Math.max(count - 1, 0);
-
-const countHiddenItems = (count: number) => groups.slice(count).flat().length;
-
-const layout = () => {
-  const el = root.value;
-  if (!el) return;
-  groupEls.forEach((it, i) => {
-    if (it?.offsetWidth) groupWidths[i] = it.offsetWidth;
-  });
-  const gap = parseFloat(getComputedStyle(el).columnGap) || 0;
-  const available = el.clientWidth;
-  let count = groups.length;
-  if (getWidth(count, gap) > available) {
-    const budget = available - MORE_BTN_WIDTH - gap;
-    // Groups move to the overflow menu from right to left; a menu with a
-    // single item would just swap it for the more button.
-    while (
-      count > 0 &&
-      (getWidth(count, gap) > budget || countHiddenItems(count) < 2)
-    ) {
-      count--;
-    }
-  }
-  visibleCount.value = count;
+// Hides groups right to left until the rest fit beside the more button
+const getVisibleCount = (groupWidths: number[], width: number) => {
+  const widthOf = (count: number) => sum(take(groupWidths, count));
+  if (widthOf(groups.length) <= width) return groups.length;
+  const canShow = (count: number) => widthOf(count) <= width - MORE_BTN_WIDTH;
+  return findLast(range(groups.length), canShow) ?? 0;
 };
 
-// Every toolbar action runs an editor command, which dispatches a
-// transaction; focus changes do too, but are not actions.
+// Closes the menu once a command runs; focus changes dispatch
+// transactions too, but aren't actions
 const onTransaction = ({ transaction }: { transaction: any }) => {
   if (!transaction.getMeta('focus') && !transaction.getMeta('blur')) {
     isOverflowOpen.value = false;
@@ -228,9 +205,12 @@ let resizeObserver: ResizeObserver | null = null;
 
 onMounted(() => {
   props.editor.on('transaction', onTransaction);
-  layout();
-  resizeObserver = new ResizeObserver(() => layout());
-  if (root.value) resizeObserver.observe(root.value);
+  // Buttons have fixed sizes, so group widths are measured once
+  const groupWidths = map(groupEls, 'offsetWidth');
+  resizeObserver = new ResizeObserver(([entry]) => {
+    visibleCount.value = getVisibleCount(groupWidths, entry.contentRect.width);
+  });
+  resizeObserver.observe(root.value!);
 });
 
 onBeforeUnmount(() => {
@@ -245,7 +225,6 @@ onBeforeUnmount(() => {
   flex: 1 1 0%;
   align-items: center;
   justify-content: flex-start;
-  gap: 0.125rem;
   min-width: 0;
 }
 
@@ -253,7 +232,8 @@ onBeforeUnmount(() => {
   content: '';
   align-self: stretch;
   width: 1px;
-  margin: 0.25rem 0.125rem;
+  // Group spacing lives here so it's part of the measured group widths
+  margin: 0.25rem 0.125rem 0.25rem 0.25rem;
   background: rgba(var(--v-border-color), var(--v-border-opacity));
 }
 </style>
