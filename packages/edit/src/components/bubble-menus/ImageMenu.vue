@@ -1,11 +1,13 @@
 <template>
+  <!-- Above the in-card toolbar (z-index 2), which can overlap a top block -->
   <BubbleMenu
     :editor="editor"
     :should-show="() => editor.isEditable && editor.isActive('image')"
+    style="z-index: 3"
   >
     <VCard class="pa-1" rounded="lg">
       <div class="image-toolbar">
-        <IconButton
+        <ToolbarButton
           v-for="{ width, label, icon } in sizes"
           :key="label"
           :active="editor.getAttributes('image').width === width"
@@ -21,7 +23,7 @@
 <script setup lang="ts">
 import { BubbleMenu } from '@tiptap/vue-3/menus';
 
-import IconButton from '../IconButton.vue';
+import ToolbarButton from '../ToolbarButton.vue';
 
 const sizes = [
   { width: '25%', label: 'Small', icon: 'mdi-size-s' },

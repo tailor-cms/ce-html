@@ -1,10 +1,11 @@
 <template>
-  <VMenu v-model="show" :close-on-content-click="false">
+  <VMenu v-model="show" :close-on-content-click="false" :submenu="inMenu">
     <template #activator="{ props: menu }">
-      <IconButton
+      <ToolbarButton
         v-bind="menu"
         :active="editor.isActive('image')"
         :disabled="!editor.can().chain().focus().setImage().run()"
+        :in-menu="inMenu"
         icon="mdi-image-plus"
         label="Add image"
       />
@@ -38,10 +39,10 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
-import IconButton from '../IconButton.vue';
 import { rules } from './rules';
+import ToolbarButton from '../ToolbarButton.vue';
 
-const props = defineProps<{ editor: any }>();
+const props = defineProps<{ editor: any; inMenu?: boolean }>();
 
 const form = ref();
 

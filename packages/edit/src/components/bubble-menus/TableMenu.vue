@@ -1,55 +1,57 @@
 <template>
+  <!-- Above the in-card toolbar (z-index 2), which can overlap a top block -->
   <BubbleMenu
     :editor="editor"
     :should-show="() => editor.isEditable && editor.isActive('table')"
+    style="z-index: 3"
   >
     <VCard class="pa-1" rounded="lg">
       <div class="table-toolbar">
-        <IconButton
+        <ToolbarButton
           icon="mdi-table-column-plus-before"
           label="Add column before"
           @click="editor.chain().focus().addColumnBefore().run()"
         />
-        <IconButton
+        <ToolbarButton
           icon="mdi-table-column-plus-after"
           label="Add column after"
           @click="editor.chain().focus().addColumnAfter().run()"
         />
-        <IconButton
+        <ToolbarButton
           icon="mdi-table-column-remove"
           label="Remove column"
           @click="editor.chain().focus().deleteColumn().run()"
         />
         <VDivider class="mx-1" vertical />
-        <IconButton
+        <ToolbarButton
           icon="mdi-table-row-plus-before"
           label="Add row before"
           @click="editor.chain().focus().addRowBefore().run()"
         />
-        <IconButton
+        <ToolbarButton
           icon="mdi-table-row-plus-after"
           label="Add row after"
           @click="editor.chain().focus().addRowAfter().run()"
         />
-        <IconButton
+        <ToolbarButton
           icon="mdi-table-row-remove"
           label="Remove row"
           @click="editor.chain().focus().deleteRow().run()"
         />
         <VDivider class="mx-1" vertical />
-        <IconButton
+        <ToolbarButton
           icon="mdi-table-remove"
           label="Remove table"
           @click="editor.chain().focus().deleteTable().run()"
         />
         <VDivider class="mx-1" vertical />
-        <IconButton
+        <ToolbarButton
           :disabled="!editor.can().chain().focus().mergeCells().run()"
           icon="mdi-table-merge-cells"
           label="Merge cells"
           @click="editor.chain().focus().mergeCells().run()"
         />
-        <IconButton
+        <ToolbarButton
           :disabled="!editor.can().chain().focus().splitCell().run()"
           icon="mdi-table-split-cell"
           label="Split cell"
@@ -63,7 +65,7 @@
 <script setup lang="ts">
 import { BubbleMenu } from '@tiptap/vue-3/menus';
 
-import IconButton from '../IconButton.vue';
+import ToolbarButton from '../ToolbarButton.vue';
 
 defineProps<{ editor: any }>();
 </script>

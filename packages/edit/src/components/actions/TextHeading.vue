@@ -1,10 +1,11 @@
 <template>
-  <VMenu>
+  <VMenu :submenu="inMenu">
     <template #activator="{ props: menu }">
-      <IconButton
+      <ToolbarButton
         v-bind="menu"
         :active="editor.isActive({ level: /\d+/ })"
         :icon="`mdi-format-header-${editor.getAttributes('heading').level ?? 'pound'}`"
+        :in-menu="inMenu"
         label="Headings"
         dropdown
       />
@@ -27,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import IconButton from '../IconButton.vue';
+import ToolbarButton from '../ToolbarButton.vue';
 
-defineProps<{ editor: any }>();
+defineProps<{ editor: any; inMenu?: boolean }>();
 </script>

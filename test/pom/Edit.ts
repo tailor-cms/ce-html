@@ -3,54 +3,55 @@ import { pom } from '@tailor-cms/cek-e2e';
 
 import { ImageMenu } from './bubble-menus/ImageMenu';
 import { TableMenu } from './bubble-menus/TableMenu';
+import { ToolbarControl } from './ToolbarControl';
 
 export class Edit extends pom.EditPanel {
   readonly editorContent: Locator;
   readonly placeholder: Locator;
-  readonly boldBtn: Locator;
-  readonly italicBtn: Locator;
-  readonly underlineBtn: Locator;
-  readonly strikeBtn: Locator;
-  readonly undoBtn: Locator;
-  readonly redoBtn: Locator;
-  readonly orderedListBtn: Locator;
-  readonly bulletListBtn: Locator;
-  readonly superscriptBtn: Locator;
-  readonly subscriptBtn: Locator;
-  readonly blockquoteBtn: Locator;
-  readonly codeBtn: Locator;
-  readonly codeBlockBtn: Locator;
-  readonly horizontalRuleBtn: Locator;
-  readonly clearFormattingBtn: Locator;
-  readonly addLinkBtn: Locator;
+  readonly boldBtn: ToolbarControl;
+  readonly italicBtn: ToolbarControl;
+  readonly underlineBtn: ToolbarControl;
+  readonly strikeBtn: ToolbarControl;
+  readonly undoBtn: ToolbarControl;
+  readonly redoBtn: ToolbarControl;
+  readonly orderedListBtn: ToolbarControl;
+  readonly bulletListBtn: ToolbarControl;
+  readonly superscriptBtn: ToolbarControl;
+  readonly subscriptBtn: ToolbarControl;
+  readonly blockquoteBtn: ToolbarControl;
+  readonly codeBtn: ToolbarControl;
+  readonly codeBlockBtn: ToolbarControl;
+  readonly horizontalRuleBtn: ToolbarControl;
+  readonly clearFormattingBtn: ToolbarControl;
+  readonly addLinkBtn: ToolbarControl;
   readonly addLinkMenu: Locator;
   readonly linkTextInput: Locator;
   readonly linkUrlInput: Locator;
   readonly linkConfirmBtn: Locator;
   readonly linkUnlinkBtn: Locator;
-  readonly addImageBtn: Locator;
+  readonly addImageBtn: ToolbarControl;
   readonly addImageMenu: Locator;
   readonly imageTitleInput: Locator;
   readonly imageUrlInput: Locator;
   readonly imageConfirmBtn: Locator;
-  readonly addTableBtn: Locator;
+  readonly addTableBtn: ToolbarControl;
   readonly addTableMenu: Locator;
   readonly tableHeaderCheckbox: Locator;
   readonly tableCellBtns: Locator;
-  readonly addTooltipBtn: Locator;
+  readonly addTooltipBtn: ToolbarControl;
   readonly addTooltipMenu: Locator;
   readonly tooltipTextInput: Locator;
   readonly tooltipInput: Locator;
   readonly tooltipConfirmBtn: Locator;
   readonly tooltipRemoveBtn: Locator;
-  readonly headingBtn: Locator;
-  readonly fontSizeBtn: Locator;
-  readonly fontFamilyBtn: Locator;
-  readonly textAlignBtn: Locator;
-  readonly textColorBtn: Locator;
-  readonly backgroundColorBtn: Locator;
-  readonly increaseIndentBtn: Locator;
-  readonly decreaseIndentBtn: Locator;
+  readonly headingBtn: ToolbarControl;
+  readonly fontSizeBtn: ToolbarControl;
+  readonly fontFamilyBtn: ToolbarControl;
+  readonly textAlignBtn: ToolbarControl;
+  readonly textColorBtn: ToolbarControl;
+  readonly backgroundColorBtn: ToolbarControl;
+  readonly increaseIndentBtn: ToolbarControl;
+  readonly decreaseIndentBtn: ToolbarControl;
   readonly imageMenu: ImageMenu;
   readonly tableMenu: TableMenu;
 
@@ -58,42 +59,22 @@ export class Edit extends pom.EditPanel {
     super(page);
     this.editorContent = this.editor.locator('.tiptap');
     this.placeholder = this.editorContent.locator('p.is-editor-empty').first();
-    this.boldBtn = this.topToolbar.getByRole('button', { name: 'Bold' });
-    this.italicBtn = this.topToolbar.getByRole('button', { name: 'Italic' });
-    this.underlineBtn = this.topToolbar.getByRole('button', {
-      name: 'Underline',
-    });
-    this.strikeBtn = this.topToolbar.getByRole('button', {
-      name: 'Strikethrough',
-    });
-    this.undoBtn = this.topToolbar.getByRole('button', { name: 'Undo' });
-    this.redoBtn = this.topToolbar.getByRole('button', { name: 'Redo' });
-    this.orderedListBtn = this.topToolbar.getByRole('button', {
-      name: 'Numbered list',
-    });
-    this.bulletListBtn = this.topToolbar.getByRole('button', {
-      name: 'Bullet list',
-    });
-    this.superscriptBtn = this.topToolbar.getByRole('button', {
-      name: 'Superscript',
-    });
-    this.subscriptBtn = this.topToolbar.getByRole('button', {
-      name: 'Subscript',
-    });
-    this.blockquoteBtn = this.topToolbar.getByRole('button', { name: 'Quote' });
-    this.codeBtn = this.topToolbar
-      .getByRole('button', { name: 'Code' })
-      .first();
-    this.codeBlockBtn = this.topToolbar.getByRole('button', {
-      name: 'Code block',
-    });
-    this.horizontalRuleBtn = this.topToolbar.getByRole('button', {
-      name: 'Horizontal line',
-    });
-    this.clearFormattingBtn = this.topToolbar.getByRole('button', {
-      name: 'Clear formatting',
-    });
-    this.addLinkBtn = this.topToolbar.getByRole('button', { name: 'Add link' });
+    this.boldBtn = this.control('Bold');
+    this.italicBtn = this.control('Italic');
+    this.underlineBtn = this.control('Underline');
+    this.strikeBtn = this.control('Strikethrough');
+    this.undoBtn = this.control('Undo');
+    this.redoBtn = this.control('Redo');
+    this.orderedListBtn = this.control('Numbered list');
+    this.bulletListBtn = this.control('Bullet list');
+    this.superscriptBtn = this.control('Superscript');
+    this.subscriptBtn = this.control('Subscript');
+    this.blockquoteBtn = this.control('Quote');
+    this.codeBtn = this.control('Code');
+    this.codeBlockBtn = this.control('Code block');
+    this.horizontalRuleBtn = this.control('Horizontal line');
+    this.clearFormattingBtn = this.control('Clear formatting');
+    this.addLinkBtn = this.control('Add link');
     this.addLinkMenu = this.el
       .locator('.v-overlay.v-menu')
       .filter({ hasText: 'Url' });
@@ -105,9 +86,7 @@ export class Edit extends pom.EditPanel {
     this.linkUnlinkBtn = this.addLinkMenu.getByRole('button', {
       name: 'Unlink',
     });
-    this.addImageBtn = this.topToolbar.getByRole('button', {
-      name: 'Add image',
-    });
+    this.addImageBtn = this.control('Add image');
     this.addImageMenu = this.el
       .locator('.v-overlay.v-menu')
       .filter({ hasText: 'Title' });
@@ -116,9 +95,7 @@ export class Edit extends pom.EditPanel {
     this.imageConfirmBtn = this.addImageMenu.getByRole('button', {
       name: 'Confirm',
     });
-    this.addTableBtn = this.topToolbar.getByRole('button', {
-      name: 'Add table',
-    });
+    this.addTableBtn = this.control('Add table');
     this.addTableMenu = this.el
       .locator('.v-overlay.v-menu')
       .filter({ hasText: 'Add header' });
@@ -126,12 +103,11 @@ export class Edit extends pom.EditPanel {
       name: 'Add header',
     });
     this.tableCellBtns = this.addTableMenu.locator('.cell-btn');
-    this.addTooltipBtn = this.topToolbar.getByRole('button', {
-      name: 'Add tooltip',
-    });
+    this.addTooltipBtn = this.control('Add tooltip');
+    // The overflow menu's "Add tooltip" item would match by text alone
     this.addTooltipMenu = this.el
       .locator('.v-overlay.v-menu')
-      .filter({ hasText: 'Tooltip' });
+      .filter({ has: this.el.getByLabel('Tooltip', { exact: true }) });
     this.tooltipTextInput = this.addTooltipMenu.getByLabel('Text');
     this.tooltipInput = this.addTooltipMenu.getByLabel('Tooltip');
     this.tooltipConfirmBtn = this.addTooltipMenu.getByRole('button', {
@@ -140,35 +116,23 @@ export class Edit extends pom.EditPanel {
     this.tooltipRemoveBtn = this.addTooltipMenu.getByRole('button', {
       name: 'Remove',
     });
-    this.headingBtn = this.topToolbar.getByRole('button', {
-      name: 'Headings',
-    });
-    this.fontSizeBtn = this.topToolbar.getByRole('button', {
-      name: 'Font size',
-    });
-    this.fontFamilyBtn = this.topToolbar.getByRole('button', {
-      name: 'Font family',
-    });
-    this.textAlignBtn = this.topToolbar.getByRole('button', {
-      name: 'Text align',
-    });
-    this.textColorBtn = this.topToolbar.getByRole('button', {
-      name: 'Text color',
-    });
-    this.backgroundColorBtn = this.topToolbar.getByRole('button', {
-      name: 'Background color',
-    });
-    this.increaseIndentBtn = this.topToolbar.getByRole('button', {
-      name: 'Increase indent',
-    });
-    this.decreaseIndentBtn = this.topToolbar.getByRole('button', {
-      name: 'Decrease indent',
-    });
+    this.headingBtn = this.control('Headings');
+    this.fontSizeBtn = this.control('Font size');
+    this.fontFamilyBtn = this.control('Font family');
+    this.textAlignBtn = this.control('Text align');
+    this.textColorBtn = this.control('Text color');
+    this.backgroundColorBtn = this.control('Background color');
+    this.increaseIndentBtn = this.control('Increase indent');
+    this.decreaseIndentBtn = this.control('Decrease indent');
     this.imageMenu = new ImageMenu(this.el);
     this.tableMenu = new TableMenu(this.el);
   }
 
-  get allToolbarButtons(): Locator[] {
+  private control(name: string): ToolbarControl {
+    return new ToolbarControl(this.el, this.topToolbar, name);
+  }
+
+  get allToolbarButtons(): ToolbarControl[] {
     return [
       this.undoBtn,
       this.redoBtn,
@@ -201,13 +165,15 @@ export class Edit extends pom.EditPanel {
   }
 
   private openMenuList() {
-    return this.el.locator('.v-overlay--active .v-list');
+    // The overflow menu stays open behind submenus; the newest sorts last
+    return this.el.locator('.v-overlay--active .v-list').last();
   }
 
   private openColorSheet() {
     return this.el
       .locator('.v-overlay--active .v-sheet')
-      .filter({ hasText: 'Reset' });
+      .filter({ hasText: 'Reset' })
+      .last();
   }
 
   async selectHeading(level: 1 | 2 | 3 | 4 | 5 | 6 | 'Normal') {

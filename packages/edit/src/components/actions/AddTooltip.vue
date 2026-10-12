@@ -1,10 +1,11 @@
 <template>
-  <VMenu v-model="show" :close-on-content-click="false">
+  <VMenu v-model="show" :close-on-content-click="false" :submenu="inMenu">
     <template #activator="{ props: menu }">
-      <IconButton
+      <ToolbarButton
         v-bind="menu"
         :active="editor.isActive('tooltip')"
         :disabled="!editor.can().chain().focus().setTooltip().run()"
+        :in-menu="inMenu"
         icon="mdi-tooltip-text"
         label="Add tooltip"
       />
@@ -45,10 +46,10 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
-import IconButton from '../IconButton.vue';
 import { rules } from './rules';
+import ToolbarButton from '../ToolbarButton.vue';
 
-const props = defineProps<{ editor: any }>();
+const props = defineProps<{ editor: any; inMenu?: boolean }>();
 
 const form = ref();
 

@@ -31,7 +31,7 @@ test.describe('Initial render', () => {
     const edit = new Edit(page);
     await edit.focus();
     await expect(edit.topToolbar).toBeVisible();
-    await expect(edit.boldBtn).toBeVisible();
+    await expect(await edit.boldBtn.reveal()).toBeVisible();
   });
 });
 
@@ -39,7 +39,9 @@ test.describe('Toolbar config', () => {
   test('All expected toolbar buttons are rendered', async ({ page }) => {
     const edit = new Edit(page);
     await edit.focus();
-    for (const btn of edit.allToolbarButtons) await expect(btn).toBeVisible();
+    for (const control of edit.allToolbarButtons) {
+      await expect(await control.reveal()).toBeVisible();
+    }
   });
 });
 
@@ -142,12 +144,12 @@ test.describe('Toolbar actions', () => {
 
   test('Bold toggles strong mark and active state', async ({ page }) => {
     const edit = new Edit(page);
-    await expect(edit.boldBtn).not.toHaveClass(/v-btn--active/);
+    await expect(edit.boldBtn.toolbarButton).not.toHaveClass(/v-btn--active/);
     await edit.boldBtn.click();
     await expect(edit.editorContent.locator('strong')).toHaveText(
       'Sample text',
     );
-    await expect(edit.boldBtn).toHaveClass(/v-btn--active/);
+    await expect(edit.boldBtn.toolbarButton).toHaveClass(/v-btn--active/);
   });
 
   test('Bullet list wraps selection in ul', async ({ page }) => {

@@ -1,10 +1,11 @@
 <template>
-  <VMenu>
+  <VMenu :submenu="inMenu">
     <template #activator="{ props: menu }">
-      <IconButton
+      <ToolbarButton
         v-bind="menu"
         :active="!!editor.getAttributes('textStyle').fontSize"
         :disabled="!editor.can().chain().focus().setFontSize().run()"
+        :in-menu="inMenu"
         icon="mdi-format-size"
         label="Font size"
         dropdown
@@ -24,9 +25,9 @@
 
 <script setup lang="ts">
 import { FONT_SIZES } from './constants';
-import IconButton from '../IconButton.vue';
+import ToolbarButton from '../ToolbarButton.vue';
 
-const props = defineProps<{ editor: any }>();
+const props = defineProps<{ editor: any; inMenu?: boolean }>();
 
 const toggle = (fontSize: string) =>
   props.editor.isActive({ fontSize })

@@ -1,6 +1,7 @@
 <template>
   <ColorPicker
     :disabled="!editor.can().chain().focus().setBackgroundColor().run()"
+    :in-menu="inMenu"
     :value="editor.getAttributes('textStyle').backgroundColor"
     icon="mdi-format-color-highlight"
     label="Background color"
@@ -14,5 +15,6 @@ import ColorPicker from './ColorPicker.vue';
 
 defineProps<{
   editor: any;
+  inMenu?: boolean;
 }>();
 </script>
