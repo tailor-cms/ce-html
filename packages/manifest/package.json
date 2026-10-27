@@ -32,10 +32,10 @@
     "prepublish": "pnpm build"
   },
   "dependencies": {
-    "@tailor-cms/cek-common": "3.0.0"
+    "@tailor-cms/cek-common": "3.0.2"
   },
   "devDependencies": {
-    "@tailor-cms/eslint-config": "3.0.0",
+    "@tailor-cms/eslint-config": "3.0.2",
     "tsdown": "^0.23.1",
     "typescript": "^6.0.3"
   },
