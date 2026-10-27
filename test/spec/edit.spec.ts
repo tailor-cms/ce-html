@@ -5,6 +5,19 @@ import { Edit } from '../pom';
 
 const ELEMENT_ID = 'test-html-edit';
 const IMAGE_URL = 'https://picsum.photos/200';
+// Resolved to a storage URL on read; the file itself doesn't need to exist
+const STORAGE_URI = 'storage://repository/assets/seed___photo.png';
+const ASSET_ID = '2f1c9a4e-7b3d-4e8a-9c6f-1d2e3f4a5b6c';
+// 1x1 transparent PNG
+const PNG = Buffer.from(
+  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
+  'base64',
+);
+
+const getElementData = async () => {
+  const { data } = await elementClient.get(ELEMENT_ID);
+  return data.element.data;
+};
 
 test.beforeEach(async ({ page }) => {
   await elementClient.reset(ELEMENT_ID);
@@ -358,28 +371,77 @@ test.describe('Link menu', () => {
   });
 });
 
-test.describe('Add image menu', () => {
+test.describe('Add image', () => {
   test('Inserts an image from a URL', async ({ page }) => {
     const edit = new Edit(page);
     await edit.focus();
     await edit.addImageBtn.click();
-    await expect(edit.addImageMenu).toBeVisible();
-    await edit.imageTitleInput.fill('Sunset');
+    await expect(edit.imagePicker).toBeVisible();
+    await edit.imagePickerUrlTab.click();
     await edit.imageUrlInput.fill(IMAGE_URL);
-    await edit.imageConfirmBtn.click();
-    const img = edit.editorContent.locator('img[src]');
+    await edit.imageTitleInput.fill('Sunset');
+    await edit.imageImportBtn.click();
+    await expect(edit.imagePicker).not.toBeVisible();
+    const img = edit.editorContent.locator('img');
     await expect(img).toHaveAttribute('src', IMAGE_URL);
     await expect(img).toHaveAttribute('alt', 'Sunset');
-    await expect(img).toHaveAttribute('title', 'Sunset');
+    await expect(img).not.toHaveAttribute('data-asset-id');
   });
 
-  test('Requires title and url', async ({ page }) => {
+  test('Requires a URL', async ({ page }) => {
     const edit = new Edit(page);
     await edit.focus();
     await edit.addImageBtn.click();
-    await edit.imageConfirmBtn.click();
-    await expect(edit.addImageMenu).toBeVisible();
-    await expect(edit.editorContent.locator('img[src]')).toHaveCount(0);
+    await edit.imagePickerUrlTab.click();
+    await edit.imageImportBtn.click();
+    await expect(edit.imagePicker).toContainText('URL is required');
+    await expect(edit.editorContent.locator('img')).toHaveCount(0);
+  });
+
+  test('Stores an uploaded image as an asset reference', async ({ page }) => {
+    const edit = new Edit(page);
+    await edit.focus();
+    await edit.addImageBtn.click();
+    await edit.imageFileInput.setInputFiles({
+      name: 'photo.png',
+      mimeType: 'image/png',
+      buffer: PNG,
+    });
+    await expect(edit.imagePicker).not.toBeVisible();
+    const img = edit.editorContent.locator('img[data-asset-id]');
+    await expect(img).toHaveAttribute('alt', 'photo.png');
+    await expect(img).not.toHaveAttribute('src', /^storage:\/\//);
+    await expect
+      .poll(async () => Object.values((await getElementData()).assets ?? {}))
+      .toEqual([expect.stringMatching(/^storage:\/\//)]);
+    const { content, images } = await getElementData();
+    expect(content).toContain('src="storage://');
+    expect(images).toBeUndefined();
+  });
+});
+
+test.describe('Library images', () => {
+  test.beforeEach(async ({ page }) => {
+    await elementClient.update(ELEMENT_ID, {
+      content: `<p><img data-asset-id="${ASSET_ID}" src="${STORAGE_URI}" alt="Photo"></p>`,
+      assets: { [`images.${ASSET_ID}`]: STORAGE_URI },
+    });
+    await page.reload({ waitUntil: 'networkidle' });
+  });
+
+  test('Shows the signed URL', async ({ page }) => {
+    const edit = new Edit(page);
+    const img = edit.editorContent.locator(`img[data-asset-id="${ASSET_ID}"]`);
+    await expect(img).toHaveAttribute('src', /^https?:\/\//);
+  });
+
+  test('Removing the image drops its asset reference', async ({ page }) => {
+    const edit = new Edit(page);
+    await edit.focus();
+    await edit.editorContent.locator('img').click();
+    await page.keyboard.press('Delete');
+    await expect(edit.editorContent.locator('img')).toHaveCount(0);
+    await expect.poll(async () => (await getElementData()).assets).toEqual({});
   });
 });
 

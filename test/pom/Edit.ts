@@ -30,10 +30,12 @@ export class Edit extends pom.EditPanel {
   readonly linkConfirmBtn: Locator;
   readonly linkUnlinkBtn: Locator;
   readonly addImageBtn: ToolbarControl;
-  readonly addImageMenu: Locator;
-  readonly imageTitleInput: Locator;
+  readonly imagePicker: Locator;
+  readonly imagePickerUrlTab: Locator;
+  readonly imageFileInput: Locator;
   readonly imageUrlInput: Locator;
-  readonly imageConfirmBtn: Locator;
+  readonly imageTitleInput: Locator;
+  readonly imageImportBtn: Locator;
   readonly addTableBtn: ToolbarControl;
   readonly addTableMenu: Locator;
   readonly tableHeaderCheckbox: Locator;
@@ -87,13 +89,17 @@ export class Edit extends pom.EditPanel {
       name: 'Unlink',
     });
     this.addImageBtn = this.control('Add image');
-    this.addImageMenu = this.el
-      .locator('.v-overlay.v-menu')
-      .filter({ hasText: 'Title' });
-    this.imageTitleInput = this.addImageMenu.getByLabel('Title');
-    this.imageUrlInput = this.addImageMenu.getByLabel('Url');
-    this.imageConfirmBtn = this.addImageMenu.getByRole('button', {
-      name: 'Confirm',
+    this.imagePicker = this.el
+      .locator('.v-dialog')
+      .filter({ hasText: 'Insert image' });
+    this.imagePickerUrlTab = this.imagePicker.getByRole('tab', {
+      name: 'URL',
+    });
+    this.imageFileInput = this.imagePicker.locator('input[type="file"]');
+    this.imageUrlInput = this.imagePicker.getByLabel('File URL');
+    this.imageTitleInput = this.imagePicker.getByLabel('Title');
+    this.imageImportBtn = this.imagePicker.getByRole('button', {
+      name: 'Import',
     });
     this.addTableBtn = this.control('Add table');
     this.addTableMenu = this.el

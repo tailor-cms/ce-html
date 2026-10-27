@@ -1,82 +1,35 @@
 <template>
-  <VMenu v-model="show" :close-on-content-click="false" :submenu="inMenu">
-    <template #activator="{ props: menu }">
-      <ToolbarButton
-        v-bind="menu"
-        :active="editor.isActive('image')"
-        :disabled="!editor.can().chain().focus().setImage().run()"
-        :in-menu="inMenu"
-        icon="mdi-image-plus"
-        label="Add image"
-      />
-    </template>
-    <VForm ref="form" @submit.prevent="setImage">
-      <VSheet class="pa-3" elevation="3" width="230" rounded>
-        <VTextField
-          v-model="title"
-          :rules="[rules.required]"
-          density="compact"
-          hide-details="auto"
-          label="Title"
-          variant="outlined"
-        />
-        <VTextField
-          v-model="url"
-          :rules="[rules.required, rules.url]"
-          density="compact"
-          hide-details="auto"
-          label="Url"
-          variant="outlined"
-        />
-        <div class="actions d-flex justify-end">
-          <VBtn color="primary" text="Confirm" type="submit" variant="tonal" />
-        </div>
-      </VSheet>
-    </VForm>
-  </VMenu>
+  <ToolbarButton
+    :active="editor.isActive('image')"
+    :disabled="!editor.can().chain().focus().setImage().run()"
+    :in-menu="inMenu"
+    icon="mdi-image-plus"
+    label="Add image"
+    @click="isPickerOpen = true"
+  />
+  <TailorAssetPicker
+    v-model="isPickerOpen"
+    :allowed-extensions="IMAGE_EXTENSIONS"
+    heading="Insert image"
+    icon="mdi-image-plus"
+    allow-url-source
+    @select="insertImage"
+    @upload="insertImage"
+  />
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
-import { rules } from './rules';
+import type { AssetPick } from '../extensions/image';
 import ToolbarButton from '../ToolbarButton.vue';
+
+const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.avif'];
 
 const props = defineProps<{ editor: any; inMenu?: boolean }>();
 
-const form = ref();
+const isPickerOpen = ref(false);
 
-const url = ref<string>('');
-const title = ref<string>('');
-const show = ref<boolean>(false);
-
-async function setImage() {
-  const { valid } = await form.value.validate();
-  if (!valid) return;
-  const href = url.value.startsWith('http')
-    ? url.value
-    : `https://${url.value}`;
-  props.editor
-    .chain()
-    .focus()
-    .setImage({ src: href, alt: title.value, title: title.value })
-    .run();
-  show.value = false;
-  form.value.resetValidation();
-}
-
-watch(show, (val: boolean) => {
-  if (!val) return;
-  url.value = '';
-  title.value = '';
-  form.value?.resetValidation();
-});
+const insertImage = (asset: AssetPick) =>
+  props.editor.chain().focus().setAssetImage(asset).run();
 </script>
-
-<style lang="scss" scoped>
-.v-sheet {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-</style>

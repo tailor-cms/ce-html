@@ -7,10 +7,11 @@
 </template>
 
 <script lang="ts" setup>
+import { debounce, omit } from 'lodash-es';
 import { EditorContent, useEditor } from '@tiptap/vue-3';
 import type { Element, ElementData } from '@tailor-cms/ce-html-manifest';
 import { inject, nextTick, watch } from 'vue';
-import { debounce } from 'lodash-es';
+import type { Node } from '@tiptap/pm/model';
 
 import extensions from './extensions';
 import ImageMenu from './bubble-menus/ImageMenu.vue';
@@ -35,9 +36,24 @@ const editor = useEditor({
   onUpdate: debounce(() => save(), SAVE_DEBOUNCE),
 });
 
+// Rebuilt from the document on every save, so it can't drift from content
+const collectAssets = (doc: Node) => {
+  const assets: Record<string, string> = {};
+  doc.descendants(({ type, attrs }) => {
+    if (type.name !== 'image' || !attrs.assetId) return;
+    assets[`images.${attrs.assetId}`] = attrs.src;
+  });
+  return assets;
+};
+
 const save = () => {
-  const content = editor.value?.isEmpty ? '' : (editor.value?.getHTML() ?? '');
-  return emit('save', { ...props.element.data, content });
+  if (!editor.value) return;
+  const { isEmpty, state } = editor.value;
+  const content = isEmpty ? '' : editor.value.getHTML();
+  const assets = collectAssets(state.doc);
+  // images holds signed URLs from the last read; they're never stored
+  const data = omit(props.element.data, 'images');
+  return emit('save', { ...data, content, assets });
 };
 
 watch(
@@ -51,6 +67,16 @@ watch(
       nextTick(() => elementBus.emit('initialize', editor.value));
     }
   },
+);
+
+// Signed URLs arrive with the element on every read
+watch(
+  [editor, () => props.element.data.images],
+  ([instance, images]) => {
+    if (!instance || !images) return;
+    Object.assign(instance.storage.image.urls, images);
+  },
+  { immediate: true },
 );
 
 watch(
