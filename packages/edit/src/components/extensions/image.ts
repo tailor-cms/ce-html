@@ -1,8 +1,12 @@
+import {
+  ASSET_ID_ATTRIBUTE,
+  createImageAssetId,
+  isStorageUrl,
+} from '@tailor-cms/cek-common';
 import { reactive, watchEffect } from 'vue';
 import Image from '@tiptap/extension-image';
 import type { ImageOptions } from '@tiptap/extension-image';
 import { mergeAttributes } from '@tiptap/vue-3';
-import { v4 as uuid } from 'uuid';
 
 export interface ImageStorage {
   // Signed URLs by data-asset-id, for images whose src is a storage:// URI
@@ -27,8 +31,6 @@ declare module '@tiptap/vue-3' {
   }
 }
 
-const STORAGE_PROTOCOL = 'storage://';
-
 export default Image.configure({ inline: true }).extend<
   ImageOptions,
   ImageStorage
@@ -46,9 +48,9 @@ export default Image.configure({ inline: true }).extend<
       },
       assetId: {
         default: null,
-        parseHTML: (element) => element.getAttribute('data-asset-id'),
+        parseHTML: (element) => element.getAttribute(ASSET_ID_ATTRIBUTE),
         renderHTML: ({ assetId }) =>
-          assetId ? { 'data-asset-id': assetId } : {},
+          assetId ? { [ASSET_ID_ATTRIBUTE]: assetId } : {},
       },
     };
   },
@@ -60,8 +62,7 @@ export default Image.configure({ inline: true }).extend<
       setAssetImage:
         ({ url, publicUrl, name }) =>
         ({ commands }) => {
-          const isStored = url.startsWith(STORAGE_PROTOCOL);
-          const assetId = isStored ? uuid() : null;
+          const assetId = isStorageUrl(url) ? createImageAssetId() : null;
           if (assetId && publicUrl) this.storage.urls[assetId] = publicUrl;
           const attrs = { src: url, alt: name ?? '', assetId };
           return commands.insertContent({ type: this.name, attrs });

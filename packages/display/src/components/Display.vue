@@ -8,21 +8,14 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import type { Element } from '@tailor-cms/ce-html-manifest';
+import { resolveImages } from '@tailor-cms/cek-common';
 
 const props = defineProps<{ element: Element }>();
 
 // Library images keep a storage:// src; show their signed URLs instead
 const html = computed(() => {
-  const { content, images = {} } = props.element.data;
-  if (!content.includes('data-asset-id')) return content;
-  const doc = new DOMParser().parseFromString(content, 'text/html');
-  doc
-    .querySelectorAll<HTMLImageElement>('img[data-asset-id]')
-    .forEach((img) => {
-      const url = images[img.dataset.assetId!];
-      if (url) img.src = url;
-    });
-  return doc.body.innerHTML;
+  const { content, imageUrls } = props.element.data;
+  return resolveImages(content, imageUrls);
 });
 </script>
 

@@ -28,6 +28,9 @@
     "nuke:dist": "pnpm dlx del-cli dist",
     "prepublish": "pnpm build"
   },
+  "dependencies": {
+    "@tailor-cms/cek-common": "3.0.3"
+  },
   "peerDependencies": {
     "vue": "^3.5.43"
   },

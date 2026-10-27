@@ -376,12 +376,9 @@ test.describe('Add image', () => {
     const edit = new Edit(page);
     await edit.focus();
     await edit.addImageBtn.click();
-    await expect(edit.imagePicker).toBeVisible();
-    await edit.imagePickerUrlTab.click();
-    await edit.imageUrlInput.fill(IMAGE_URL);
-    await edit.imageTitleInput.fill('Sunset');
-    await edit.imageImportBtn.click();
-    await expect(edit.imagePicker).not.toBeVisible();
+    await edit.imagePicker.waitForOpen();
+    await edit.imagePicker.importUrl(IMAGE_URL, 'Sunset');
+    await edit.imagePicker.waitForClose();
     const img = edit.editorContent.locator('img');
     await expect(img).toHaveAttribute('src', IMAGE_URL);
     await expect(img).toHaveAttribute('alt', 'Sunset');
@@ -392,9 +389,9 @@ test.describe('Add image', () => {
     const edit = new Edit(page);
     await edit.focus();
     await edit.addImageBtn.click();
-    await edit.imagePickerUrlTab.click();
-    await edit.imageImportBtn.click();
-    await expect(edit.imagePicker).toContainText('URL is required');
+    await edit.imagePicker.urlTab.click();
+    await edit.imagePicker.importBtn.click();
+    await expect(edit.imagePicker.el).toContainText('URL is required');
     await expect(edit.editorContent.locator('img')).toHaveCount(0);
   });
 
@@ -402,21 +399,21 @@ test.describe('Add image', () => {
     const edit = new Edit(page);
     await edit.focus();
     await edit.addImageBtn.click();
-    await edit.imageFileInput.setInputFiles({
+    await edit.imagePicker.upload({
       name: 'photo.png',
       mimeType: 'image/png',
       buffer: PNG,
     });
-    await expect(edit.imagePicker).not.toBeVisible();
+    await edit.imagePicker.waitForClose();
     const img = edit.editorContent.locator('img[data-asset-id]');
     await expect(img).toHaveAttribute('alt', 'photo.png');
     await expect(img).not.toHaveAttribute('src', /^storage:\/\//);
     await expect
       .poll(async () => Object.values((await getElementData()).assets ?? {}))
       .toEqual([expect.stringMatching(/^storage:\/\//)]);
-    const { content, images } = await getElementData();
+    const { content, imageUrls } = await getElementData();
     expect(content).toContain('src="storage://');
-    expect(images).toBeUndefined();
+    expect(imageUrls).toBeUndefined();
   });
 });
 
@@ -424,7 +421,7 @@ test.describe('Library images', () => {
   test.beforeEach(async ({ page }) => {
     await elementClient.update(ELEMENT_ID, {
       content: `<p><img data-asset-id="${ASSET_ID}" src="${STORAGE_URI}" alt="Photo"></p>`,
-      assets: { [`images.${ASSET_ID}`]: STORAGE_URI },
+      assets: { [`imageUrls.${ASSET_ID}`]: STORAGE_URI },
     });
     await page.reload({ waitUntil: 'networkidle' });
   });
