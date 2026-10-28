@@ -8,14 +8,14 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import type { Element } from '@tailor-cms/ce-html-manifest';
-import { resolveImages } from '@tailor-cms/cek-common';
+import { resolveHtmlAssets } from '@tailor-cms/cek-common';
 
 const props = defineProps<{ element: Element }>();
 
-// Library images keep a storage:// src; show their signed URLs instead
+// Library assets keep a storage:// URL; show their signed URLs instead
 const html = computed(() => {
-  const { content, imageUrls } = props.element.data;
-  return resolveImages(content, imageUrls);
+  const { content, assetUrls } = props.element.data;
+  return resolveHtmlAssets(content, assetUrls);
 });
 </script>
 

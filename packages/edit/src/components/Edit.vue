@@ -11,7 +11,7 @@ import { debounce, omit } from 'lodash-es';
 import { EditorContent, useEditor } from '@tiptap/vue-3';
 import type { Element, ElementData } from '@tailor-cms/ce-html-manifest';
 import { inject, nextTick, watch } from 'vue';
-import { collectImageAssets } from '@tailor-cms/cek-common';
+import { collectHtmlAssets } from '@tailor-cms/cek-common';
 
 import extensions from './extensions';
 import ImageMenu from './bubble-menus/ImageMenu.vue';
@@ -40,9 +40,9 @@ const save = () => {
   if (!editor.value) return;
   const content = editor.value.isEmpty ? '' : editor.value.getHTML();
   // Rebuilt from content on every save, so it can't drift from it
-  const assets = collectImageAssets(content);
-  // imageUrls holds signed URLs from the last read; they're never stored
-  const data = omit(props.element.data, 'imageUrls');
+  const assets = collectHtmlAssets(content);
+  // assetUrls holds signed URLs from the last read; they're never stored
+  const data = omit(props.element.data, 'assetUrls');
   return emit('save', { ...data, content, assets });
 };
 
@@ -61,10 +61,10 @@ watch(
 
 // Signed URLs arrive with the element on every read
 watch(
-  [editor, () => props.element.data.imageUrls],
-  ([instance, imageUrls]) => {
-    if (!instance || !imageUrls) return;
-    Object.assign(instance.storage.image.urls, imageUrls);
+  [editor, () => props.element.data.assetUrls],
+  ([instance, assetUrls]) => {
+    if (!instance || !assetUrls) return;
+    Object.assign(instance.storage.image.urls, assetUrls);
   },
   { immediate: true },
 );

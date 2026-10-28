@@ -18,9 +18,9 @@
   "devDependencies": {
     "@changesets/cli": "^3.0.3",
     "@playwright/test": "^1.64.0",
-    "@tailor-cms/cek-e2e": "3.0.3",
-    "@tailor-cms/eslint-config": "3.0.2",
-    "@tailor-cms/tce-boot": "3.0.3",
+    "@tailor-cms/cek-e2e": "3.0.5",
+    "@tailor-cms/eslint-config": "3.0.5",
+    "@tailor-cms/tce-boot": "3.0.5",
     "@types/node": "^26.6.5",
     "dotenv": "^18.0.7",
     "eslint": "^10.12.0",

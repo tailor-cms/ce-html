@@ -76,7 +76,7 @@ test.describe('Content rendering', () => {
     const storageUri = 'storage://repository/assets/seed___photo.png';
     await elementClient.update(ELEMENT_ID, {
       content: `<p><img data-asset-id="2f1c9a4e-7b3d-4e8a-9c6f-1d2e3f4a5b6c" src="${storageUri}" alt="Photo"></p>`,
-      assets: { 'imageUrls.2f1c9a4e-7b3d-4e8a-9c6f-1d2e3f4a5b6c': storageUri },
+      assets: { 'assetUrls.2f1c9a4e-7b3d-4e8a-9c6f-1d2e3f4a5b6c': storageUri },
     });
     await page.reload({ waitUntil: 'networkidle' });
     const display = new Display(page);

@@ -1,8 +1,4 @@
-import {
-  ASSET_ID_ATTRIBUTE,
-  createImageAssetId,
-  isStorageUrl,
-} from '@tailor-cms/cek-common';
+import { createAssetId, isStorageUrl } from '@tailor-cms/cek-common';
 import { reactive, watchEffect } from 'vue';
 import Image from '@tiptap/extension-image';
 import type { ImageOptions } from '@tiptap/extension-image';
@@ -48,9 +44,9 @@ export default Image.configure({ inline: true }).extend<
       },
       assetId: {
         default: null,
-        parseHTML: (element) => element.getAttribute(ASSET_ID_ATTRIBUTE),
+        parseHTML: (element) => element.getAttribute('data-asset-id'),
         renderHTML: ({ assetId }) =>
-          assetId ? { [ASSET_ID_ATTRIBUTE]: assetId } : {},
+          assetId ? { 'data-asset-id': assetId } : {},
       },
     };
   },
@@ -62,7 +58,7 @@ export default Image.configure({ inline: true }).extend<
       setAssetImage:
         ({ url, publicUrl, name }) =>
         ({ commands }) => {
-          const assetId = isStorageUrl(url) ? createImageAssetId() : null;
+          const assetId = isStorageUrl(url) ? createAssetId() : null;
           if (assetId && publicUrl) this.storage.urls[assetId] = publicUrl;
           const attrs = { src: url, alt: name ?? '', assetId };
           return commands.insertContent({ type: this.name, attrs });

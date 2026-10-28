@@ -411,9 +411,9 @@ test.describe('Add image', () => {
     await expect
       .poll(async () => Object.values((await getElementData()).assets ?? {}))
       .toEqual([expect.stringMatching(/^storage:\/\//)]);
-    const { content, imageUrls } = await getElementData();
+    const { content, assetUrls } = await getElementData();
     expect(content).toContain('src="storage://');
-    expect(imageUrls).toBeUndefined();
+    expect(assetUrls).toBeUndefined();
   });
 });
 
@@ -421,7 +421,7 @@ test.describe('Library images', () => {
   test.beforeEach(async ({ page }) => {
     await elementClient.update(ELEMENT_ID, {
       content: `<p><img data-asset-id="${ASSET_ID}" src="${STORAGE_URI}" alt="Photo"></p>`,
-      assets: { [`imageUrls.${ASSET_ID}`]: STORAGE_URI },
+      assets: { [`assetUrls.${ASSET_ID}`]: STORAGE_URI },
     });
     await page.reload({ waitUntil: 'networkidle' });
   });
