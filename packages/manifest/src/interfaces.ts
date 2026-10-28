@@ -2,6 +2,10 @@ import type * as common from '@tailor-cms/cek-common';
 
 export interface ElementData extends common.ElementConfig {
   content: string;
+  // `assetUrls.<data-asset-id>` -> storage:// URI; rebuilt from content on save
+  assets?: Record<string, string>;
+  // Signed asset URLs by data-asset-id, resolved from `assets` on read
+  assetUrls?: Record<string, string>;
 }
 
 export type DataInitializer = common.DataInitializer<ElementData>;

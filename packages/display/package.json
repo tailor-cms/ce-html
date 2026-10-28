@@ -11,7 +11,7 @@
   "homepage": "https://github.com/tailor-cms/ce_html_default#readme",
   "bugs": "https://github.com/tailor-cms/ce_html_default/issues",
   "type": "module",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "exports": {
     ".": "./dist/index.js"
   },
@@ -28,18 +28,21 @@
     "nuke:dist": "pnpm dlx del-cli dist",
     "prepublish": "pnpm build"
   },
+  "dependencies": {
+    "@tailor-cms/cek-common": "3.0.5"
+  },
   "peerDependencies": {
     "vue": "^3.5.43"
   },
   "devDependencies": {
     "@tailor-cms/ce-html-manifest": "workspace:*",
-    "@tailor-cms/eslint-config": "3.0.0",
+    "@tailor-cms/eslint-config": "3.0.5",
     "@vitejs/plugin-vue": "^6.0.10",
     "typescript": "^6.0.3",
-    "vite": "^8.3.4",
+    "vite": "^8.3.5",
     "vite-plugin-lib-inject-css": "^2.2.2",
     "vue-tsc": "^3.3.13",
-    "vuetify": "^4.2.4"
+    "vuetify": "^4.3.1"
   },
   "publishConfig": {
     "access": "public"

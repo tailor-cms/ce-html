@@ -1,14 +1,22 @@
 <template>
   <div class="ce-html-root">
     <!-- eslint-disable-next-line -->
-    <span v-html="element.data.content" />
+    <span v-html="html" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import type { Element } from '@tailor-cms/ce-html-manifest';
+import { resolveHtmlAssets } from '@tailor-cms/cek-common';
 
-defineProps<{ element: Element }>();
+const props = defineProps<{ element: Element }>();
+
+// Library assets keep a storage:// URL; show their signed URLs instead
+const html = computed(() => {
+  const { content, assetUrls } = props.element.data;
+  return resolveHtmlAssets(content, assetUrls);
+});
 </script>
 
 <style scoped lang="scss">

@@ -1,5 +1,20 @@
 # @tailor-cms/ce-html-server
 
+## 3.1.0
+
+### Minor Changes
+
+- Insert images from the repository asset library
+
+  - "Add image" now opens the Tailor asset picker, so authors can pick an image
+    from the library, upload a new one, or paste a URL. This replaces the old
+    title/URL form.
+
+### Patch Changes
+
+- Updated dependencies
+  - @tailor-cms/ce-html-manifest@3.1.0
+
 ## 3.0.0
 
 ### Major Changes

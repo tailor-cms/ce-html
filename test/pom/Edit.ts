@@ -7,6 +7,7 @@ import { ToolbarControl } from './ToolbarControl';
 
 export class Edit extends pom.EditPanel {
   readonly editorContent: Locator;
+  readonly images: Locator;
   readonly placeholder: Locator;
   readonly boldBtn: ToolbarControl;
   readonly italicBtn: ToolbarControl;
@@ -30,10 +31,7 @@ export class Edit extends pom.EditPanel {
   readonly linkConfirmBtn: Locator;
   readonly linkUnlinkBtn: Locator;
   readonly addImageBtn: ToolbarControl;
-  readonly addImageMenu: Locator;
-  readonly imageTitleInput: Locator;
-  readonly imageUrlInput: Locator;
-  readonly imageConfirmBtn: Locator;
+  readonly imagePicker: pom.AssetPicker;
   readonly addTableBtn: ToolbarControl;
   readonly addTableMenu: Locator;
   readonly tableHeaderCheckbox: Locator;
@@ -59,6 +57,8 @@ export class Edit extends pom.EditPanel {
     super(page);
     this.editorContent = this.editor.locator('.tiptap');
     this.placeholder = this.editorContent.locator('p.is-editor-empty').first();
+    // ProseMirror pads inline atoms with separator <img> hack nodes
+    this.images = this.editorContent.locator('img:not(.ProseMirror-separator)');
     this.boldBtn = this.control('Bold');
     this.italicBtn = this.control('Italic');
     this.underlineBtn = this.control('Underline');
@@ -87,14 +87,7 @@ export class Edit extends pom.EditPanel {
       name: 'Unlink',
     });
     this.addImageBtn = this.control('Add image');
-    this.addImageMenu = this.el
-      .locator('.v-overlay.v-menu')
-      .filter({ hasText: 'Title' });
-    this.imageTitleInput = this.addImageMenu.getByLabel('Title');
-    this.imageUrlInput = this.addImageMenu.getByLabel('Url');
-    this.imageConfirmBtn = this.addImageMenu.getByRole('button', {
-      name: 'Confirm',
-    });
+    this.imagePicker = new pom.AssetPicker(this.el, 'Insert image');
     this.addTableBtn = this.control('Add table');
     this.addTableMenu = this.el
       .locator('.v-overlay.v-menu')
