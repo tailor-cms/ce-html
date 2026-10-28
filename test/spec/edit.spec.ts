@@ -379,7 +379,7 @@ test.describe('Add image', () => {
     await edit.imagePicker.waitForOpen();
     await edit.imagePicker.importUrl(IMAGE_URL, 'Sunset');
     await edit.imagePicker.waitForClose();
-    const img = edit.editorContent.locator('img');
+    const img = edit.images;
     await expect(img).toHaveAttribute('src', IMAGE_URL);
     await expect(img).toHaveAttribute('alt', 'Sunset');
     await expect(img).not.toHaveAttribute('data-asset-id');
@@ -392,7 +392,7 @@ test.describe('Add image', () => {
     await edit.imagePicker.urlTab.click();
     await edit.imagePicker.importBtn.click();
     await expect(edit.imagePicker.el).toContainText('URL is required');
-    await expect(edit.editorContent.locator('img')).toHaveCount(0);
+    await expect(edit.images).toHaveCount(0);
   });
 
   test('Stores an uploaded image as an asset reference', async ({ page }) => {
@@ -413,7 +413,10 @@ test.describe('Add image', () => {
       .toEqual([expect.stringMatching(/^storage:\/\//)]);
     const { content, assetUrls } = await getElementData();
     expect(content).toContain('src="storage://');
-    expect(assetUrls).toBeUndefined();
+    // Resolved to signed URLs on read; the runtime prunes them before save
+    expect(Object.values(assetUrls)).toEqual([
+      expect.stringMatching(/^https?:\/\//),
+    ]);
   });
 });
 
@@ -435,9 +438,9 @@ test.describe('Library images', () => {
   test('Removing the image drops its asset reference', async ({ page }) => {
     const edit = new Edit(page);
     await edit.focus();
-    await edit.editorContent.locator('img').click();
+    await edit.images.click();
     await page.keyboard.press('Delete');
-    await expect(edit.editorContent.locator('img')).toHaveCount(0);
+    await expect(edit.images).toHaveCount(0);
     await expect.poll(async () => (await getElementData()).assets).toEqual({});
   });
 });
@@ -510,25 +513,22 @@ test.describe('Image bubble menu', () => {
   test('Appears when image is selected', async ({ page }) => {
     const edit = new Edit(page);
     await edit.focus();
-    await edit.editorContent.locator('img[src]').click();
+    await edit.images.click();
     await expect(edit.imageMenu.smallBtn).toBeVisible();
   });
 
   test('Resizes image via size button', async ({ page }) => {
     const edit = new Edit(page);
     await edit.focus();
-    await edit.editorContent.locator('img[src]').click();
+    await edit.images.click();
     await edit.imageMenu.mediumBtn.click();
-    await expect(edit.editorContent.locator('img[src]')).toHaveAttribute(
-      'style',
-      /width:\s*50%/,
-    );
+    await expect(edit.images).toHaveAttribute('style', /width:\s*50%/);
   });
 
   test('All expected buttons are rendered', async ({ page }) => {
     const edit = new Edit(page);
     await edit.focus();
-    await edit.editorContent.locator('img[src]').click();
+    await edit.images.click();
     for (const btn of edit.imageMenu.allButtons)
       await expect(btn).toBeVisible();
   });
@@ -596,7 +596,7 @@ test.describe('Readonly mode', () => {
     await page.reload({ waitUntil: 'networkidle' });
     const edit = new Edit(page);
     await edit.setReadonly();
-    await edit.editorContent.locator('img[src]').click();
+    await edit.images.click();
     await expect(edit.imageMenu.smallBtn).not.toBeVisible();
   });
 

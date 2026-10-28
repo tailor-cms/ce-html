@@ -7,6 +7,7 @@ import { ToolbarControl } from './ToolbarControl';
 
 export class Edit extends pom.EditPanel {
   readonly editorContent: Locator;
+  readonly images: Locator;
   readonly placeholder: Locator;
   readonly boldBtn: ToolbarControl;
   readonly italicBtn: ToolbarControl;
@@ -56,6 +57,8 @@ export class Edit extends pom.EditPanel {
     super(page);
     this.editorContent = this.editor.locator('.tiptap');
     this.placeholder = this.editorContent.locator('p.is-editor-empty').first();
+    // ProseMirror pads inline atoms with separator <img> hack nodes
+    this.images = this.editorContent.locator('img:not(.ProseMirror-separator)');
     this.boldBtn = this.control('Bold');
     this.italicBtn = this.control('Italic');
     this.underlineBtn = this.control('Underline');

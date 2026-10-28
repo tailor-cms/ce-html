@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@tailor-cms/eslint-config": "3.0.5",
-    "tsdown": "^0.23.1",
+    "tsdown": "^0.23.2",
     "typescript": "^6.0.3"
   },
   "tsdown": {
